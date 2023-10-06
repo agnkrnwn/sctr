@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkbox, Input, dan Tombol Hitung - Bootstrap</title>
+  <!-- Include Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Include Font Awesome CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-light d-flex align-items-center justify-content-center min-vh-100">
+    <div class="container bg-white p-4 rounded shadow-lg">
+      <div class="mb-4">
+        <label for="slider" class="text-lg font-weight-bold">Pilih Kecepatan:</label>
+        <input type="range" class="w-100 slider" id="slider" min="1" max="8">
+        <p class="text-center mt-2"><span id="sliderValue" class="font-weight-bold">10</span></p>
+      </div>
+      <div>
+        <label class="text-lg font-weight-bold ">Pilih Mode:</label>
+        <div class="d-flex justify-content-center align-items-center mt-2">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" id="turbo" class="form-check-input">
+            <label for="turbo" class="form-check-label">
+              <i class="fas fa-bolt"></i> Turbo
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="checkbox" id="cepat" class="form-check-input">
+            <label for="cepat" class="form-check-label">
+              <i class="fas fa-tachometer-alt"></i> Cepat
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="checkbox" id="lewati" class="form-check-input">
+            <label for="lewati" class="form-check-label">
+              <i class="fas fa-forward"></i> Lewati
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4">
+        <label class="text-lg font-weight-bold">Input:</label>
+        <div class="d-flex justify-content-center align-items-center mt-2">
+          <div class="form-group mr-4">
+            <label for="bet">Bet:</label>
+            <input type="text" class="form-control" id="bet">
+          </div>
+          <div class="form-group mr-4">
+            <label for="saldo">Sisa Saldo:</label>
+            <input type="text" class="form-control" id="saldo">
+          </div>
+          <div class="form-group">
+            <label for="scatter">Scatter Muncul:</label>
+            <input type="text" class="form-control" id="scatter">
+          </div>
+        </div>
+      </div>
+      <div class="mt-4 text-center">
+        <button class="btn btn-primary" id="hitungButton">
+          <i class="fas fa-bolt"></i> Hitung
+        </button>
+        <h1 class="mt-3" id="hasil"></h1>
+      </div>
+    </div>
+  </body>
+  
+  <!-- Include Bootstrap JS and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/hitung.js"></script>
+
+</body>
+</html>
