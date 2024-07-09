@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </button>
             <input id="ayatInput" type="number" min="1" max="${surah.jumlahAyat}" class="ml-2 px-2 py-1 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600" placeholder="Go to Ayat">
             <button id="goToAyatBtn" class="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600 transition-colors duration-200">
-              Go
+              <i class="fas fa-otter"></i>
             </button>
           </div>
           <div id="ayatContainer" class="mt-4 hidden"></div>
@@ -310,11 +310,11 @@ document.addEventListener("DOMContentLoaded", () => {
     function toggleAyat(ayat, tafsir, button, container) {
         if (container.classList.contains("hidden")) {
             displayAyatWithTafsir(ayat, tafsir, container);
-            button.innerHTML = '<i class="fas fa-eye-slash"></i>Ayat';
+            button.innerHTML = '<i class="fas fa-eye-slash"></i> Ayat';
             container.classList.remove("hidden");
         } else {
             container.innerHTML = "";
-            button.innerHTML = '<i class="fas fa-eye"></i>Ayat';
+            button.innerHTML = '<i class="fas fa-eye"></i> Ayat';
             container.classList.add("hidden");
         }
     }
