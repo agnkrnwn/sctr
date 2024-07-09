@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
     async function fetchSurahList() {
       try {
-        const response = await fetch("https://agnk.netlify.app/asset/data/surat.json");
+        const response = await fetch("https://sctr.netlify.app/surat");
         const data = await response.json();
   
         if (data.code === 200) {
