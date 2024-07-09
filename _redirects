@@ -1,2 +1,3 @@
+/surat  /surat/surat.json  200
 /surat/:file  /surat/:file.json  200
 /tafsir/:file  /tafsir/:file.json  200
