@@ -41,17 +41,63 @@ document.addEventListener("DOMContentLoaded", () => {
       document.documentElement.classList.add('dark');
   }
   
-    searchInput.addEventListener("input", () => {
-      const searchTerm = searchInput.value.toLowerCase();
-      const filteredSurahs = allSurahs.filter(
-        (surah) =>
-          surah.namaLatin.toLowerCase().includes(searchTerm) ||
-          surah.arti.toLowerCase().includes(searchTerm) ||
-          surah.nama.toLowerCase().includes(searchTerm) ||
-          surah.nomor.toString().includes(searchTerm)
-      );
-      displayAllSurahs(filteredSurahs);
+    // Modifikasi fungsi pencarian
+searchInput.addEventListener("input", () => {
+    const searchTerm = searchInput.value.toLowerCase();
+    const filteredSurahs = allSurahs.filter(
+      (surah) =>
+        surah.namaLatin.toLowerCase().includes(searchTerm) ||
+        surah.arti.toLowerCase().includes(searchTerm) ||
+        surah.nama.toLowerCase().includes(searchTerm) ||
+        surah.nomor.toString().includes(searchTerm)
+    );
+    displayAllSurahs(filteredSurahs);
+  });
+  
+  // Tambahkan fungsi untuk menandai ayat yang sedang dibaca
+  function highlightCurrentAyat(currentTime) {
+    const ayatElements = document.querySelectorAll('[data-ayat]');
+    let currentAyat = null;
+  
+    for (let i = 0; i < surah.ayat.length; i++) {
+      if (currentTime >= surah.ayat[i].startTime && currentTime < surah.ayat[i].endTime) {
+        currentAyat = surah.ayat[i].nomorAyat;
+        break;
+      }
+    }
+  
+    ayatElements.forEach(element => {
+      if (element.dataset.ayat === currentAyat.toString()) {
+        element.classList.add('current-ayat');
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        element.classList.remove('current-ayat');
+      }
     });
+  }
+  
+  // Modifikasi fungsi pemutaran audio
+  function toggleAudio(audio, button, audioInfo) {
+    if (audio.paused) {
+      audio.play();
+      button.innerHTML = '<i class="fas fa-pause"></i>';
+      audioInfo.classList.remove("hidden");
+      
+      // Tambahkan event listener untuk update highlight ayat
+      audio.addEventListener('timeupdate', () => {
+        const progress = (audio.currentTime / audio.duration) * 100;
+        progressBarFill.style.width = `${progress}%`;
+        highlightCurrentAyat(audio.currentTime);
+      });
+    } else {
+      audio.pause();
+      button.innerHTML = '<i class="fas fa-play"></i>';
+      audioInfo.classList.add("hidden");
+      
+      // Hapus event listener saat audio di-pause
+      audio.removeEventListener('timeupdate', highlightCurrentAyat);
+    }
+  }
   
     async function fetchSurahList() {
       try {
@@ -204,17 +250,17 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   
-    function toggleAudio(audio, button, audioInfo) {
-      if (audio.paused) {
-        audio.play();
-        button.innerHTML = '<i class="fas fa-pause"></i>';
-        audioInfo.classList.remove("hidden");
-      } else {
-        audio.pause();
-        button.innerHTML = '<i class="fas fa-play"></i>';
-        audioInfo.classList.add("hidden");
-      }
-    }
+    // function toggleAudio(audio, button, audioInfo) {
+    //   if (audio.paused) {
+    //     audio.play();
+    //     button.innerHTML = '<i class="fas fa-pause"></i>';
+    //     audioInfo.classList.remove("hidden");
+    //   } else {
+    //     audio.pause();
+    //     button.innerHTML = '<i class="fas fa-play"></i>';
+    //     audioInfo.classList.add("hidden");
+    //   }
+    // }
   
     function toggleAyat(ayat, tafsir, button, container) {
       if (container.classList.contains("hidden")) {
