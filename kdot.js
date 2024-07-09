@@ -249,8 +249,11 @@ document.addEventListener("DOMContentLoaded", () => {
       overlay.innerHTML = '<button id="overlayPauseBtn" class="bg-primary-950 text-white p-3 rounded-full"><i class="fas fa-pause"></i></button>';
       overlay.style.cssText = `
         position: fixed;
-        bottom: 35px;
-        right: 20px;
+        bottom: 20px;
+        left: 20px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
         z-index: 1000;
       `;
       document.body.appendChild(overlay);
