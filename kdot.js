@@ -183,7 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
           <div class="mt-4 space-x-2 flex items-center">
             <button id="toggleAyatBtn" class="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600 transition-colors duration-200">
-              <i class="fas fa-eye"></i> Show Ayat
+              <i class="fas fa-eye"></i> Ayat
             </button>
             <input id="ayatInput" type="number" min="1" max="${surah.jumlahAyat}" class="ml-2 px-2 py-1 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600" placeholder="Go to Ayat">
             <button id="goToAyatBtn" class="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600 transition-colors duration-200">
@@ -265,7 +265,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
     function stopAutoPlay() {
       isAutoPlaying = false;
-      document.getElementById("autoPlayToggle").innerHTML = '<i class="fas fa-play"></i> Auto Play';
+      document.getElementById("autoPlayToggle").innerHTML = '<i class="fas fa-play"></i> Auto';
       const audio = document.querySelector(`audio[data-ayat="${currentAyatIndex}"]`);
       if (audio) {
         audio.pause();
@@ -310,11 +310,11 @@ document.addEventListener("DOMContentLoaded", () => {
     function toggleAyat(ayat, tafsir, button, container) {
         if (container.classList.contains("hidden")) {
             displayAyatWithTafsir(ayat, tafsir, container);
-            button.innerHTML = '<i class="fas fa-eye-slash"></i> Hide Ayat';
+            button.innerHTML = '<i class="fas fa-eye-slash"></i>Ayat';
             container.classList.remove("hidden");
         } else {
             container.innerHTML = "";
-            button.innerHTML = '<i class="fas fa-eye"></i> Show Ayat';
+            button.innerHTML = '<i class="fas fa-eye"></i>Ayat';
             container.classList.add("hidden");
         }
     }
