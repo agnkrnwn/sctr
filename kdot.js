@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <h2 class="text-2xl font-bold text-primary-600 dark:text-primary-400">${surah.nomor}. ${surah.namaLatin} (${surah.nama})</h2>
             <div>
               <button id="audioToggle" class="text-primary-800 dark:text-primary-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200 mr-2">
-                <i class="fas fa-play"></i> full
+                <i class="fas fa-play"></i> Full
               </button>
               <button id="autoPlayToggle" class="text-primary-800 dark:text-primary-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200">
                 <i class="fas fa-play"></i> Auto
@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function toggleFullAudio(audio, button, audioInfo, progressBarFill) {
       if (audio.paused) {
         audio.play();
-        button.innerHTML = '<i class="fas fa-pause"></i>Full';
+        button.innerHTML = '<i class="fas fa-pause"></i> Full';
         audioInfo.classList.remove("hidden");
         
         audio.addEventListener('timeupdate', () => {
