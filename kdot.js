@@ -246,10 +246,10 @@ document.addEventListener("DOMContentLoaded", () => {
       // Add overlay pause button
       const overlay = document.createElement('div');
       overlay.id = 'pauseOverlay';
-      overlay.innerHTML = '<button id="overlayPauseBtn" class="bg-primary-500 text-white p-3 rounded-full"><i class="fas fa-pause"></i></button>';
+      overlay.innerHTML = '<button id="overlayPauseBtn" class="bg-primary-950 text-white p-3 rounded-full"><i class="fas fa-pause"></i></button>';
       overlay.style.cssText = `
         position: fixed;
-        bottom: 20px;
+        bottom: 35px;
         right: 20px;
         z-index: 1000;
       `;
