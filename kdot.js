@@ -113,8 +113,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
   
         const [surahResponse, tafsirResponse] = await Promise.all([
-          fetch(`https://equran.id/api/v2/surat/${nomorSurah}`),
-          fetch(`https://equran.id/api/v2/tafsir/${nomorSurah}`)
+          fetch(`https://sctr.netlify.app/surat/${nomorSurah}`),
+          fetch(`https://sctr.netlify.app/tafsir/${nomorSurah}`)
         ]);
   
         let surahData, tafsirData;
