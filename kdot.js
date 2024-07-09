@@ -156,15 +156,15 @@ document.addEventListener("DOMContentLoaded", () => {
     function displaySurahDetail(surah, tafsir) {
       currentSurah = surah;
       surahDetail.innerHTML = `
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+        <div class="bg-white dark:bg-gray-800 p-2 rounded-lg shadow-md">
           <div class="flex justify-between items-center mb-4">
             <h2 class="text-2xl font-bold text-primary-600 dark:text-primary-400">${surah.nomor}. ${surah.namaLatin} (${surah.nama})</h2>
             <div>
               <button id="audioToggle" class="text-primary-800 dark:text-primary-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200 mr-2">
-                <i class="fas fa-play"></i> Play Full Surah
+                <i class="fas fa-play"></i> full
               </button>
               <button id="autoPlayToggle" class="text-primary-800 dark:text-primary-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200">
-                <i class="fas fa-play"></i> Auto Play
+                <i class="fas fa-play"></i> Auto
               </button>
             </div>
           </div>
@@ -183,7 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
           <div class="mt-4 space-x-2 flex items-center">
             <button id="toggleAyatBtn" class="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600 transition-colors duration-200">
-              Show Ayat
+              <i class="fas fa-eye"></i>
             </button>
             <input id="ayatInput" type="number" min="1" max="${surah.jumlahAyat}" class="ml-2 px-2 py-1 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600" placeholder="Go to Ayat">
             <button id="goToAyatBtn" class="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600 transition-colors duration-200">
@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function toggleFullAudio(audio, button, audioInfo, progressBarFill) {
       if (audio.paused) {
         audio.play();
-        button.innerHTML = '<i class="fas fa-pause"></i> Pause Full Surah';
+        button.innerHTML = '<i class="fas fa-pause"></i>Full';
         audioInfo.classList.remove("hidden");
         
         audio.addEventListener('timeupdate', () => {
@@ -227,7 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       } else {
         audio.pause();
-        button.innerHTML = '<i class="fas fa-play"></i> Play Full Surah';
+        button.innerHTML = '<i class="fas fa-play"></i>Full';
         audioInfo.classList.add("hidden");
       }
     }
@@ -240,7 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
       isAutoPlaying = true;
       currentAyatIndex = 0;
-      document.getElementById("autoPlayToggle").innerHTML = '<i class="fas fa-pause"></i> Pause Auto Play';
+      document.getElementById("autoPlayToggle").innerHTML = '<i class="fas fa-pause"></i> Auto';
       playNextAyat(ayat);
   
       // Add overlay pause button
@@ -310,11 +310,11 @@ document.addEventListener("DOMContentLoaded", () => {
     function toggleAyat(ayat, tafsir, button, container) {
         if (container.classList.contains("hidden")) {
           displayAyatWithTafsir(ayat, tafsir, container);
-          button.textContent = "Hide Ayat";
+          button.textContent = '<i class="fas fa-eye-slash"></i>';
           container.classList.remove("hidden");
         } else {
           container.innerHTML = "";
-          button.textContent = "Show Ayat";
+          button.textContent = '<i class="fas fa-eye"></i>';
           container.classList.add("hidden");
         }
       }
