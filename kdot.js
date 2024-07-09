@@ -246,15 +246,21 @@ document.addEventListener("DOMContentLoaded", () => {
       // Add overlay pause button
       const overlay = document.createElement('div');
       overlay.id = 'pauseOverlay';
-      overlay.innerHTML = '<button id="overlayPauseBtn" class="bg-primary-950 text-white p-3 rounded-full"><i class="fas fa-pause"></i></button>';
+      overlay.innerHTML = '<button id="overlayPauseBtn" class="fixed bottom-4 right-4 bg-primary-950 text-white p-3 rounded-full shadow-lg hover:bg-primary-600 transition-colors duration-200 z-50"><i class="fas fa-pause"></i></button>';
       overlay.style.cssText = `
         position: fixed;
-        bottom: 20px;
-        left: 20px;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        z-index: 1000;
+      bottom: 20px;
+      left: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.3s, transform 0.3s;
+      transform: translateY(100px);
       `;
       document.body.appendChild(overlay);
   
