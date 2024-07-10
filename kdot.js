@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentSurah = null;
     let currentAyatIndex = 0;
     let isAutoPlaying = false;
+    let currentAudio = null;
   
     scrollToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
     scrollToTopBtn.className = "fixed bottom-4 right-4 bg-primary-500 text-white p-3 rounded-full shadow-lg hover:bg-primary-600 transition-colors duration-200 z-50";
@@ -161,7 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <h2 class="text-2xl font-bold text-primary-600 dark:text-primary-400">${surah.nomor}. ${surah.namaLatin} (${surah.nama})</h2>
             <div>
               <button id="audioToggle" class="text-primary-800 dark:text-primary-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200 mr-2">
-                <i class="fas fa-play"></i> Full
+                <i class="fas fa-play"></i> full
               </button>
               <button id="autoPlayToggle" class="text-primary-800 dark:text-primary-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200">
                 <i class="fas fa-play"></i> Auto
@@ -218,7 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function toggleFullAudio(audio, button, audioInfo, progressBarFill) {
       if (audio.paused) {
         audio.play();
-        button.innerHTML = '<i class="fas fa-pause"></i> Full';
+        button.innerHTML = '<i class="fas fa-pause"></i>Full';
         audioInfo.classList.remove("hidden");
         
         audio.addEventListener('timeupdate', () => {
@@ -404,21 +405,39 @@ document.addEventListener("DOMContentLoaded", () => {
     
         loadMoreAyat();
       }
-    
-      function playAyatAudio(button) {
+
+        function playAyatAudio(button) {
         const audioSrc = button.dataset.audio;
-        const audio = new Audio(audioSrc);
-    
-        document.querySelectorAll("audio").forEach((a) => a.pause());
-    
-        audio.play();
-    
-        button.innerHTML = '<i class="fas fa-pause"></i>';
-    
-        audio.onended = () => {
-          button.innerHTML = '<i class="fas fa-play"></i>';
-        };
-      }
+
+        if (currentAudio && currentAudio.src === audioSrc) {
+            // Jika audio yang sama sedang diputar, pause atau resume
+            if (currentAudio.paused) {
+            currentAudio.play();
+            button.innerHTML = '<i class="fas fa-pause"></i>';
+            } else {
+            currentAudio.pause();
+            button.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        } else {
+            // Jika audio berbeda atau belum ada yang diputar
+            if (currentAudio) {
+            currentAudio.pause();
+            const prevButton = document.querySelector(`[data-audio="${currentAudio.src}"]`);
+            if (prevButton) {
+                prevButton.innerHTML = '<i class="fas fa-play"></i>';
+            }
+            }
+
+            currentAudio = new Audio(audioSrc);
+            currentAudio.play();
+            button.innerHTML = '<i class="fas fa-pause"></i>';
+
+            currentAudio.onended = () => {
+            button.innerHTML = '<i class="fas fa-play"></i>';
+            currentAudio = null;
+            };
+        }
+        }
     
       function toggleTafsirPerAyat(button) {
         const tafsirContainer = button.nextElementSibling;
