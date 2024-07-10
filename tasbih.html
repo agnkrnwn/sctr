@@ -7,6 +7,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+    @keyframes breathe {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+    .breathe-animation {
+        animation: breathe 1s ease-in-out;
+    }
+</style>
 </head>
 <body class="bg-gradient-to-br from-blue-500 to-purple-600 min-h-screen flex items-center justify-center p-4">
     <div class="bg-white bg-opacity-90 rounded-3xl shadow-2xl p-8 max-w-md w-full">
@@ -27,8 +36,11 @@
                 <circle cx="50" cy="50" r="45" fill="none" stroke="#e0e0e0" stroke-width="10" />
                 <circle id="progressCircle" cx="50" cy="50" r="45" fill="none" stroke="#FF5722" stroke-width="10" stroke-dasharray="282.7" stroke-dashoffset="282.7" transform="rotate(-90 50 50)" />
             </svg>
-            <button id="tasbihButton" class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 text-white text-2xl font-bold shadow-lg transform transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300 flex items-center justify-center">
-                <i class="fas fa-hand-point-up text-4xl"></i>
+            <button id="tasbihButton" class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 text-white text-2xl font-bold shadow-lg transform transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300 flex items-center justify-center overflow-hidden">
+                <span class="relative z-10">
+                    <i class="fas fa-hand-point-up text-4xl"></i>
+                </span>
+                <span id="ripple" class="absolute inset-0 bg-white opacity-30 scale-0"></span>
             </button>
         </div>
         <div class="flex items-center justify-center space-x-4 mb-4">
@@ -230,10 +242,16 @@
         customDzikir.addEventListener('input', saveData);
 
         function animateButton() {
-            tasbihButton.classList.add('scale-95');
+            tasbihButton.classList.add('breathe-animation');
+            const ripple = document.getElementById('ripple');
+            ripple.classList.remove('scale-0');
+            ripple.classList.add('scale-100', 'transition-transform', 'duration-300', 'ease-out');
+            
             setTimeout(() => {
-                tasbihButton.classList.remove('scale-95');
-            }, 100);
+                tasbihButton.classList.remove('breathe-animation');
+                ripple.classList.remove('scale-100');
+                ripple.classList.add('scale-0');
+            }, 300);
         }
 
         function vibrate(pattern) {
