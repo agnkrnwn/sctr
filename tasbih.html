@@ -17,13 +17,15 @@
                 <option value="Alhamdulillah">Alhamdulillah</option>
                 <option value="Allahu Akbar">Allahu Akbar</option>
                 <option value="Astaghfirullah">Astaghfirullah</option>
+                <option value="custom">Custom...</option>
             </select>
+            <input id="customDzikir" class="mt-2 px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 hidden w-full" placeholder="Masukkan dzikir custom">
         </div>
         <div id="count" class="text-6xl font-bold text-center text-blue-600 mb-8">0</div>
         <div class="relative w-48 h-48 mx-auto mb-8">
             <svg class="w-full h-full" viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="45" fill="none" stroke="#e0e0e0" stroke-width="10" />
-                <circle id="progressCircle" cx="50" cy="50" r="45" fill="none" stroke="#3b82f6" stroke-width="10" stroke-dasharray="282.7" stroke-dashoffset="282.7" transform="rotate(-90 50 50)" />
+                <circle id="progressCircle" cx="50" cy="50" r="45" fill="none" stroke="#4CAF50" stroke-width="10" stroke-dasharray="282.7" stroke-dashoffset="282.7" transform="rotate(-90 50 50)" />
             </svg>
             <button id="tasbihButton" class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 text-white text-2xl font-bold shadow-lg transform transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300 flex items-center justify-center">
                 <i class="fas fa-hand-point-up text-4xl"></i>
@@ -36,9 +38,13 @@
         <div class="flex justify-center space-x-4 mb-4">
             <button id="resetButton" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"><i class="fas fa-redo-alt mr-2"></i>Reset</button>
             <button id="toggleSoundButton" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"><i class="fas fa-volume-up mr-2"></i>Suara: On</button>
-            <button id="clearDataButton" class="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition-colors"><i class="fas fa-trash-alt mr-2"></i>Hapus Data</button>
+            <button id="toggleProgressButton" class="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition-colors"><i class="fas fa-chart-bar mr-2"></i>Progress</button>
         </div>
-        <div id="history" class="mt-4 text-sm text-gray-600 max-h-40 overflow-y-auto"></div>
+        <div id="progressContainer" class="mt-4 hidden">
+            <h2 class="text-xl font-bold mb-2">Progress Dzikir</h2>
+            <div id="progressList" class="text-sm text-gray-600 max-h-40 overflow-y-auto mb-4"></div>
+            <button id="clearDataButton" class="w-full px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"><i class="fas fa-trash-alt mr-2"></i>Hapus Data</button>
+        </div>
     </div>
 
     <audio id="clickSound" src="/klik.mp3"></audio>
@@ -52,20 +58,27 @@
         const maxCountInput = document.getElementById('maxCount');
         const resetButton = document.getElementById('resetButton');
         const toggleSoundButton = document.getElementById('toggleSoundButton');
+        const toggleProgressButton = document.getElementById('toggleProgressButton');
         const clearDataButton = document.getElementById('clearDataButton');
         const clickSound = document.getElementById('clickSound');
         const finishSound = document.getElementById('finishSound');
         const progressCircle = document.getElementById('progressCircle');
         const dzikirSelect = document.getElementById('dzikirSelect');
-        const history = document.getElementById('history');
+        const customDzikir = document.getElementById('customDzikir');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressList = document.getElementById('progressList');
 
         function loadData() {
             const data = JSON.parse(localStorage.getItem('datadzikirv2') || '{}');
             count = data.count || 0;
             maxCountInput.value = data.target || 33;
             dzikirSelect.value = data.dzikir || 'Subhanallah';
+            if (dzikirSelect.value === 'custom') {
+                customDzikir.value = data.customDzikir || '';
+                customDzikir.classList.remove('hidden');
+            }
             updateDisplay();
-            updateHistory();
+            updateProgressList();
         }
 
         function saveData() {
@@ -73,7 +86,8 @@
                 count: count,
                 target: parseInt(maxCountInput.value),
                 dzikir: dzikirSelect.value,
-                history: history.innerHTML
+                customDzikir: customDzikir.value,
+                progress: JSON.parse(localStorage.getItem('datadzikirv2') || '{}').progress || []
             };
             localStorage.setItem('datadzikirv2', JSON.stringify(data));
         }
@@ -89,16 +103,28 @@
             progressCircle.style.strokeDashoffset = 282.7 - progress;
         }
 
-        function updateHistory() {
+        function updateProgressList() {
             const data = JSON.parse(localStorage.getItem('datadzikirv2') || '{}');
-            history.innerHTML = data.history || '';
+            const progress = data.progress || [];
+            progressList.innerHTML = progress.map(p => `
+                <div class="mb-2 p-2 bg-gray-100 rounded">
+                    <div class="font-bold">${new Date(p.date).toLocaleDateString()} ${new Date(p.date).toLocaleTimeString()}</div>
+                    <div>${p.dzikir} - ${p.count}x</div>
+                </div>
+            `).join('');
         }
 
-        function addToHistory() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString();
-            history.innerHTML = `${timeString}: ${dzikirSelect.value} - ${count}x<br>` + history.innerHTML;
-            saveData();
+        function addToProgress() {
+            const data = JSON.parse(localStorage.getItem('datadzikirv2') || '{}');
+            const progress = data.progress || [];
+            progress.unshift({
+                date: new Date().toISOString(),
+                dzikir: dzikirSelect.value === 'custom' ? customDzikir.value : dzikirSelect.value,
+                count: count
+            });
+            data.progress = progress;
+            localStorage.setItem('datadzikirv2', JSON.stringify(data));
+            updateProgressList();
         }
 
         tasbihButton.addEventListener('click', () => {
@@ -114,11 +140,11 @@
                 if (soundEnabled) finishSound.play();
                 Swal.fire({
                     title: 'Target Tercapai!',
-                    text: `Anda telah membaca "${dzikirSelect.value}" sebanyak ${target}x`,
+                    text: `Anda telah membaca "${dzikirSelect.value === 'custom' ? customDzikir.value : dzikirSelect.value}" sebanyak ${target}x`,
                     icon: 'success',
                     confirmButtonText: 'Alhamdulillah'
                 });
-                addToHistory();
+                addToProgress();
                 count = 0;
                 updateDisplay();
             }
@@ -139,6 +165,10 @@
             toggleSoundButton.classList.toggle('bg-gray-500');
         });
 
+        toggleProgressButton.addEventListener('click', () => {
+            progressContainer.classList.toggle('hidden');
+        });
+
         clearDataButton.addEventListener('click', () => {
             Swal.fire({
                 title: 'Hapus Data?',
@@ -155,8 +185,10 @@
                     count = 0;
                     maxCountInput.value = 33;
                     dzikirSelect.value = 'Subhanallah';
-                    history.innerHTML = '';
+                    customDzikir.value = '';
+                    customDzikir.classList.add('hidden');
                     updateDisplay();
+                    updateProgressList();
                     Swal.fire(
                         'Terhapus!',
                         'Data dzikir Anda telah dihapus.',
@@ -171,7 +203,16 @@
             saveData();
         });
 
-        dzikirSelect.addEventListener('change', saveData);
+        dzikirSelect.addEventListener('change', () => {
+            if (dzikirSelect.value === 'custom') {
+                customDzikir.classList.remove('hidden');
+            } else {
+                customDzikir.classList.add('hidden');
+            }
+            saveData();
+        });
+
+        customDzikir.addEventListener('input', saveData);
 
         function animateButton() {
             tasbihButton.classList.add('scale-95');
