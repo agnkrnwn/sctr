@@ -25,7 +25,9 @@
         <div class="relative w-48 h-48 mx-auto mb-8">
             <svg class="w-full h-full" viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="45" fill="none" stroke="#e0e0e0" stroke-width="10" />
-                <circle id="progressCircle" cx="50" cy="50" r="45" fill="none" stroke="#4CAF50" stroke-width="10" stroke-dasharray="282.7" stroke-dashoffset="282.7" transform="rotate(-90 50 50)" />
+                <circle id="progressCircle" cx="50" cy="50" r="45" fill="none" stroke="#FF5722" stroke-width="10" stroke-dasharray="282.7" stroke-dashoffset="282.7" transform="rotate(-90 50 50)">
+                    <animate attributeName="stroke-dashoffset" dur="0.5s" fill="freeze" />
+                </circle>
             </svg>
             <button id="tasbihButton" class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 text-white text-2xl font-bold shadow-lg transform transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300 flex items-center justify-center">
                 <i class="fas fa-hand-point-up text-4xl"></i>
@@ -101,6 +103,7 @@
             const target = parseInt(maxCountInput.value);
             const progress = (count / target) * 282.7;
             progressCircle.style.strokeDashoffset = 282.7 - progress;
+            progressCircle.style.stroke = count >= target ? '#4CAF50' : '#FF5722'; // Ubah warna saat target tercapai
         }
 
         function updateProgressList() {
