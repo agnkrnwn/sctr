@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "05": "Mishari Rashid Al-Afasy",
     };
 
+    let surahData = [];
+
     // Populate qari options
     for (let [value, name] of Object.entries(qariOptions)) {
         const option = document.createElement("option");
@@ -28,7 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(response => response.json())
         .then(data => {
             if (data.code === 200) {
-                data.data.forEach(surah => {
+                surahData = data.data;
+                surahData.forEach(surah => {
                     const option = document.createElement("option");
                     option.value = surah.nomor;
                     option.textContent = `${surah.nomor}. ${surah.namaLatin}`;
@@ -52,22 +55,58 @@ document.addEventListener("DOMContentLoaded", () => {
     // Download audio
     downloadAudioBtn.addEventListener("click", () => {
         const qari = qariSelect.value;
-        const surah = surahSelect.value.padStart(3, "0");
-        const ayah = ayahInput.value.padStart(3, "0");
+        const surahNumber = surahSelect.value;
+        const ayah = ayahInput.value.trim();
 
-        if (!surah || !ayah) {
-            alert("Please select a surah and enter an ayah number.");
+        const selectedSurah = surahData.find(s => s.nomor == surahNumber);
+        if (!selectedSurah) {
+            alert("Please select a valid surah.");
             return;
         }
 
-        const audioUrl = `https://sctr.netlify.app/audio/${qari}/${surah}${ayah}.mp3`;
+        if (ayah === "") {
+            // Download full surah
+            const audioUrl = selectedSurah.audioFull[qari];
+            const fileName = `surah_${surahNumber}_full_qari_${qari}.mp3`;
+            triggerDownload(audioUrl, fileName);
+        } else {
+            // Download specific ayah
+            const ayahNumber = parseInt(ayah);
+            if (isNaN(ayahNumber) || ayahNumber < 1 || ayahNumber > selectedSurah.jumlahAyat) {
+                alert(`Please enter a valid ayah number between 1 and ${selectedSurah.jumlahAyat}.`);
+                return;
+            }
+            
+            // Fetch the specific ayah data
+            fetch(`https://sctr.netlify.app/surat/${surahNumber}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.code === 200) {
+                        const ayahData = data.data.ayat.find(a => a.nomorAyat == ayahNumber);
+                        if (ayahData && ayahData.audio[qari]) {
+                            const audioUrl = ayahData.audio[qari];
+                            const fileName = `surah_${surahNumber}_ayah_${ayahNumber}_qari_${qari}.mp3`;
+                            triggerDownload(audioUrl, fileName);
+                        } else {
+                            alert("Audio for this ayah is not available.");
+                        }
+                    } else {
+                        alert("Failed to fetch ayah data.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching ayah data:", error);
+                    alert("An error occurred while fetching ayah data.");
+                });
+        }
+    });
 
-        // Create a temporary anchor element to trigger the download
+    function triggerDownload(audioUrl, fileName) {
         const downloadLink = document.createElement("a");
         downloadLink.href = audioUrl;
-        downloadLink.download = `surah_${surah}_ayah_${ayah}_qari_${qari}.mp3`;
+        downloadLink.download = fileName;
         document.body.appendChild(downloadLink);
         downloadLink.click();
         document.body.removeChild(downloadLink);
-    });
+    }
 });
