@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const surahSelect = document.getElementById("surahSelect");
     const ayahInput = document.getElementById("ayahInput");
     const downloadAudioBtn = document.getElementById("downloadAudioBtn");
+    const audioPreview = document.getElementById("audioPreview");
 
     const qariOptions = {
         "01": "Abdullah Al-Juhany",
@@ -50,54 +51,70 @@ document.addEventListener("DOMContentLoaded", () => {
     closeModalBtn.addEventListener("click", () => {
         audioSettingsModal.classList.add("hidden");
         audioSettingsModal.classList.remove("flex");
+        audioPreview.pause();
+        audioPreview.src = "";
     });
 
-    // Download audio
-    downloadAudioBtn.addEventListener("click", () => {
+    // Add event listeners for audio preview
+    qariSelect.addEventListener("change", updateAudioPreview);
+    surahSelect.addEventListener("change", updateAudioPreview);
+    ayahInput.addEventListener("input", updateAudioPreview);
+
+    function updateAudioPreview() {
         const qari = qariSelect.value;
         const surahNumber = surahSelect.value;
         const ayah = ayahInput.value.trim();
 
-        const selectedSurah = surahData.find(s => s.nomor == surahNumber);
-        if (!selectedSurah) {
-            alert("Please select a valid surah.");
+        if (!surahNumber) {
+            audioPreview.src = "";
             return;
         }
 
         if (ayah === "") {
-            // Download full surah
-            const audioUrl = selectedSurah.audioFull[qari];
-            const fileName = `surah_${surahNumber}_full_qari_${qari}.mp3`;
-            triggerDownload(audioUrl, fileName);
-        } else {
-            // Download specific ayah
-            const ayahNumber = parseInt(ayah);
-            if (isNaN(ayahNumber) || ayahNumber < 1 || ayahNumber > selectedSurah.jumlahAyat) {
-                alert(`Please enter a valid ayah number between 1 and ${selectedSurah.jumlahAyat}.`);
-                return;
+            // Preview surah lengkap
+            const selectedSurah = surahData.find(s => s.nomor == surahNumber);
+            if (selectedSurah && selectedSurah.audioFull[qari]) {
+                audioPreview.src = selectedSurah.audioFull[qari];
             }
-            
-            // Fetch the specific ayah data
+        } else {
+            // Preview ayat spesifik
             fetch(`https://sctr.netlify.app/surat/${surahNumber}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.code === 200) {
-                        const ayahData = data.data.ayat.find(a => a.nomorAyat == ayahNumber);
+                        const ayahData = data.data.ayat.find(a => a.nomorAyat == ayah);
                         if (ayahData && ayahData.audio[qari]) {
-                            const audioUrl = ayahData.audio[qari];
-                            const fileName = `surah_${surahNumber}_ayah_${ayahNumber}_qari_${qari}.mp3`;
-                            triggerDownload(audioUrl, fileName);
+                            audioPreview.src = ayahData.audio[qari];
                         } else {
-                            alert("Audio for this ayah is not available.");
+                            audioPreview.src = "";
                         }
-                    } else {
-                        alert("Failed to fetch ayah data.");
                     }
                 })
                 .catch(error => {
                     console.error("Error fetching ayah data:", error);
-                    alert("An error occurred while fetching ayah data.");
+                    audioPreview.src = "";
                 });
+        }
+    }
+
+    // Download audio
+    downloadAudioBtn.addEventListener("click", () => {
+        const audioUrl = audioPreview.src;
+        if (audioUrl) {
+            const qari = qariSelect.value;
+            const surahNumber = surahSelect.value;
+            const ayah = ayahInput.value.trim();
+            let fileName;
+
+            if (ayah === "") {
+                fileName = `surah_${surahNumber}_full_qari_${qari}.mp3`;
+            } else {
+                fileName = `surah_${surahNumber}_ayah_${ayah}_qari_${qari}.mp3`;
+            }
+
+            triggerDownload(audioUrl, fileName);
+        } else {
+            alert("Please select valid audio before downloading.");
         }
     });
 
