@@ -162,10 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <h2 class="text-2xl font-bold text-primary-600 dark:text-primary-400">${surah.nomor}. ${surah.namaLatin} (${surah.nama})</h2>
             <div>
               <button id="audioToggle" class="text-primary-800 dark:text-primary-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200 mr-2">
-                <i class="fas fa-play"></i> full
-              </button>
-              <button id="autoPlayToggle" class="text-primary-800 dark:text-primary-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200">
-                <i class="fas fa-play"></i> Auto
+                <i class="fas fa-play mr-1"></i> Full
               </button>
             </div>
           </div>
@@ -183,13 +180,14 @@ document.addEventListener("DOMContentLoaded", () => {
             <p><strong class="font-semibold">Deskripsi:</strong> ${surah.deskripsi}</p>
           </div>
           <div class="mt-4 space-x-2 flex items-center">
-            <button id="toggleAyatBtn" class="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600 transition-colors duration-200">
+            <button id="toggleAyatBtn" class="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600 transition-colors duration-200 text-sm leading-tight">
               <i class="fas fa-eye"></i> Ayat
             </button>
-            <input id="ayatInput" type="number" min="1" max="${surah.jumlahAyat}" class="ml-2 px-2 py-1 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600" placeholder="Go to Ayat">
-            <button id="goToAyatBtn" class="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600 transition-colors duration-200">
-              <i class="fas fa-otter"></i>
+            <input id="ayatInput" type="number" min="1" max="${surah.jumlahAyat}" class="ml-2 px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 text-sm leading-tight focus:outline-none focus:border-primary-500" placeholder="Go to Ayat">
+            <button id="goToAyatBtn" class="px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600 transition-colors duration-200 text-sm leading-tight">
+            <i class="fas fa-search"></i>
             </button>
+            
           </div>
           <div id="ayatContainer" class="mt-4 hidden"></div>
         </div>
@@ -219,7 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function toggleFullAudio(audio, button, audioInfo, progressBarFill) {
       if (audio.paused) {
         audio.play();
-        button.innerHTML = '<i class="fas fa-pause"></i>Full';
+        button.innerHTML = '<i class="fas fa-pause mr-1"></i> Full';
         audioInfo.classList.remove("hidden");
         
         audio.addEventListener('timeupdate', () => {
@@ -228,7 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       } else {
         audio.pause();
-        button.innerHTML = '<i class="fas fa-play"></i>Full';
+        button.innerHTML = '<i class="fas fa-play mr-1"></i> Full';
         audioInfo.classList.add("hidden");
       }
     }
@@ -241,13 +239,13 @@ document.addEventListener("DOMContentLoaded", () => {
   
       isAutoPlaying = true;
       currentAyatIndex = 0;
-      document.getElementById("autoPlayToggle").innerHTML = '<i class="fas fa-pause"></i> Auto';
+      document.getElementById("autoPlayToggle").innerHTML = '<i class="fas fa-pause"></i>';
       playNextAyat(ayat);
   
       // Add overlay pause button
       const overlay = document.createElement('div');
       overlay.id = 'pauseOverlay';
-      overlay.innerHTML = '<button id="overlayPauseBtn" class="bg-primary-950 text-white p-3 rounded-full"><i class="fas fa-pause"></i></button>';
+      overlay.innerHTML = '<button id="overlayPauseBtn" class="bg-primary-950 text-white p-3 w-12 h-12 rounded-full flex items-center justify-center"><i class="fas fa-pause"></i></button>';
       overlay.style.cssText = `
         position: fixed;
         bottom: 20px;
@@ -266,7 +264,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
     function stopAutoPlay() {
       isAutoPlaying = false;
-      document.getElementById("autoPlayToggle").innerHTML = '<i class="fas fa-play"></i> Auto';
+      document.getElementById("autoPlayToggle").innerHTML = '<i class="fas fa-play"></i>';
       const audio = document.querySelector(`audio[data-ayat="${currentAyatIndex}"]`);
       if (audio) {
         audio.pause();
@@ -333,15 +331,15 @@ document.addEventListener("DOMContentLoaded", () => {
           <h3 class="text-xl font-semibold mb-4 text-primary-600 dark:text-primary-400">Ayat-ayat:</h3>
           <div id="ayatList" class="space-y-6"></div>
         `;
-    
+      
         const ayatList = document.getElementById("ayatList");
         const batchSize = 10;
         let currentIndex = 0;
-    
+      
         function loadMoreAyat() {
           const fragment = document.createDocumentFragment();
           const endIndex = Math.min(currentIndex + batchSize, ayat.length);
-    
+      
           for (let i = currentIndex; i < endIndex; i++) {
             const a = ayat[i];
             const div = document.createElement("div");
@@ -350,61 +348,219 @@ document.addEventListener("DOMContentLoaded", () => {
             div.innerHTML = `
               <div class="flex justify-between items-center mb-2">
                 <span class="text-lg font-semibold">${a.nomorAyat}.</span>
-                <button class="play-audio-btn text-primary-800 dark:text-primary-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200" data-audio="${a.audio["05"]}">
-                  <i class="fas fa-play"></i>
-                </button>
+                <div>
+                   <button class="play-audio-btn text-primary-800 dark:text-primary-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200 mr-2" data-audio="${a.audio["05"]}">
+                    <i class="fas fa-play"></i>
+                    </button>
+                    <a href="${a.audio["05"]}" target="_blank" class="text-primary-800 dark:text-primary-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200 mr-2">
+                    <i class="fa-solid fa-file-audio"></i>
+                    </a>
+                    <button class="download-image-btn text-primary-800 dark:text-primary-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200">
+                    <i class="fas fa-download"></i>
+                    </button>
+                </div>
               </div>
-              <p class="text-right text-2xl mb-2 font-arabic">${a.teksArab}</p>
+              <p class="text-right text-2xl mb-5 mt-5 font-arabic">${a.teksArab}</p>
               <p class="mb-1 text-lg">${a.teksLatin}</p>
               <p class="text-gray-600 dark:text-gray-400">${a.teksIndonesia}</p>
-              <button class="toggle-tafsir-btn mt-2 text-primary-600 dark:text-primary-400 hover:underline" data-ayat="${a.nomorAyat}">
-                Show Tafsir
+              <button class="toggle-tafsir-btn mt-2 text-primary-600 dark:text-primary-400 hover:underline">
+              Show Tafsir <i class="fas fa-chevron-down ml-1"></i>
               </button>
               <div class="tafsir-container hidden mt-2">
                 <p class="text-gray-600 dark:text-gray-400">
-                  ${tafsir[i] ? tafsir[i].teks.split('\n').map(line => `
-                    <span class="block mb-2">${line}</span>
-                  `).join('') : 'Tafsir tidak tersedia'}
+                  ${tafsir[i] ? tafsir[i].teks : 'Tafsir tidak tersedia'}
                 </p>
+                <button class="copy-tafsir-btn mt-2 bg-primary-500 text-white px-3 py-1 rounded hover:bg-primary-600 transition-colors duration-200">
+                  <i class="fas fa-copy"> </i> Copy Tafsir
+                </button>
               </div>
             `;
             fragment.appendChild(div);
           }
-    
+      
           ayatList.appendChild(fragment);
-    
+      
           currentIndex = endIndex;
-    
+      
           if (currentIndex < ayat.length) {
             const options = {
               root: null,
               rootMargin: "0px",
               threshold: 0.1
             };
-    
+      
             const observer = new IntersectionObserver((entries) => {
               if (entries[0].isIntersecting) {
                 observer.unobserve(entries[0].target);
                 loadMoreAyat();
               }
             }, options);
-    
+      
             observer.observe(ayatList.lastElementChild);
           }
-    
+      
+          // Add event listeners
           const audioButtons = ayatList.querySelectorAll(".play-audio-btn");
           audioButtons.forEach((button) => {
             button.addEventListener("click", () => playAyatAudio(button));
           });
-    
+      
           const tafsirButtons = ayatList.querySelectorAll(".toggle-tafsir-btn");
           tafsirButtons.forEach((button) => {
             button.addEventListener("click", () => toggleTafsirPerAyat(button));
           });
+      
+          const downloadButtons = ayatList.querySelectorAll(".download-image-btn");
+          downloadButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+              const ayatElement = button.closest("[data-ayat]");
+              const ayatNumber = ayatElement.getAttribute("data-ayat");
+              downloadAyatImageForTikTok(ayatElement, ayatNumber);
+            });
+          });
+      
+          const copyTafsirButtons = ayatList.querySelectorAll(".copy-tafsir-btn");
+          copyTafsirButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+              const tafsirText = button.previousElementSibling.textContent;
+              copyTafsir(tafsirText);
+            });
+          });
         }
-    
+      
         loadMoreAyat();
       }
+      
+      function downloadAyatImageForTikTok(ayatElement, ayatNumber) {
+        const tempDiv = document.createElement('div');
+        tempDiv.style.width = '1080px';
+        tempDiv.style.height = '1920px';
+        tempDiv.style.backgroundColor = 'black';
+        tempDiv.style.color = 'white';
+        tempDiv.style.fontFamily = 'Arial, sans-serif';
+        tempDiv.style.display = 'flex';
+        tempDiv.style.flexDirection = 'column';
+        tempDiv.style.justifyContent = 'center';
+        tempDiv.style.alignItems = 'center';
+        tempDiv.style.padding = '50px';
+        tempDiv.style.boxSizing = 'border-box';
+      
+        // Konten wrapper dengan margin yang lebih lebar
+        const contentWrapper = document.createElement('div');
+        contentWrapper.style.width = '100%';
+        contentWrapper.style.maxWidth = '800px'; // Memperlebar margin
+        contentWrapper.style.margin = '0 auto';
+      
+        // Judul
+        const title = document.createElement('h1');
+        title.textContent = `${currentSurah.namaLatin} : Ayat ${ayatNumber}`;
+        title.style.textAlign = 'center';
+        title.style.marginBottom = '50px';
+        title.style.fontSize = 'clamp(20px, 5vw, 40px)'; // Font size fleksibel
+      
+        // Teks Arab
+        const arabicText = document.createElement('p');
+        arabicText.textContent = ayatElement.querySelector('.font-arabic').textContent;
+        arabicText.style.fontSize = 'clamp(25px, 7vw, 50px)'; // Font size fleksibel
+        arabicText.style.fontFamily = '"Traditional Arabic", Arial';
+        arabicText.style.textAlign = 'right';
+        arabicText.style.direction = 'rtl';
+        arabicText.style.marginBottom = '30px';
+      
+        // Teks Latin
+        const latinText = document.createElement('p');
+        latinText.textContent = ayatElement.querySelector('p:nth-of-type(2)').textContent;
+        latinText.style.fontSize = 'clamp(18px, 3.5vw, 36px)'; // Font size fleksibel
+        latinText.style.textAlign = 'left';
+        latinText.style.marginBottom = '20px';
+      
+        // Teks Indonesia
+        const indonesianText = document.createElement('p');
+        indonesianText.textContent = ayatElement.querySelector('p:nth-of-type(3)').textContent;
+        indonesianText.style.fontSize = 'clamp(16px, 3vw, 30px)'; // Font size fleksibel
+        indonesianText.style.textAlign = 'left';
+      
+        // Gabungkan semua elemen
+        contentWrapper.appendChild(title);
+        contentWrapper.appendChild(arabicText);
+        contentWrapper.appendChild(latinText);
+        contentWrapper.appendChild(indonesianText);
+        tempDiv.appendChild(contentWrapper);
+      
+        // Tambahkan div sementara ke body
+        document.body.appendChild(tempDiv);
+      
+        // Gunakan html2canvas untuk mengonversi div menjadi gambar
+        html2canvas(tempDiv, {
+          width: 1080,
+          height: 1920,
+          scale: 1
+        }).then(canvas => {
+          // Hapus div sementara
+          document.body.removeChild(tempDiv);
+      
+          // Unduh gambar
+          const link = document.createElement('a');
+          link.download = `${currentSurah.namaLatin}-Ayat-${ayatNumber}-TikTok.png`;
+          link.href = canvas.toDataURL();
+          link.click();
+        });
+      }
+      
+      function wrapText(context, text, x, y, maxWidth, lineHeight) {
+        const words = text.split(' ');
+        let line = '';
+        let lastY = y;
+        
+        for (let n = 0; n < words.length; n++) {
+          const testLine = line + words[n] + ' ';
+          const metrics = context.measureText(testLine);
+          const testWidth = metrics.width;
+          
+          if (testWidth > maxWidth && n > 0) {
+            context.fillText(line, x, lastY);
+            line = words[n] + ' ';
+            lastY += lineHeight;
+          } else {
+            line = testLine;
+          }
+        }
+        
+        context.fillText(line, x, lastY);
+        return lastY + lineHeight;
+      }
+      
+      function measureTextHeight(context, text, maxWidth, lineHeight) {
+        const words = text.split(' ');
+        let line = '';
+        let height = 0;
+        
+        for (let n = 0; n < words.length; n++) {
+          const testLine = line + words[n] + ' ';
+          const metrics = context.measureText(testLine);
+          const testWidth = metrics.width;
+          
+          if (testWidth > maxWidth && n > 0) {
+            height += lineHeight;
+            line = words[n] + ' ';
+          } else {
+            line = testLine;
+          }
+        }
+        
+        return height + lineHeight;
+      }
+      
+      function copyTafsir(tafsirText) {
+        navigator.clipboard.writeText(tafsirText).then(() => {
+          alert('Tafsir berhasil disalin!');
+        }).catch(err => {
+          console.error('Gagal menyalin tafsir: ', err);
+        });
+      }
+      
+      // Fungsi playAyatAudio tetap sama
+      
 
         function playAyatAudio(button) {
         const audioSrc = button.dataset.audio;
@@ -439,14 +595,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         }
     
-      function toggleTafsirPerAyat(button) {
-        const tafsirContainer = button.nextElementSibling;
-        if (tafsirContainer.classList.contains("hidden")) {
-          tafsirContainer.classList.remove("hidden");
-          button.textContent = "Hide Tafsir";
-        } else {
-          tafsirContainer.classList.add("hidden");
-          button.textContent = "Show Tafsir";
-        }
-      }
+        function toggleTafsirPerAyat(button) {
+            const tafsirContainer = button.nextElementSibling;
+            const chevronIcon = button.querySelector('i');
+          
+            if (tafsirContainer.classList.contains("hidden")) {
+              tafsirContainer.classList.remove("hidden");
+              button.innerHTML = `Hide Tafsir <i class="fas fa-chevron-up ml-1"></i>`;
+            } else {
+              tafsirContainer.classList.add("hidden");
+              button.innerHTML = `Show Tafsir <i class="fas fa-chevron-down ml-1"></i>`;
+            }
+          }
   });

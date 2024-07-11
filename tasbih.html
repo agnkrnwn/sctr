@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,40 +9,59 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-    @keyframes breathe {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-    }
-    .breathe-animation {
-        animation: breathe 1s ease-in-out;
-    }
-    .gradient-text {
-        background: linear-gradient(45deg, #3b82f6, #93c5fd);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
+        @keyframes breathe {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .breathe-animation {
+            animation: breathe 1s ease-in-out;
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, #3b82f6, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #progressCircle {
+            transition: stroke-dashoffset 0.3s ease-in-out, stroke 0.3s ease-in-out;
+        }
     </style>
 </head>
+
 <body class="bg-gradient-to-br from-gray-900 to-gray-800 min-h-screen flex items-center justify-center p-4">
     <div class="bg-gray-800 rounded-3xl shadow-2xl p-8 max-w-md w-full">
         <h1 class="text-4xl font-bold text-center gradient-text mb-6">Tasbih Digital</h1>
         <div class="mb-4 text-center">
-            <select id="dzikirSelect" class="px-4 py-2 rounded-md bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <select id="dzikirSelect"
+                class="px-4 py-2 rounded-md bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 <option value="Subhanallah">Subhanallah</option>
                 <option value="Alhamdulillah">Alhamdulillah</option>
                 <option value="Allahu Akbar">Allahu Akbar</option>
                 <option value="Astaghfirullah">Astaghfirullah</option>
                 <option value="custom">Custom...</option>
             </select>
-            <input id="customDzikir" class="mt-2 px-4 py-2 rounded-md bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 hidden w-full" placeholder="Masukkan dzikir custom">
+            <input id="customDzikir"
+                class="mt-2 px-4 py-2 rounded-md bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 hidden w-full"
+                placeholder="Masukkan dzikir custom">
         </div>
         <div id="count" class="text-7xl font-bold text-center gradient-text mb-8">0</div>
         <div class="relative w-56 h-56 mx-auto mb-8">
             <svg class="w-full h-full" viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="45" fill="none" stroke="#4B5563" stroke-width="10" />
-                <circle id="progressCircle" cx="50" cy="50" r="45" fill="none" stroke="#3B82F6" stroke-width="10" stroke-dasharray="282.7" stroke-dashoffset="282.7" transform="rotate(-90 50 50)" />
+                <circle id="progressCircle" cx="50" cy="50" r="45" fill="none" stroke="#3B82F6" stroke-width="10"
+                    stroke-dasharray="282.7" stroke-dashoffset="282.7" transform="rotate(-90 50 50)" />
             </svg>
-            <button id="tasbihButton" class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600 to-blue-400 text-white text-2xl font-bold shadow-lg transform transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300 flex items-center justify-center overflow-hidden">
+            <button id="tasbihButton"
+                class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600 to-blue-400 text-white text-2xl font-bold shadow-lg transform transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300 flex items-center justify-center overflow-hidden">
                 <span class="relative z-10">
                     <i class="fas fa-hand-point-up text-5xl"></i>
                 </span>
@@ -50,18 +70,27 @@
         </div>
         <div class="flex items-center justify-center space-x-4 mb-4">
             <label for="maxCount" class="text-gray-300">Target:</label>
-            <input type="number" id="maxCount" value="33" min="1" class="w-20 px-2 py-1 bg-gray-700 text-white border border-gray-600 rounded-md text-center">
+            <input type="number" id="maxCount" value="33" min="1"
+                class="w-20 px-2 py-1 bg-gray-700 text-white border border-gray-600 rounded-md text-center">
         </div>
         <div class="flex justify-center space-x-4 mb-4">
-            <button id="resetButton" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"><i class="fas fa-redo-alt mr-2"></i></button>
-            <button id="toggleSoundButton" class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"><i class="fas fa-volume-up mr-2"></i></button>
-            <button id="toggleProgressButton" class="px-4 py-2 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition-colors"><i class="fas fa-chart-bar mr-2"></i></button>
+            <button id="resetButton"
+                class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"><i
+                    class="fas fa-redo-alt mr-2"></i></button>
+            <button id="toggleSoundButton"
+                class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"><i
+                    class="fas fa-volume-up mr-2"></i></button>
+            <button id="toggleProgressButton"
+                class="px-4 py-2 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition-colors"><i
+                    class="fas fa-chart-bar mr-2"></i></button>
         </div>
         <div id="progressContainer" class="mt-4 hidden">
-    <h2 class="text-xl font-bold mb-2 text-white">Progress Dzikir</h2>
-    <div id="progressList" class="text-sm text-gray-300 max-h-40 overflow-y-auto mb-4"></div>
-    <button id="clearDataButton" class="w-full px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"><i class="fas fa-trash-alt mr-2"></i>Hapus Data</button>
-</div>
+            <h2 class="text-xl font-bold mb-2 text-white">Progress Dzikir</h2>
+            <div id="progressList" class="text-sm text-gray-300 max-h-40 overflow-y-auto mb-4"></div>
+            <button id="clearDataButton"
+                class="w-full px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"><i
+                    class="fas fa-trash-alt mr-2"></i>Hapus Data</button>
+        </div>
     </div>
 
     <audio id="clickSound" src="/klik.mp3"></audio>
@@ -84,7 +113,7 @@
         const progressContainer = document.getElementById('progressContainer');
         const progressList = document.getElementById('progressList');
 
-        
+
 
         function loadData() {
             const data = JSON.parse(localStorage.getItem('datadzikirv2') || '{}');
@@ -111,18 +140,20 @@
         }
 
         function updateDisplay() {
-            countDisplay.textContent = count;
+            animateCounter(parseInt(countDisplay.textContent), count);
             updateProgress();
         }
 
         function updateProgress() {
             const target = parseInt(maxCountInput.value);
             const progress = (count / target) * 282.7;
-            progressCircle.style.transition = 'stroke-dashoffset 0.3s ease-in-out';
-            progressCircle.style.strokeDashoffset = 282.7 - progress;
-            
-            // Ubah warna berdasarkan persentase penyelesaian
             const percentage = (count / target) * 100;
+
+            // Animasi perubahan stroke-dashoffset
+            progressCircle.style.transition = 'stroke-dashoffset 0.3s ease-in-out, stroke 0.3s ease-in-out';
+            progressCircle.style.strokeDashoffset = 282.7 - progress;
+
+            // Animasi perubahan warna
             let color;
             if (percentage < 33) {
                 color = '#FF5722'; // Oranye
@@ -136,16 +167,39 @@
             progressCircle.style.stroke = color;
         }
 
+        function animateCounter(from, to) {
+            let start = from;
+            const duration = 300; // Durasi animasi dalam milidetik
+            const range = to - from;
+            const increment = range / duration * 10; // Langkah perubahan setiap 10ms
+            const startTime = new Date().getTime();
+
+            function updateCounter() {
+                const currentTime = new Date().getTime();
+                const elapsedTime = currentTime - startTime;
+
+                if (elapsedTime < duration) {
+                    start += increment;
+                    countDisplay.textContent = Math.round(start);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    countDisplay.textContent = to;
+                }
+            }
+
+            requestAnimationFrame(updateCounter);
+        }
+
         function updateProgressList() {
-    const data = JSON.parse(localStorage.getItem('datadzikirv2') || '{}');
-    const progress = data.progress || [];
-    progressList.innerHTML = progress.map(p => `
+            const data = JSON.parse(localStorage.getItem('datadzikirv2') || '{}');
+            const progress = data.progress || [];
+            progressList.innerHTML = progress.map(p => `
         <div class="mb-2 p-2 bg-gray-700 rounded">
             <div class="font-bold text-gray-200">${new Date(p.date).toLocaleDateString()} ${new Date(p.date).toLocaleTimeString()}</div>
             <div class="text-gray-300">${p.dzikir} - ${p.count}x</div>
         </div>
     `).join('');
-}
+        }
 
         function addToProgress() {
             const data = JSON.parse(localStorage.getItem('datadzikirv2') || '{}');
@@ -161,38 +215,40 @@
         }
 
         let clickSounds = [new Audio('/klik.mp3'), new Audio('/klik.mp3'), new Audio('/klik.mp3')];
-let currentSoundIndex = 0;
+        let currentSoundIndex = 0;
 
-function playClickSound() {
-    if (soundEnabled) {
-        clickSounds[currentSoundIndex].play();
-        currentSoundIndex = (currentSoundIndex + 1) % clickSounds.length;
-    }
-}
+        function playClickSound() {
+            if (soundEnabled) {
+                clickSounds[currentSoundIndex].play();
+                currentSoundIndex = (currentSoundIndex + 1) % clickSounds.length;
+            }
+        }
 
-tasbihButton.addEventListener('click', () => {
-    count++;
-    updateDisplay();
-    animateButton();
-    vibrate(50);
-    playClickSound();
+        tasbihButton.addEventListener('click', () => {
+            const oldCount = count;
+            count++;
+            animateCounter(oldCount, count);
+            updateProgress();
+            animateButton();
+            vibrate(50);
+            playClickSound();
 
-    const target = parseInt(maxCountInput.value);
-    if (count >= target) {
-        vibrate([100, 50, 100]);
-        if (soundEnabled) finishSound.play();
-        Swal.fire({
-            title: 'Target Tercapai!',
-            text: `Anda telah membaca "${dzikirSelect.value === 'custom' ? customDzikir.value : dzikirSelect.value}" sebanyak ${target}x`,
-            icon: 'success',
-            confirmButtonText: 'Alhamdulillah'
+            const target = parseInt(maxCountInput.value);
+            if (count >= target) {
+                vibrate([100, 50, 100]);
+                if (soundEnabled) finishSound.play();
+                Swal.fire({
+                    title: 'Target Tercapai!',
+                    text: `Anda telah membaca "${dzikirSelect.value === 'custom' ? customDzikir.value : dzikirSelect.value}" sebanyak ${target}x`,
+                    icon: 'success',
+                    confirmButtonText: 'Alhamdulillah'
+                });
+                addToProgress();
+                count = 0;
+                updateDisplay();
+            }
+            saveData();
         });
-        addToProgress();
-        count = 0;
-        updateDisplay();
-    }
-    saveData();
-});
 
         resetButton.addEventListener('click', () => {
             count = 0;
@@ -262,12 +318,12 @@ tasbihButton.addEventListener('click', () => {
             const ripple = document.getElementById('ripple');
             ripple.style.transform = 'scale(0)';
             ripple.style.opacity = '0.3';
-            
+
             setTimeout(() => {
                 ripple.style.transform = 'scale(2)';
                 ripple.style.opacity = '0';
             }, 0);
-            
+
             setTimeout(() => {
                 tasbihButton.classList.remove('breathe-animation');
                 ripple.style.transform = 'scale(0)';
@@ -285,4 +341,5 @@ tasbihButton.addEventListener('click', () => {
         updateProgress(); // Tambahkan ini setelah loadData()
     </script>
 </body>
+
 </html>

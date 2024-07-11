@@ -1,12 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const audioSettingsToggle = document.getElementById("audioSettingsToggle");
-    const audioSettingsModal = document.getElementById("audioSettingsModal");
-    const closeModalBtn = document.getElementById("closeModalBtn");
     const qariSelect = document.getElementById("qariSelect");
     const surahSelect = document.getElementById("surahSelect");
     const ayahInput = document.getElementById("ayahInput");
     const downloadAudioBtn = document.getElementById("downloadAudioBtn");
     const audioPreview = document.getElementById("audioPreview");
+    const darkModeToggle = document.getElementById("darkModeToggle");
 
     const qariOptions = {
         "01": "Abdullah Al-Juhany",
@@ -27,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Fetch and populate surah options
-    fetch("https://sctr.netlify.app/surat")
+    fetch("./surat/surat.json")
         .then(response => response.json())
         .then(data => {
             if (data.code === 200) {
@@ -41,19 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         })
         .catch(error => console.error("Error fetching surah list:", error));
-
-    // Toggle modal
-    audioSettingsToggle.addEventListener("click", () => {
-        audioSettingsModal.classList.toggle("hidden");
-        audioSettingsModal.classList.toggle("flex");
-    });
-
-    closeModalBtn.addEventListener("click", () => {
-        audioSettingsModal.classList.add("hidden");
-        audioSettingsModal.classList.remove("flex");
-        audioPreview.pause();
-        audioPreview.src = "";
-    });
 
     // Add event listeners for audio preview
     qariSelect.addEventListener("change", updateAudioPreview);
@@ -78,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         } else {
             // Preview ayat spesifik
-            fetch(`https://sctr.netlify.app/surat/${surahNumber}`)
+            fetch(`./surat/${surahNumber}.json`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.code === 200) {
@@ -102,28 +87,28 @@ document.addEventListener("DOMContentLoaded", () => {
         const audioUrl = audioPreview.src;
         if (audioUrl) {
             const qari = qariSelect.value;
+            const qariName = qariOptions[qari].replace(/\s+/g, '-').toLowerCase();
             const surahNumber = surahSelect.value;
+            const surahName = surahData.find(s => s.nomor == surahNumber).namaLatin.replace(/\s+/g, '-').toLowerCase();
             const ayah = ayahInput.value.trim();
-            let fileName;
+            
+            let fileName = ayah === "" 
+                ? `surat-${surahName}-full-${qariName}.mp3`
+                : `surat-${surahName}-ayat-${ayah}-${qariName}.mp3`;
 
-            if (ayah === "") {
-                fileName = `surah_${surahNumber}_full_qari_${qari}.mp3`;
-            } else {
-                fileName = `surah_${surahNumber}_ayah_${ayah}_qari_${qari}.mp3`;
-            }
-
-            triggerDownload(audioUrl, fileName);
+            const downloadLink = document.createElement("a");
+            downloadLink.href = audioUrl;
+            downloadLink.download = fileName;
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
         } else {
             alert("Please select valid audio before downloading.");
         }
     });
 
-    function triggerDownload(audioUrl, fileName) {
-        const downloadLink = document.createElement("a");
-        downloadLink.href = audioUrl;
-        downloadLink.download = fileName;
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-    }
+    // Dark mode toggle
+    darkModeToggle.addEventListener("change", () => {
+        document.documentElement.classList.toggle("dark");
+    });
 });
