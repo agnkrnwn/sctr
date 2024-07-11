@@ -364,7 +364,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     </button>
                 </div>
               </div>
-              <p class="text-right text-2xl mb-5 mt-5 font-arabic">${a.teksArab}</p>
+              <p class="text-right text-2xl my-5 font-arabic leading-relaxed" style="line-height: 2.5;">${a.teksArab}</p>
               <p class="mb-1 text-lg">${a.teksLatin}</p>
               <p class="text-gray-600 dark:text-gray-400">${a.teksIndonesia}</p>
               <button class="toggle-tafsir-btn mt-2 text-primary-600 dark:text-primary-400 hover:underline">

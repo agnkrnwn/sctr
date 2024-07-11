@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id" class="bg-gradient-to-br from-indigo-500 to-purple-600 min-h-screen">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kumpulan Doa Modern</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Amiri&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        arabic: ['LPMQ Isep Misbah', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        @font-face {
+        font-family: 'LPMQ Isep Misbah';
+        src: url('LPMQ-IsepMisbah.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+        }
+
+        .arabic {
+            font-family: 'LPMQ Isep Misbah', sans-serif;
+            font-size: 1.75rem;
+            line-height: 3rem;
+            letter-spacing: 0.05em;
+            word-spacing: 0.1em;
+        }
+
+        /* Tambahkan kelas baru untuk kontainer teks Arab */
+        .arabic-container {
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+        }
+        /* 
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        } */
+    </style>
+</head>
+<body class="text-gray-800 dark:text-gray-200 transition-colors duration-200">
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-4xl font-bold text-white">Kumpulan Doa Modern</h1>
+            <button id="darkModeToggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 transition-all duration-300 hover:scale-110">
+                <i class="fas fa-sun text-yellow-500 dark:hidden"></i>
+                <i class="fas fa-moon text-blue-300 hidden dark:inline"></i>
+            </button>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 mb-8">
+            <div class="flex flex-col md:flex-row gap-4 mb-4">
+                <div class="relative flex-grow">
+                    <input type="text" id="searchInput" placeholder="Cari doa..." class="w-full p-2 pl-10 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                </div>
+                <select id="categorySelect" class="p-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="all">Semua Kategori</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="doaList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+
+    <div id="doaModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full">
+        <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-3/4 lg:w-1/2 shadow-lg rounded-md bg-white dark:bg-gray-800">
+            <div id="doaModalContent" class="max-h-[70vh] overflow-y-auto custom-scrollbar pr-4"></div>
+            <div class="text-right mt-4">
+                <button onclick="closeModal()" class="px-4 py-2 bg-indigo-500 text-white text-base font-medium rounded-md shadow-sm hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-300 transition-colors duration-200">
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allDoas = [];
+        let categories = new Set();
+
+        async function fetchAndDisplayDoas() {
+            try {
+                const response = await fetch('./doa/doa.json');
+                allDoas = await response.json();
+                categories = new Set(allDoas.map(doa => doa.grup));
+                populateCategoryDropdown();
+                displayDoas(allDoas);
+            } catch (error) {
+                console.error('Error fetching doa data:', error);
+                document.getElementById('doaList').innerHTML = '<p class="text-white text-center col-span-full">Gagal memuat data doa. Silakan coba lagi nanti.</p>';
+            }
+        }
+
+        function populateCategoryDropdown() {
+            const categorySelect = document.getElementById('categorySelect');
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category;
+                option.textContent = category;
+                categorySelect.appendChild(option);
+            });
+        }
+
+        function displayDoas(doas) {
+            const doaList = document.getElementById('doaList');
+            doaList.innerHTML = '';
+            doas.forEach(doa => {
+                doaList.innerHTML += `
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition duration-300 transform hover:scale-105" onclick="showDoaDetail(${doa.id})">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-indigo-600 dark:text-indigo-400 mb-2">${doa.nama}</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">${doa.grup}</p>
+                            <p class="text-gray-800 dark:text-gray-200 truncate">${doa.idn.substring(0, 100)}...</p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function showDoaDetail(id) {
+        const doa = allDoas.find(d => d.id === id);
+        const modalContent = document.getElementById('doaModalContent');
+        modalContent.innerHTML = `
+            <h2 class="text-2xl font-semibold text-indigo-600 dark:text-indigo-400 mb-4">${doa.nama}</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-4">${doa.grup}</p>
+            <div class="arabic-container mb-4">
+                <p class="arabic text-right" dir="rtl">${doa.ar}</p>
+            </div>
+            <div class="bg-gray-50 dark:bg-gray-600 p-4 rounded-lg mb-4">
+                <p class="italic">${doa.tr}</p>
+            </div>
+            <div class="bg-indigo-50 dark:bg-indigo-900 p-4 rounded-lg mb-4">
+                <p>${doa.idn}</p>
+            </div>
+            <div class="mt-4">
+                <h4 class="font-semibold text-indigo-600 dark:text-indigo-400 mb-2">Tentang Doa Ini:</h4>
+                <p class="text-sm whitespace-pre-line">${doa.tentang}</p>
+            </div>
+            <div class="flex items-center space-x-2 mt-4">
+                <span class="bg-indigo-100 dark:bg-indigo-800 text-indigo-800 dark:text-indigo-200 text-xs font-medium px-2.5 py-0.5 rounded">${doa.tag}</span>
+            </div>
+        `;
+        document.getElementById('doaModal').classList.remove('hidden');
+    }
+
+        function closeModal() {
+            document.getElementById('doaModal').classList.add('hidden');
+        }
+
+        document.getElementById('searchInput').addEventListener('input', filterDoas);
+        document.getElementById('categorySelect').addEventListener('change', filterDoas);
+
+        function filterDoas() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const selectedCategory = document.getElementById('categorySelect').value;
+            
+            const filteredDoas = allDoas.filter(doa => 
+                (selectedCategory === 'all' || doa.grup === selectedCategory) &&
+                (doa.nama.toLowerCase().includes(searchTerm) || 
+                doa.idn.toLowerCase().includes(searchTerm))
+            );
+            displayDoas(filteredDoas);
+        }
+
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        darkModeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
+        });
+
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.documentElement.classList.add('dark');
+        }
+
+        window.onload = fetchAndDisplayDoas;
+    </script>
+</body>
+</html>
