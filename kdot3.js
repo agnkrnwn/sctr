@@ -501,7 +501,7 @@ document.addEventListener("DOMContentLoaded", () => {
       
           // Unduh gambar
           const link = document.createElement('a');
-          link.download = `${currentSurah.namaLatin}-Ayat-${ayatNumber}-TikTok.png`;
+          link.download = `${currentSurah.namaLatin}-Ayat-${ayatNumber}.png`;
           link.href = canvas.toDataURL();
           link.click();
         });
