@@ -93,8 +93,8 @@
         </div>
     </div>
 
-    <audio id="clickSound" src="/klik.mp3"></audio>
-    <audio id="finishSound" src="/hselesai.mp3"></audio>
+    <audio id="clickSound" src="/audio//klik.mp3"></audio>
+    <audio id="finishSound" src="/audio/hselesai.mp3"></audio>
     <script>
         let count = 0;
         let soundEnabled = true;
@@ -214,7 +214,7 @@
             updateProgressList();
         }
 
-        let clickSounds = [new Audio('/klik.mp3'), new Audio('/klik.mp3'), new Audio('/klik.mp3')];
+        let clickSounds = [new Audio('/audio/klik.mp3'), new Audio('/audio/klik.mp3'), new Audio('/audio/klik.mp3')];
         let currentSoundIndex = 0;
 
         function playClickSound() {

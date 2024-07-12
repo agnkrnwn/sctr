@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al-Quran & Doa Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap');
+        @font-face {
+            font-family: 'LPMQ Isep Misbah';
+            src: url('./font/LPMQ-IsepMisbah.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .arabic-text {
+            font-family: 'LPMQ Isep Misbah', serif;
+            font-size: 2em;
+            line-height: 2.5;
+            word-spacing: 0.1em;
+            padding: 1rem 0;
+        }
+    </style>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { "50": "#f0f9ff", "100": "#e0f2fe", "200": "#bae6fd", "300": "#7dd3fc", "400": "#38bdf8", "500": "#0ea5e9", "600": "#0284c7", "700": "#0369a1", "800": "#075985", "900": "#0c4a6e", "950": "#1c7a0b" },
+                    },
+                    fontFamily: {
+                        'sans': ['Poppins', 'sans-serif'],
+                        'arabic': ['LPMQ Isep Misbah', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white transition-all duration-300">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div id="sidebar" class="bg-white dark:bg-gray-800 w-64 flex-shrink-0 hidden md:block transition-all duration-300 overflow-y-auto">
+            <div class="p-4">
+                <h2 class="text-2xl font-bold mb-4">Menu</h2>
+                <button id="surahBtn" class="w-full py-2 px-4 bg-blue-500 text-white rounded mb-2 hover:bg-blue-600 transition-colors">Surah</button>
+                <button id="doaBtn" class="w-full py-2 px-4 bg-green-500 text-white rounded mb-2 hover:bg-green-600 transition-colors">Doa</button>
+            </div>
+            <div class="px-4 mb-4">
+                <input type="text" id="searchInput" placeholder="Cari surah atau doa..." class="w-full p-2 rounded border dark:bg-gray-700 dark:border-gray-600">
+            </div>
+            <div id="listContent" class="p-4"></div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <header class="bg-white dark:bg-gray-800 shadow-md p-4 flex justify-between items-center">
+                <button id="sidebarToggle" class="md:hidden text-2xl"><i class="fas fa-bars"></i></button>
+                <h1 class="text-2xl font-bold">Al-Quran & Doa Digital</h1>
+                <button id="darkModeToggle" class="text-2xl"><i class="fas fa-moon"></i></button>
+            </header>
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 dark:bg-gray-900 p-4">
+                <div id="mainContent" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transition-all duration-300"></div>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
