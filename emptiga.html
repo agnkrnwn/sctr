@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quran Audio Player</title>
+
+    <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="./images/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="./images/android-chrome-512x512.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon-16x16.png">
+
+    <!-- Meta tags untuk SEO dan sharing -->
+    <meta name="description" content="Al-Quran Digital untuk membaca dan mempelajari Al-Quran secara online">
+    <meta name="keywords" content="Al-Quran, Digital Quran, Baca Quran, Islam">
+    <meta name="author" content="@agnkrnwn">
+    <meta property="og:title" content="Al-Quran Digital">
+    <meta property="og:description" content="Baca dan pelajari Al-Quran secara online">
+    <meta property="og:image" content="./images/quran-thumbnail.jpg">
+    <meta property="og:url" content="https://sctr.netlify.app/">
+
+    <!-- PWA tags -->
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#1F2937">
+    <link rel="apple-touch-icon" href="./images/icon-192x192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Preconnect dan stylesheet -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="./css/audio2.css">
+    <link rel="stylesheet" href="./css/all.min.css">
+
+    <!-- Script untuk service worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js')
+                    .then(reg => console.log('Service worker registered'))
+                    .catch(err => console.log('Service worker not registered', err));
+            });
+        }
+    </script>
+</head>
+<body class="h-full bg-gradient-to-br from-primary-100 to-primary-200 dark:from-gray-900 dark:to-gray-800 transition-all duration-300 font-sans flex flex-col">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-lg p-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold text-primary-600 dark:text-primary-400">Quran Player</h1>
+        <div class="flex items-center space-x-4">
+            <button id="darkModeToggle" class="text-2xl text-primary-600 dark:text-primary-400">
+                <i class="fas fa-moon dark:hidden"></i>
+                <i class="fas fa-sun hidden dark:inline"></i>
+            </button>
+            <button id="menuToggle" class="md:hidden text-2xl text-primary-600 dark:text-primary-400">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    <!-- Main content -->
+    <div class="flex-grow flex flex-col md:flex-row overflow-hidden">
+        <!-- Sidebar -->
+        <div id="sidebar" class="hidden md:block w-full md:w-64 bg-white dark:bg-gray-800 p-4 overflow-y-auto">
+            <input type="text" id="searchInput" class="w-full p-2 mb-4 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200" placeholder="Search surah...">
+            <select id="qariSelect" class="w-full p-2 mb-4 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                <option value="05">Mishari Rashid Al-Afasy</option>
+                <option value="01">Abdullah Al-Juhany</option>
+                <option value="02">Abdul Muhsin Al-Qasim</option>
+                <option value="03">Abdurrahman As-Sudais</option>
+                <option value="04">Ibrahim Al-Dossari</option>
+            </select>
+            <ul id="surahList" class="space-y-2 text-gray-800 dark:text-gray-200"></ul>
+        </div>
+
+        <!-- Player area -->
+        <div class="flex-grow flex flex-col p-4 overflow-hidden">
+            <!-- Now Playing -->
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-4 flex flex-col items-center">
+                <img id="albumCover" src="/images/android-chrome-512x512.png" alt="Quran Cover" class="w-48 h-48 rounded-full shadow-lg mb-4">
+                <h2 id="nowPlayingTitle" class="text-2xl font-bold text-gray-800 dark:text-gray-200 text-center">Select a Surah</h2>
+                <p id="nowPlayingArtist" class="text-lg text-gray-600 dark:text-gray-400">Quran Recitation</p>
+            </div>
+
+            <!-- Audio controls -->
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4">
+                <input type="range" id="seekBar" class="w-full mb-4" value="0" step="0.1">
+                <div class="flex justify-between items-center mb-4">
+                    <span id="currentTime" class="text-sm text-gray-600 dark:text-gray-400">0:00</span>
+                    <span id="duration" class="text-sm text-gray-600 dark:text-gray-400">0:00</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <button id="shuffleBtn" class="text-2xl text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300">
+                        <i class="fas fa-random"></i>
+                    </button>
+                    <button id="prevBtn" class="text-2xl text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300">
+                        <i class="fas fa-step-backward"></i>
+                    </button>
+                    <button id="playPauseBtn" class="text-4xl text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-300">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button id="nextBtn" class="text-2xl text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300">
+                        <i class="fas fa-step-forward"></i>
+                    </button>
+                    <button id="repeatBtn" class="text-2xl text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 mt-4">
+                <h3 class="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4">Popular Surahs</h3>
+                <div class="relative">
+                    <div id="popularSurahs" class="grid grid-cols-2 md:grid-cols-3 gap-4 max-h-60 overflow-y-auto pr-2">
+                        <!-- Popular surahs will be added here dynamically -->
+                    </div>
+                    <div class="absolute top-0 right-0 bottom-0 w-2 bg-gradient-to-b from-white via-transparent to-white dark:from-gray-800 dark:via-transparent dark:to-gray-800 pointer-events-none"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="audioPlayer"></audio>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const audioPlayer = document.getElementById("audioPlayer");
+        const playPauseBtn = document.getElementById("playPauseBtn");
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+        const shuffleBtn = document.getElementById("shuffleBtn");
+        const repeatBtn = document.getElementById("repeatBtn");
+        const surahList = document.getElementById("surahList");
+        const nowPlayingTitle = document.getElementById("nowPlayingTitle");
+        const nowPlayingArtist = document.getElementById("nowPlayingArtist");
+        const searchInput = document.getElementById("searchInput");
+        const qariSelect = document.getElementById("qariSelect");
+        const menuToggle = document.getElementById("menuToggle");
+        const sidebar = document.getElementById("sidebar");
+        const seekBar = document.getElementById("seekBar");
+        const currentTime = document.getElementById("currentTime");
+        const duration = document.getElementById("duration");
+        const popularSurahsDiv = document.getElementById("popularSurahs");
+        const darkModeToggle = document.getElementById("darkModeToggle");
+        const albumCover = document.getElementById("albumCover");
+        const popularSurahs = ["Al-Fatihah", "Al-Ikhlas", "An-Nas", "Al-Falaq", "Yasin", "Al-Kahfi", "Yusuf", "Al-Mulk", "Al-Waqi'ah", "Ar-Rahman", "Al-Kahf", "Maryam", "Al-Baqarah" ];
+
+
+        let surahData = [];
+        let currentSurahIndex = -1;
+        let isShuffled = false;
+        let isRepeated = false;
+
+        // Fetch surah data
+        fetch("./surat/surat.json")
+            .then(response => response.json())
+            .then(data => {
+                if (data.code === 200) {
+                    surahData = data.data;
+                    populateSurahList();
+                }
+            })
+            .catch(error => console.error("Error fetching surah list:", error));
+
+            function populateSurahList() {
+            surahList.innerHTML = '';
+            surahData.forEach((surah, index) => {
+                const li = document.createElement("li");
+                li.textContent = `${surah.nomor}. ${surah.namaLatin}`;
+                li.classList.add("cursor-pointer", "hover:bg-primary-100", "dark:hover:bg-primary-900", "p-2", "rounded", "transition-colors", "duration-300");
+                li.addEventListener("click", () => playSurah(index));
+                surahList.appendChild(li);
+            });
+
+            populatePopularSurahs();
+        }
+
+        function populatePopularSurahs() {
+            popularSurahsDiv.innerHTML = '';
+            popularSurahs.forEach(surahName => {
+                const surah = surahData.find(s => s.namaLatin === surahName);
+                if (surah) {
+                    const button = document.createElement("button");
+                    button.textContent = surahName;
+                    button.classList.add("bg-primary-100", "dark:bg-primary-900", "text-primary-600", "dark:text-primary-400", "p-2", "rounded", "transition-colors", "duration-300", "hover:bg-primary-200", "dark:hover:bg-primary-800");
+                    button.addEventListener("click", () => playSurah(surahData.indexOf(surah)));
+                    popularSurahsDiv.appendChild(button);
+                }
+            });
+        }
+
+        function playSurah(index) {
+            currentSurahIndex = index;
+            const surah = surahData[index];
+            const qari = qariSelect.value;
+            audioPlayer.src = surah.audioFull[qari];
+            audioPlayer.play();
+            nowPlayingTitle.textContent = surah.namaLatin;
+            nowPlayingArtist.textContent = qariSelect.options[qariSelect.selectedIndex].text;
+            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            highlightCurrentSurah();
+            albumCover.classList.add("spin", "playing");
+        }
+
+        playPauseBtn.addEventListener("click", () => {
+        if (audioPlayer.paused) {
+            audioPlayer.play();
+            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            albumCover.classList.add("playing");
+        } else {
+            audioPlayer.pause();
+            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            albumCover.classList.remove("playing");
+        }
+    });
+
+        function highlightCurrentSurah() {
+            document.querySelectorAll("#surahList li").forEach((li, index) => {
+                if (index === currentSurahIndex) {
+                    li.classList.add("bg-primary-100", "dark:bg-primary-900", "text-primary-600", "dark:text-primary-400");
+                } else {
+                    li.classList.remove("bg-primary-100", "dark:bg-primary-900", "text-primary-600", "dark:text-primary-400");
+                }
+            });
+        }
+
+        playPauseBtn.addEventListener("click", () => {
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            } else {
+                audioPlayer.pause();
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        });
+
+        prevBtn.addEventListener("click", () => {
+            if (currentSurahIndex > 0) {
+                currentSurahIndex--;
+                playSurah(currentSurahIndex);
+            }
+        });
+
+        nextBtn.addEventListener("click", () => {
+            if (currentSurahIndex < surahData.length - 1) {
+                currentSurahIndex++;
+                playSurah(currentSurahIndex);
+            }
+        });
+
+        shuffleBtn.addEventListener("click", () => {
+            isShuffled = !isShuffled;
+            shuffleBtn.classList.toggle("text-primary-600");
+        });
+
+        repeatBtn.addEventListener("click", () => {
+            isRepeated = !isRepeated;
+            repeatBtn.classList.toggle("text-primary-600");
+        });
+
+        audioPlayer.addEventListener("ended", () => {
+            albumCover.classList.remove("playing");
+            if (isRepeated) {
+                audioPlayer.play();
+            } else if (isShuffled) {
+                let randomIndex;
+                do {
+                    randomIndex = Math.floor(Math.random() * surahData.length);
+                } while (randomIndex === currentSurahIndex);
+                playSurah(randomIndex);
+            } else if (currentSurahIndex < surahData.length - 1) {
+                nextBtn.click();
+            }
+        });
+
+        searchInput.addEventListener("input", () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filteredSurahs = surahData.filter(surah => 
+                surah.namaLatin.toLowerCase().includes(searchTerm) ||
+                surah.nomor.toString().includes(searchTerm)
+            );
+            populateFilteredList(filteredSurahs);
+        });
+
+        function populateFilteredList(filteredSurahs) {
+            surahList.innerHTML = '';
+            filteredSurahs.forEach((surah, index) => {
+                const li = document.createElement("li");
+                li.textContent = `${surah.nomor}. ${surah.namaLatin}`;
+                li.classList.add("cursor-pointer", "hover:bg-primary-100", "dark:hover:bg-primary-900", "p-2", "rounded", "transition-colors", "duration-300");
+                li.addEventListener("click", () => playSurah(surahData.findIndex(s => s.nomor === surah.nomor)));
+                surahList.appendChild(li);
+            });
+        }
+
+        qariSelect.addEventListener("change", () => {
+            if (currentSurahIndex !== -1) {
+                playSurah(currentSurahIndex);
+            }
+        });
+
+        menuToggle.addEventListener("click", () => {
+            sidebar.classList.toggle("hidden");
+        });
+
+        audioPlayer.addEventListener("timeupdate", updateSeekBar);
+        seekBar.addEventListener("input", seekTo);
+
+        function updateSeekBar() {
+            seekBar.value = audioPlayer.currentTime;
+            currentTime.textContent = formatTime(audioPlayer.currentTime);
+            if (!isNaN(audioPlayer.duration)) {
+                seekBar.max = audioPlayer.duration;
+                duration.textContent = formatTime(audioPlayer.duration);
+            }
+        }
+
+        function seekTo() {
+            audioPlayer.currentTime = seekBar.value;
+        }
+
+        function formatTime(time) {
+            const minutes = Math.floor(time / 60);
+            const seconds = Math.floor(time % 60);
+            return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
+
+        // Fungsi untuk mengubah mode gelap
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
+        }
+
+        // Event listener untuk tombol toggle dark mode
+        darkModeToggle.addEventListener("click", toggleDarkMode);
+
+        // Cek preferensi dark mode yang tersimpan
+        if (localStorage.getItem('darkMode') === 'true' || 
+            (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+    });
+    </script>
+</body>
+</html>
