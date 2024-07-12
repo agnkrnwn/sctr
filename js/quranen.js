@@ -6,7 +6,7 @@ function updateQariSelection() {
   localStorage.setItem("selectedQari", selectedQari);
 }
 
-let bookmarks = JSON.parse(localStorage.getItem("quranBookmarks")) || {};
+let bookmarks = JSON.parse(localStorage.getItem("quranBookmarks-xcv")) || {};
 let currentSurah = null;
 
 function toggleBookmark(surahNumber, ayatNumber) {
@@ -16,7 +16,7 @@ function toggleBookmark(surahNumber, ayatNumber) {
   } else {
     bookmarks[key] = true;
   }
-  localStorage.setItem("quranBookmarks", JSON.stringify(bookmarks));
+  localStorage.setItem("quranBookmarks-xcv", JSON.stringify(bookmarks));
   updateBookmarkDisplay();
 }
 
@@ -223,7 +223,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Fungsi navigateToAyat juga perlu dimodifikasi
   function navigateToAyat(surahNumber, ayatNumber) {
     // Close the bookmark modal
     document.getElementById("bookmarkModal").classList.add("hidden");
@@ -246,7 +245,7 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => ayatElement.classList.remove("highlight-ayat"), 3000);
     }
   }
-  
+
   function displaySurahDetail(surah, tafsir) {
     const qariName =
       document.getElementById("qariSelect").options[
