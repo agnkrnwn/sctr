@@ -44,6 +44,16 @@
             });
         }
     </script>
+    <style>
+        .highlight-ayat {
+            animation: highlight 3s;
+        }
+
+        @keyframes highlight {
+            0% { background-color: yellow; }
+            100% { background-color: transparent; }
+        }
+    </style>
 </head>
 
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white min-h-screen transition-all">
@@ -56,6 +66,9 @@
                 <h1 class="text-2xl font-bold text-primary-600 dark:text-primary-400">Al-Quran</h1>
             </div>
             <div class="flex items-center space-x-4 ml-auto">
+                <button id="bookmarkButton" class="p-2 w-10 h-10 rounded-full flex items-center justify-center bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 transition-all">
+                    <i class="fas fa-bookmark"></i>
+                </button>
                 <button id="openModalButton" class="p-2 w-10 h-10 rounded-full flex items-center justify-center bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 transition-all">
                     <i class="fas fa-th"></i>
                 </button>
@@ -66,6 +79,16 @@
             </div>
         </div>
     </nav>
+
+    <div id="bookmarkModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black bg-opacity-50">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 w-full max-w-md">
+            <h2 class="text-xl font-bold mb-4 text-gray-700 dark:text-gray-300">Bookmarks</h2>
+            <ul id="bookmarkList" class="max-h-60 overflow-y-auto"></ul>
+            <button id="closeBookmarkModal" class="mt-4 p-2 bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-all">
+                Close
+            </button>
+        </div>
+    </div>
     
     <div id="myModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black bg-opacity-50">
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 w-full max-w-xl md:max-w-md">
@@ -74,14 +97,14 @@
                 <a href="tasbih.html" class="p-4 bg-primary-600 dark:bg-primary-400 text-white rounded-lg flex items-center justify-center hover:bg-primary-700 dark:hover:bg-primary-500 transition-all">
                     <i class="fas fa-pray mr-2"></i> Tasbih
                 </a>
+                <a href="audio.html" class="p-4 bg-primary-700 dark:bg-primary-400 text-white rounded-lg flex items-center justify-center hover:bg-primary-700 dark:hover:bg-primary-500 transition-all">
+                    <i class="fas fa-microphone mr-2"></i> Audio
+                </a>
                 <a href="doa.html" class="p-4 bg-primary-800 dark:bg-primary-400 text-white rounded-lg flex items-center justify-center hover:bg-primary-700 dark:hover:bg-primary-500 transition-all">
                     <i class="fas fa-mosque mr-2"></i> Doa
                 </a>
-                <a href="emptiga.html" class="p-4 bg-primary-700 dark:bg-primary-400 text-white rounded-lg flex items-center justify-center hover:bg-primary-700 dark:hover:bg-primary-500 transition-all">
-                    <i class="fas fa-headphones mr-2"></i> Audio Player
-                </a>
-                <a href="audio.html" class="p-4 bg-primary-900 dark:bg-primary-400 text-white rounded-lg flex items-center justify-center hover:bg-primary-700 dark:hover:bg-primary-500 transition-all">
-                    <i class="fas fa-download mr-2"></i> Audio Download
+                <a href="quran.html" class="p-4 bg-primary-900 dark:bg-primary-400 text-white rounded-lg flex items-center justify-center hover:bg-primary-700 dark:hover:bg-primary-500 transition-all">
+                    <i class="fas fa-book-quran mr-2"></i> Quran old
                 </a>
                 <div class="flex flex-col md:col-span-2">
                     <label for="qariSelect" class="mb-2 text-gray-700 dark:text-gray-300">Select Qari:</label>
