@@ -5,67 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Al-Quran Digital</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="./images/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="./images/android-chrome-512x512.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon-16x16.png">
+
+    <!-- Meta tags untuk SEO dan sharing -->
+    <meta name="description" content="Al-Quran Digital untuk membaca dan mempelajari Al-Quran secara online">
+    <meta name="keywords" content="Al-Quran, Digital Quran, Baca Quran, Islam">
+    <meta name="author" content="@agnkrnwn">
+    <meta property="og:title" content="Al-Quran Digital">
+    <meta property="og:description" content="Baca dan pelajari Al-Quran secara online">
+    <meta property="og:image" content="./images/quran-thumbnail.jpg">
+    <meta property="og:url" content="https://sctr.netlify.app/">
+
+    <!-- PWA tags -->
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#1F2937">
+    <link rel="apple-touch-icon" href="./images/icon-192x192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Preconnect dan stylesheet -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/all.min.css">
+
+    <!-- Script untuk service worker -->
     <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: { "50": "#f0f9ff", "100": "#e0f2fe", "200": "#bae6fd", "300": "#7dd3fc", "400": "#38bdf8", "500": "#0ea5e9", "600": "#0284c7", "700": "#0369a1", "800": "#075985", "900": "#0c4a6e", "950": "#1c7a0b" },
-                    },
-                    fontFamily: {
-                        'sans': ['Poppins', 'sans-serif'],
-                        'arabic': ['LPMQ Isep Misbah', 'sans-serif'],
-                    },
-                }
-            }
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js')
+                    .then(reg => console.log('Service worker registered'))
+                    .catch(err => console.log('Service worker not registered', err));
+            });
         }
     </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap');
-
-        @font-face {
-            font-family: 'LPMQ Isep Misbah';
-            src: url('./font/LPMQ-IsepMisbah.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-
-        html {
-            scroll-padding-top: 5rem;
-            scroll-behavior: smooth;
-        }
-
-        .font-arabic {
-            font-family: 'LPMQ Isep Misbah', serif;
-            font-size: 2em;
-            line-height: 2.5;
-            word-spacing: 0.1em;
-            padding: 1rem 0;
-        }
-
-        .surah-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .transition-all {
-            transition-duration: 300ms;
-        }
-        .current-ayat {
-            background-color: rgba(0, 123, 255, 0.1);
-            border-left: 4px solid #007bff;
-            padding-left: 10px;
-        }
-    </style>
 </head>
 
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white min-h-screen transition-all">
@@ -143,7 +121,7 @@
         </main>        
     </div>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <script src="quranen.js"></script>
+    <script src="/js/quranen.js"></script>
     
     <script>
         document.getElementById('openModalButton').addEventListener('click', function() {

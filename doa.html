@@ -1,62 +1,49 @@
 <!DOCTYPE html>
 <html lang="id" class="bg-gradient-to-br from-indigo-500 to-purple-600 min-h-screen">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kumpulan Doa Modern</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Amiri&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Poppins', 'sans-serif'],
-                        arabic: ['LPMQ Isep Misbah', 'sans-serif'],
-                    },
-                },
-            },
-        }
-    </script>
-    <style>
-        @font-face {
-        font-family: 'LPMQ Isep Misbah';
-        src: url('LPMQ-IsepMisbah.woff2') format('woff2');
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-        }
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Doa</title>
 
-        .arabic {
-            font-family: 'LPMQ Isep Misbah', sans-serif;
-            font-size: 1.75rem;
-            line-height: 2.5rem;
-            word-spacing: 0.1em;
-        }
-
-        /* Tambahkan kelas baru untuk kontainer teks Arab */
-        .arabic-container {
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-        }
-        /* 
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 8px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        } */
-    </style>
-</head>
+        <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="./images/android-chrome-192x192.png">
+        <link rel="icon" type="image/png" sizes="512x512" href="./images/android-chrome-512x512.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon-16x16.png">
+    
+        <!-- Meta tags untuk SEO dan sharing -->
+        <meta name="description" content="Al-Quran Digital untuk membaca dan mempelajari Al-Quran secara online">
+        <meta name="keywords" content="Al-Quran, Digital Quran, Baca Quran, Islam">
+        <meta name="author" content="@agnkrnwn">
+        <meta property="og:title" content="Al-Quran Digital">
+        <meta property="og:description" content="Baca dan pelajari Al-Quran secara online">
+        <meta property="og:image" content="./images/quran-thumbnail.jpg">
+        <meta property="og:url" content="https://sctr.netlify.app/">
+    
+        <!-- PWA tags -->
+        <link rel="manifest" href="./manifest.json">
+        <meta name="theme-color" content="#1F2937">
+        <link rel="apple-touch-icon" href="./images/icon-192x192.png">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+        <!-- Preconnect dan stylesheet -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="stylesheet" href="./css/doa.css">
+        <link rel="stylesheet" href="./css/all.min.css">
+    
+        <!-- Script untuk service worker -->
+        <script>
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('./service-worker.js')
+                        .then(reg => console.log('Service worker registered'))
+                        .catch(err => console.log('Service worker not registered', err));
+                });
+            }
+        </script>
+    </head>
 <body class="text-gray-800 dark:text-gray-200 transition-colors duration-200">
     <div class="container mx-auto px-4 py-8">
         <div class="flex justify-between items-center mb-8">

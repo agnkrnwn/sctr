@@ -5,36 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tasbih Digital Modern</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <style>
-        @keyframes breathe {
 
-            0%,
-            100% {
-                transform: scale(1);
-            }
+    <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="./images/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="./images/android-chrome-512x512.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon-16x16.png">
 
-            50% {
-                transform: scale(1.05);
-            }
+    <!-- Meta tags untuk SEO dan sharing -->
+    <meta name="description" content="Al-Quran Digital untuk membaca dan mempelajari Al-Quran secara online">
+    <meta name="keywords" content="Al-Quran, Digital Quran, Baca Quran, Islam">
+    <meta name="author" content="@agnkrnwn">
+    <meta property="og:title" content="Al-Quran Digital">
+    <meta property="og:description" content="Baca dan pelajari Al-Quran secara online">
+    <meta property="og:image" content="./images/quran-thumbnail.jpg">
+    <meta property="og:url" content="https://sctr.netlify.app/">
+
+    <!-- PWA tags -->
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#1F2937">
+    <link rel="apple-touch-icon" href="./images/icon-192x192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Preconnect dan stylesheet -->
+    <link href="./css/all.min.css" rel="stylesheet">
+    <link href="./css/tasbih.css" rel="stylesheet">
+    <script src="./js/sweetalert2@11.js"></script>
+
+    <!-- Script untuk service worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js')
+                    .then(reg => console.log('Service worker registered'))
+                    .catch(err => console.log('Service worker not registered', err));
+            });
         }
-
-        .breathe-animation {
-            animation: breathe 1s ease-in-out;
-        }
-
-        .gradient-text {
-            background: linear-gradient(45deg, #3b82f6, #93c5fd);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        #progressCircle {
-            transition: stroke-dashoffset 0.3s ease-in-out, stroke 0.3s ease-in-out;
-        }
-    </style>
+    </script>
 </head>
 
 <body class="bg-gradient-to-br from-gray-900 to-gray-800 min-h-screen flex items-center justify-center p-4">
@@ -93,8 +102,8 @@
         </div>
     </div>
 
-    <audio id="clickSound" src="/audio//klik.mp3"></audio>
-    <audio id="finishSound" src="/audio/hselesai.mp3"></audio>
+    <audio id="clickSound" src="./audio//klik.mp3"></audio>
+    <audio id="finishSound" src="./audio/hselesai.mp3"></audio>
     <script>
         let count = 0;
         let soundEnabled = true;
@@ -214,7 +223,7 @@
             updateProgressList();
         }
 
-        let clickSounds = [new Audio('/audio/klik.mp3'), new Audio('/audio/klik.mp3'), new Audio('/audio/klik.mp3')];
+        let clickSounds = [new Audio('./audio/klik.mp3'), new Audio('./audio/klik.mp3'), new Audio('./audio/klik.mp3')];
         let currentSoundIndex = 0;
 
         function playClickSound() {

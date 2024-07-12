@@ -258,8 +258,8 @@ document.addEventListener("DOMContentLoaded", () => {
   
       function startAutoPlay(ayat) {
         if (isAutoPlaying) {
-            stopAutoPlay();
-            return;
+          stopAutoPlay();
+          return;
         }
     
         isAutoPlaying = true;
@@ -267,45 +267,26 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("autoPlayToggle").innerHTML = '<i class="fas fa-pause"></i>';
         playNextAyat(ayat);
     
+        // Add overlay pause button
         const overlay = document.createElement('div');
         overlay.id = 'pauseOverlay';
         overlay.innerHTML = '<button id="overlayPauseBtn" class="bg-primary-950 text-white p-3 w-12 h-12 rounded-full flex items-center justify-center"><i class="fas fa-pause"></i></button>';
         overlay.style.cssText = `
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
+          position: fixed;
+          bottom: 20px;
+          left: 20px;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          align-items: center;
+          justify-content: center;
+          z-index: 1000;
         `;
         document.body.appendChild(overlay);
     
         document.getElementById('overlayPauseBtn').addEventListener('click', stopAutoPlay);
-    }
-
+      }
     
-    function playNextAyat(ayat) {
-        if (!isAutoPlaying || currentAyatIndex >= ayat.length) {
-            stopAutoPlay();
-            return;
-        }
-    
-        const currentAyat = ayat[currentAyatIndex];
-        const audio = new Audio(currentAyat.audio[selectedQari]);
-        audio.setAttribute('data-ayat', currentAyatIndex);
-    
-        highlightCurrentAyat(currentAyatIndex);
-    
-        audio.play();
-        audio.onended = () => {
-            currentAyatIndex++;
-            playNextAyat(ayat);
-        };
-    }
-  
       function stopAutoPlay() {
         isAutoPlaying = false;
         document.getElementById("autoPlayToggle").innerHTML = '<i class="fas fa-play"></i>';
@@ -318,7 +299,29 @@ document.addEventListener("DOMContentLoaded", () => {
           overlay.remove();
         }
       }
-  
+
+
+    
+      function playNextAyat(ayat) {
+        if (!isAutoPlaying || currentAyatIndex >= ayat.length) {
+          stopAutoPlay();
+          return;
+        }
+    
+        const currentAyat = ayat[currentAyatIndex];
+        // const audio = new Audio(currentAyat.audio["05"]);
+        const audio = new Audio(currentAyat.audio[selectedQari]);
+        audio.setAttribute('data-ayat', currentAyatIndex);
+    
+        highlightCurrentAyat(currentAyatIndex);
+    
+        audio.play();
+        audio.onended = () => {
+          currentAyatIndex++;
+          playNextAyat(ayat);
+        };
+      }
+    
   
       function highlightCurrentAyat(ayatIndex) {
         const ayatElements = document.querySelectorAll('[data-ayat]');
@@ -343,6 +346,7 @@ document.addEventListener("DOMContentLoaded", () => {
           container.classList.add("hidden");
         }
       }
+      
   
       function goToAyat(ayatNumber, container) {
         const ayatElement = container.querySelector(`[data-ayat="${ayatNumber}"]`);
@@ -350,7 +354,7 @@ document.addEventListener("DOMContentLoaded", () => {
           ayatElement.scrollIntoView({ behavior: "smooth" });
         }
       }
-  
+
       function displayAyatWithTafsir(ayat, tafsir, container) {
         container.innerHTML = `
           <h3 class="text-xl font-semibold mb-4 text-primary-600 dark:text-primary-400">Ayat-ayat:</h3>
@@ -387,7 +391,9 @@ document.addEventListener("DOMContentLoaded", () => {
             </button>
             <div class="tafsir-container hidden mt-2">
               <p class="text-gray-600 dark:text-gray-400">
-                ${tafsir[index] ? tafsir[index].teks : 'Tafsir tidak tersedia'}
+                ${tafsir[index] ? tafsir[index].teks.split('\n').map(line => `
+                  <span class="block mb-2">${line}</span>
+                `).join('') : 'Tafsir tidak tersedia'}
               </p>
               <button class="copy-tafsir-btn mt-2 bg-primary-500 text-white px-3 py-1 rounded hover:bg-primary-600 transition-colors duration-200">
                 <i class="fas fa-copy"> </i> Copy Tafsir
@@ -398,6 +404,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
   
         ayatList.appendChild(fragment);
+       // ${formatTafsir(tafsir[index].teks)}
   
         // Add event listeners
         const audioButtons = ayatList.querySelectorAll(".play-audio-btn");
@@ -432,9 +439,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const tempDiv = document.createElement('div');
         tempDiv.style.width = '1080px';
         tempDiv.style.height = '1920px';
-        tempDiv.style.backgroundColor = 'black';
+        tempDiv.style.backgroundColor = '#26282A';
         tempDiv.style.color = 'white';
-        tempDiv.style.fontFamily = 'Arial, sans-serif';
+        tempDiv.style.fontFamily = 'Poppins, sans-serif';
         tempDiv.style.display = 'flex';
         tempDiv.style.flexDirection = 'column';
         tempDiv.style.justifyContent = 'center';
@@ -446,23 +453,6 @@ document.addEventListener("DOMContentLoaded", () => {
         contentWrapper.style.width = '100%';
         contentWrapper.style.maxWidth = '800px';
         contentWrapper.style.margin = '0 auto';
-
-        // Tambahkan informasi qari
-        const qariName = document.getElementById("qariSelect").options[document.getElementById("qariSelect").selectedIndex].text;
-        const qariInfo = document.createElement('p');
-        qariInfo.textContent = `Qari: ${qariName}`;
-        qariInfo.style.fontSize = 'clamp(14px, 2.5vw, 24px)';
-        qariInfo.style.textAlign = 'center';
-        qariInfo.style.marginTop = '20px';
-
-        contentWrapper.appendChild(qariInfo);
-        tempDiv.appendChild(contentWrapper);
-  
-        const title = document.createElement('h1');
-        title.textContent = `${currentSurah.namaLatin} : Ayat ${ayatNumber}`;
-        title.style.textAlign = 'center';
-        title.style.marginBottom = '50px';
-        title.style.fontSize = 'clamp(20px, 5vw, 40px)';
   
         const arabicText = document.createElement('p');
         arabicText.textContent = ayatElement.querySelector('.font-arabic').textContent;
@@ -482,12 +472,30 @@ document.addEventListener("DOMContentLoaded", () => {
         indonesianText.textContent = ayatElement.querySelector('p:nth-of-type(3)').textContent;
         indonesianText.style.fontSize = 'clamp(16px, 3vw, 30px)';
         indonesianText.style.textAlign = 'left';
-  
-        contentWrapper.appendChild(title);
+        indonesianText.style.marginBottom = '30px';
+
+        const title = document.createElement('p');
+        title.textContent = `${currentSurah.namaLatin} - ${currentSurah.nama} :  ${ayatNumber}`;
+        title.style.textAlign = 'center';
+        title.style.fontSize = 'clamp(15px, 5vw, 30px)';
+
+        // Tambahkan informasi qari
+        // const qariName = document.getElementById("qariSelect").options[document.getElementById("qariSelect").selectedIndex].text;
+        // const qariInfo = document.createElement('p');
+        // qariInfo.textContent = `Qari: ${qariName}`;
+        // qariInfo.style.fontSize = 'clamp(14px, 2.5vw, 24px)';
+        // qariInfo.style.textAlign = 'center';
+        // qariInfo.style.marginTop = '20px';
+
+        
+        
         contentWrapper.appendChild(arabicText);
         contentWrapper.appendChild(latinText);
         contentWrapper.appendChild(indonesianText);
+        contentWrapper.appendChild(title);
+        // contentWrapper.appendChild(qariInfo);
         tempDiv.appendChild(contentWrapper);
+
   
         document.body.appendChild(tempDiv);
   
