@@ -1154,7 +1154,7 @@ html {
 
 .font-arabic {
   font-family: 'LPMQ Isep Misbah', serif;
-  font-size: 2em;
+  font-size: 1.5em;
   line-height: 2.5;
   word-spacing: 0.1em;
   padding: 1rem 0;
@@ -1174,6 +1174,11 @@ html {
   border-left: 4px solid #007bff;
   padding-left: 10px;
 }
+
+.highlight-ayat {
+  background-color: rgba(255, 255, 0, 0.3); /* Light yellow highlight */
+  transition: background-color 0.5s ease;
+  }
 
 .hover\:bg-gray-300:hover {
   --tw-bg-opacity: 1;
