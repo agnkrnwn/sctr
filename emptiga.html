@@ -30,6 +30,7 @@
 
     <!-- Preconnect dan stylesheet -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="/css/warna.css">
     <link rel="stylesheet" href="./css/audio2.css">
     <link rel="stylesheet" href="./css/all.min.css">
 
@@ -50,7 +51,7 @@
         <h1 class="text-2xl font-bold text-primary-600 dark:text-primary-400">Quran Player</h1>
         <div class="flex items-center space-x-4">
             <button id="darkModeToggle" class="text-2xl text-primary-600 dark:text-primary-400">
-                <i class="fas fa-moon dark:hidden"></i>
+
                 <i class="fas fa-sun hidden dark:inline"></i>
             </button>
             <button id="menuToggle" class="md:hidden text-2xl text-primary-600 dark:text-primary-400">
@@ -107,19 +108,63 @@
                     </button>
                 </div>
             </div>
+            
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 mt-4">
-                <!-- <p class="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4">Popular Surahs</p> -->
+                <p class="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4">Popular Surahs</p>
+                <div class="relative">
+                    <select id="popularSurahs" class="w-full p-2 text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg">
+                        <option value="" disabled selected>Select a Surah</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- list
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 mt-4">
+                <p class="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4">Popular Surahs</p>
+                <div class="relative">
+                    <ul id="popularSurahs" class="list-none p-0 m-0 space-y-2">
+                    </ul>
+                </div>
+            </div> -->
+            
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 mt-4">
+                <p class="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4">Pilih Tema</p>
+                <div class="flex flex-col md:col-span-2 mb-2">
+                    <select id="themeSelector" onchange="setTheme(this.value)" class="p-2 text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg">
+                        <option value="">Pilih Tema</option>
+                        <option value="default">Default Theme</option>
+                        <option value="green">Green Theme</option>
+                        <option value="blue">Blue Theme</option>
+                        <option value="purple">Purple Theme</option>
+                        <option value="orange">Orange Theme</option>
+                        <option value="teal">Teal Theme</option>
+                        <option value="pink">Pink Theme</option>
+                        <option value="indigo">Indigo Theme</option>
+                        <option value="red">Red Theme</option>
+                        <option value="yellow">Yellow Theme</option>
+                        <option value="cyan">Cyan Theme</option>
+                        <option value="lime">Lime Theme</option>
+
+                    </select>
+                </div>
+            </div>
+            
+            <!-- original
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 mt-4">
+                 <p class="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4">Popular Surahs</p>
                 <div class="relative">
                     <div id="popularSurahs" class="grid grid-cols-2 md:grid-cols-3 gap-4 max-h-60 overflow-y-auto pr-2">
                         
                     </div>
                     <div class="absolute top-0 right-0 bottom-0 w-2 bg-gradient-to-b from-white via-transparent to-white dark:from-gray-800 dark:via-transparent dark:to-gray-800 pointer-events-none"></div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 
     <audio id="audioPlayer"></audio>
+    
+    <script src="/js/theme-switcher.js"></script>
 
     <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -174,19 +219,59 @@
             populatePopularSurahs();
         }
 
-        function populatePopularSurahs() {
-            popularSurahsDiv.innerHTML = '';
-            popularSurahs.forEach(surahName => {
-                const surah = surahData.find(s => s.namaLatin === surahName);
-                if (surah) {
-                    const button = document.createElement("button");
-                    button.textContent = surahName;
-                    button.classList.add("bg-primary-100", "dark:bg-primary-900", "text-primary-600", "dark:text-primary-400", "p-2", "rounded", "transition-colors", "duration-300", "hover:bg-primary-200", "dark:hover:bg-primary-800");
-                    button.addEventListener("click", () => playSurah(surahData.indexOf(surah)));
-                    popularSurahsDiv.appendChild(button);
-                }
-            });
-        }
+        // function populatePopularSurahs() {
+        //     const popularSurahsList = document.getElementById("popularSurahs");
+        //     popularSurahsList.innerHTML = ''; // Reset the list
+        //     popularSurahs.forEach(surahName => {
+        //         const surah = surahData.find(s => s.namaLatin === surahName);
+        //         if (surah) {
+        //             const listItem = document.createElement("li");
+        //             listItem.classList.add("bg-primary-100", "dark:bg-primary-900", "text-primary-600", "dark:text-primary-400", "p-2", "rounded", "transition-colors", "duration-300", "hover:bg-primary-200", "dark:hover:bg-primary-800", "cursor-pointer");
+        //             listItem.textContent = surahName;
+        //             listItem.addEventListener("click", () => playSurah(surahData.indexOf(surah)));
+        //             popularSurahsList.appendChild(listItem);
+        //         }
+        //     });
+        // }
+        //list
+
+
+         function populatePopularSurahs() {
+             const popularSurahsSelect = document.getElementById("popularSurahs");
+             popularSurahsSelect.innerHTML = '<option value="" disabled selected>Select a Surah</option>'; // Reset the dropdown
+             popularSurahs.forEach(surahName => {
+                 const surah = surahData.find(s => s.namaLatin === surahName);
+                 if (surah) {
+                     const option = document.createElement("option");
+                     option.textContent = surahName;
+                     option.value = surahData.indexOf(surah);
+                     popularSurahsSelect.appendChild(option);
+                 }
+             });
+
+             popularSurahsSelect.addEventListener("change", (event) => {
+                 if (event.target.value) {
+                     playSurah(event.target.value);
+                 }
+             });
+         }
+        //dropdiwn
+
+
+        // function populatePopularSurahs() {
+        //     popularSurahsDiv.innerHTML = '';
+        //     popularSurahs.forEach(surahName => {
+        //         const surah = surahData.find(s => s.namaLatin === surahName);
+        //         if (surah) {
+        //             const button = document.createElement("button");
+        //             button.textContent = surahName;
+        //             button.classList.add("bg-primary-100", "dark:bg-primary-900", "text-primary-600", "dark:text-primary-400", "p-2", "rounded", "transition-colors", "duration-300", "hover:bg-primary-200", "dark:hover:bg-primary-800");
+        //             button.addEventListener("click", () => playSurah(surahData.indexOf(surah)));
+        //             popularSurahsDiv.appendChild(button);
+        //         }
+        //     });
+        // }
+        // orignal
 
         function playSurah(index) {
             currentSurahIndex = index;
