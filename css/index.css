@@ -1172,13 +1172,27 @@ html {
 .current-ayat {
   background-color: rgba(0, 123, 255, 0.1);
   border-left: 4px solid #007bff;
-  padding-left: 10px;
+  padding: 10px;
+  width: 100%; /* Memastikan lebar penuh */
+  box-sizing: border-box; /* Menghitung padding dan border dalam lebar */
 }
 
 .highlight-ayat {
-  background-color: rgba(255, 255, 0, 0.3); /* Light yellow highlight */
-  transition: background-color 0.5s ease;
+  background-color: rgba(255, 255, 0, 0.3);
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  animation: breathe 5s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% {
+    background-color: rgba(255, 255, 0, 0.3);
   }
+  50% {
+    background-color: rgba(255, 255, 0, 0.1);
+  }
+}
 
 .hover\:bg-gray-300:hover {
   --tw-bg-opacity: 1;

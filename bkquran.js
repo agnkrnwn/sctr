@@ -1,4 +1,8 @@
 let selectedQari = "05"; // Default to Misyari Rasyid Al-Afasi
+let allSurahs = [];
+let currentSurah = null;
+let bookmarks = JSON.parse(localStorage.getItem("quranBookmarks-0098123")) || [];
+console.log("Updated bookmarks:", bookmarks);
 
 function updateQariSelection() {
   const qariSelect = document.getElementById("qariSelect");
@@ -6,68 +10,84 @@ function updateQariSelection() {
   localStorage.setItem("selectedQari", selectedQari);
 }
 
-let currentSurah = null;
-let bookmarks = JSON.parse(localStorage.getItem("quranBookmarks-00981")) || [];
 
-function toggleBookmark(surahNumber, ayatNumber) {
+function toggleBookmark(surah, ayatNumber) {
+  console.log(`Toggling bookmark for Surah ${surah.nomor}, Ayat ${ayatNumber}`);
   const bookmarkIndex = bookmarks.findIndex(
-    (b) => b.surah === surahNumber && b.ayat === ayatNumber
+    (b) => b.surah === surah.nomor && b.ayat === ayatNumber
   );
+  let message;
+  let isBookmarked;
   if (bookmarkIndex > -1) {
     bookmarks.splice(bookmarkIndex, 1);
-    alert(`Bookmark untuk Surah ${surahNumber} Ayat ${ayatNumber} telah dihapus.`);
+    message = `Bookmark untuk Surah ${surah.nomor} Ayat ${ayatNumber} telah dihapus.`;
+    isBookmarked = false;
   } else {
-    bookmarks.push({ surah: surahNumber, ayat: ayatNumber });
-    alert(`Bookmark untuk Surah ${surahNumber} Ayat ${ayatNumber} telah ditambahkan.`);
+    bookmarks.push({ surah: surah.nomor, ayat: ayatNumber });
+    message = `Bookmark untuk Surah ${surah.nomor} Ayat ${ayatNumber} telah ditambahkan.`;
+    isBookmarked = true;
   }
-  localStorage.setItem("quranBookmarks-00981", JSON.stringify(bookmarks));
-  updateBookmarkButtons();
+  localStorage.setItem("quranBookmarks-0098123", JSON.stringify(bookmarks));
+  updateBookmarkButtons(surah);
+  return { isBookmarked, message };
 }
 
-function updateBookmarkButtons() {
-  if (!currentSurah) return; // Exit if currentSurah is not set
+
+
+function updateBookmarkButtons(surah) {
+  console.log("Updating bookmark buttons for surah:", surah);
+  if (!surah) {
+    console.log("Surah is not set, exiting updateBookmarkButtons");
+    return;
+  }
 
   document.querySelectorAll('.bookmark-btn').forEach(btn => {
-    const surahNumber = currentSurah.nomor;
     const ayatNumber = parseInt(btn.closest('[data-ayat]').getAttribute('data-ayat'));
-    const isBookmarked = bookmarks.some(b => b.surah === surahNumber && b.ayat === ayatNumber);
+    const isBookmarked = bookmarks.some(b => b.surah === surah.nomor && b.ayat === ayatNumber);
     btn.innerHTML = isBookmarked ? '<i class="fas fa-bookmark"></i>' : '<i class="far fa-bookmark"></i>';
   });
 }
 
+
+async function fetchSurahList() {
+  try {
+    const response = await fetch("./surat/surat.json");
+    const data = await response.json();
+
+    if (data.code === 200) {
+      allSurahs = data.data;
+      displayAllSurahs(allSurahs);
+    } else {
+      surahList.innerHTML =
+        '<p class="text-red-500">Gagal memuat daftar surah.</p>';
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    surahList.innerHTML =
+      '<p class="text-red-500">Terjadi kesalahan. Silakan coba lagi nanti.</p>';
+  }
+}
+
+
+
 function getSurahName(surahNumber) {
-  const surahNames = [
-    "Al-Fatihah", "Al-Baqarah", "Ali 'Imran", "An-Nisa'", "Al-Ma'idah",
-    "Al-An'am", "Al-A'raf", "Al-Anfal", "At-Taubah", "Yunus",
-    "Hud", "Yusuf", "Ar-Ra'd", "Ibrahim", "Al-Hijr",
-    "An-Nahl", "Al-Isra'", "Al-Kahf", "Maryam", "Ta Ha",
-    "Al-Anbiya'", "Al-Hajj", "Al-Mu'minun", "An-Nur", "Al-Furqan",
-    "Asy-Syu'ara'", "An-Naml", "Al-Qasas", "Al-'Ankabut", "Ar-Rum",
-    "Luqman", "As-Sajdah", "Al-Ahzab", "Saba'", "Fatir",
-    "Ya Sin", "As-Saffat", "Sad", "Az-Zumar", "Ghafir",
-    "Fussilat", "Asy-Syura", "Az-Zukhruf", "Ad-Dukhan", "Al-Jasiyah",
-    "Al-Ahqaf", "Muhammad", "Al-Fath", "Al-Hujurat", "Qaf",
-    "Az-Zariyat", "At-Tur", "An-Najm", "Al-Qamar", "Ar-Rahman",
-    "Al-Waqi'ah", "Al-Hadid", "Al-Mujadilah", "Al-Hasyr", "Al-Mumtahanah",
-    "As-Saff", "Al-Jumu'ah", "Al-Munafiqun", "At-Taghabun", "At-Talaq",
-    "At-Tahrim", "Al-Mulk", "Al-Qalam", "Al-Haqqah", "Al-Ma'arij",
-    "Nuh", "Al-Jinn", "Al-Muzzammil", "Al-Muddassir", "Al-Qiyamah",
-    "Al-Insan", "Al-Mursalat", "An-Naba'", "An-Nazi'at", "'Abasa",
-    "At-Takwir", "Al-Infitar", "Al-Mutaffifin", "Al-Insyiqaq", "Al-Buruj",
-    "At-Tariq", "Al-A'la", "Al-Ghasyiyah", "Al-Fajr", "Al-Balad",
-    "Asy-Syams", "Al-Lail", "Ad-Duha", "Asy-Syarh", "At-Tin",
-    "Al-'Alaq", "Al-Qadr", "Al-Bayyinah", "Az-Zalzalah", "Al-'Adiyat",
-    "Al-Qari'ah", "At-Takasur", "Al-'Asr", "Al-Humazah", "Al-Fil",
-    "Quraisy", "Al-Ma'un", "Al-Kausar", "Al-Kafirun", "An-Nasr",
-    "Al-Masad", "Al-Ikhlas", "Al-Falaq", "An-Nas"
-];
-  return surahNames[surahNumber - 1] || `Surah ${surahNumber}`;
+  const surah = allSurahs.find(s => s.nomor === surahNumber);
+  if (surah) {
+    return `${surah.namaLatin} (${surah.nama})`;
+  }
+  return `Surah ${surahNumber}`;
 }
 
 function showBookmarkList() {
+  // Hapus modal yang mungkin sudah ada
+  const existingModal = document.querySelector('.bookmark-modal');
+  if (existingModal) {
+    document.body.removeChild(existingModal);
+  }
+
   const modal = document.createElement("div");
   modal.className =
-    "fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50";
+    "bookmark-modal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50";
   modal.innerHTML = `
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 w-full max-w-md max-h-[80vh] overflow-y-auto">
       <h2 class="text-xl font-bold mb-4 text-gray-700 dark:text-gray-300">Bookmarks</h2>
@@ -86,9 +106,9 @@ function showBookmarkList() {
     bookmarks.forEach(bookmark => {
       const li = document.createElement('li');
       li.className = 'flex justify-between items-center py-2 border-b border-gray-200 dark:border-gray-700';
-      
+
       const surahName = getSurahName(bookmark.surah);
-      
+
       li.innerHTML = `
         <div class="flex-grow">
           <span class="font-semibold text-primary-600 dark:text-primary-400">Surah ${bookmark.surah}: ${surahName}</span>
@@ -96,10 +116,10 @@ function showBookmarkList() {
           <span class="text-sm text-gray-600 dark:text-gray-400">Ayat ${bookmark.ayat}</span>
         </div>
         <div class="flex space-x-2 ml-2">
-          <button class="go-to-bookmark p-2 text-white hover:bg-primary-600 transition-colors duration-200" data-surah="${bookmark.surah}" data-ayat="${bookmark.ayat}" title="Lihat">
+          <button class="go-to-bookmark p-2 text-white " data-surah="${bookmark.surah}" data-ayat="${bookmark.ayat}" title="Lihat">
             <i class="fas fa-eye"></i>
           </button>
-          <button class="remove-bookmark p-2 text-white hover:bg-red-600 transition-colors duration-200" data-surah="${bookmark.surah}" data-ayat="${bookmark.ayat}" title="Hapus">
+          <button class="remove-bookmark p-2 text-white bg-red-500 hover:bg-red-600 rounded transition-colors duration-200" data-surah="${bookmark.surah}" data-ayat="${bookmark.ayat}" title="Hapus">
             <i class="fas fa-trash-alt"></i>
           </button>
         </div>
@@ -108,8 +128,12 @@ function showBookmarkList() {
     });
   }
 
-  document.getElementById("closeBookmarkList").addEventListener("click", () => {
-    document.body.removeChild(modal);
+  const closeButton = document.getElementById("closeBookmarkList");
+  closeButton.addEventListener("click", () => {
+    const modal = document.querySelector('.bookmark-modal');
+    if (modal) {
+      document.body.removeChild(modal);
+    }
   });
 
   bookmarkList.addEventListener("click", (e) => {
@@ -126,8 +150,22 @@ function showBookmarkList() {
       const button = e.target.closest(".remove-bookmark");
       const surah = parseInt(button.getAttribute("data-surah"));
       const ayat = parseInt(button.getAttribute("data-ayat"));
-      toggleBookmark(surah, ayat);
-      document.body.removeChild(modal); // Tutup modal setelah menghapus bookmark
+
+      // Cari surah yang sesuai
+      const surahData = allSurahs.find(s => s.nomor === surah);
+      if (surahData) {
+        const result = toggleBookmark(surahData, ayat);
+        alert(result.message);
+        // Hapus modal setelah menghapus bookmark
+        const modal = document.querySelector('.bookmark-modal');
+        if (modal) {
+          document.body.removeChild(modal);
+        }
+        // Tampilkan kembali daftar bookmark yang diperbarui
+        setTimeout(showBookmarkList, 100);
+      } else {
+        console.error(`Surah ${surah} tidak ditemukan`);
+      }
     }
   });
 }
@@ -167,7 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const darkModeToggle = document.getElementById("darkModeToggle");
   const scrollToTopBtn = document.createElement("button");
 
-  let allSurahs = [];
+  //let allSurahs = [];
   let surahCache = new Map();
   let currentSurah = null;
   let currentAyatIndex = 0;
@@ -306,6 +344,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (surahData.code === 200 && tafsirData.code === 200) {
         currentSurah = surahData.data; // Set currentSurah here
+        console.log("Set currentSurah:", currentSurah); // Tambahkan log ini
+
         surahCache.set(nomorSurah, {
           surahData: surahData.data,
           tafsirData: tafsirData.data,
@@ -428,9 +468,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     isAutoPlaying = true;
-  currentAyatIndex = currentSurah.nomor === 9 ? 0 : -1; // Start from 0 for At-Taubah, -1 for others
-  document.getElementById("autoPlayToggle").innerHTML = '<i class="fas fa-pause"></i>';
-  playNextAyat(ayat);
+    currentAyatIndex = currentSurah.nomor === 9 ? 0 : -1; // Start from 0 for At-Taubah, -1 for others
+    document.getElementById("autoPlayToggle").innerHTML = '<i class="fas fa-pause"></i>';
+    playNextAyat(ayat);
 
     // Add overlay pause button
     const overlay = document.createElement("div");
@@ -476,7 +516,7 @@ document.addEventListener("DOMContentLoaded", () => {
       stopAutoPlay();
       return;
     }
-  
+
     let audioSrc;
     if (currentAyatIndex === -1 && currentSurah.nomor !== 9) {
       // Play Bismillah audio
@@ -485,12 +525,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const currentAyat = ayat[currentAyatIndex];
       audioSrc = currentAyat.audio[selectedQari];
     }
-  
+
     const audio = new Audio(audioSrc);
     audio.setAttribute("data-ayat", currentAyatIndex);
-  
+
     highlightCurrentAyat(currentAyatIndex);
-  
+
     audio.play();
     audio.onended = () => {
       currentAyatIndex++;
@@ -537,10 +577,10 @@ document.addEventListener("DOMContentLoaded", () => {
       <h3 class="text-xl font-semibold mb-4 text-primary-600 dark:text-primary-400">Ayat-ayat:</h3>
       <div id="ayatList" class="space-y-6"></div>
     `;
-  
+
     const ayatList = document.getElementById("ayatList");
     const fragment = document.createDocumentFragment();
-  
+
     // Add Bismillah at the beginning (except for Surah At-Taubah)
     if (currentSurah.nomor !== 9) {
       const bismillahDiv = document.createElement("div");
@@ -553,8 +593,8 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
       fragment.appendChild(bismillahDiv);
     }
-  
-  
+
+
     ayat.forEach((a, index) => {
       const div = document.createElement("div");
       div.className = "border-b border-gray-200 dark:border-gray-700 pb-4";
@@ -580,11 +620,23 @@ document.addEventListener("DOMContentLoaded", () => {
         <p class="text-right text-2xl my-5 font-arabic leading-relaxed" style="line-height: 2.5;">${a.teksArab}</p>
         <p class="mb-1 text-lg">${a.teksLatin}</p>
         <p class="text-gray-600 dark:text-gray-400">${a.teksIndonesia}</p>
-        <!-- ... rest of the ayat content ... -->
+        <button class="toggle-tafsir-btn mt-2 text-primary-600 dark:text-primary-400 hover:underline">
+  Show Tafsir <i class="fas fa-chevron-down ml-1"></i>
+</button>
+<div class="tafsir-container hidden mt-2">
+  <p class="text-gray-600 dark:text-gray-400">
+    ${tafsir[index] ? tafsir[index].teks.split('\n').map(line => `
+      <span class="block mb-2">${line}</span>
+    `).join('') : 'Tafsir tidak tersedia'}
+  </p>
+  <button class="copy-tafsir-btn mt-2 bg-primary-500 text-white px-3 py-1 rounded-lg hover:bg-primary-600 transition-colors duration-200">
+    <i class="fas fa-copy mr-2"></i> Copy Tafsir
+  </button>
+</div>
       `;
       fragment.appendChild(div);
     });
-  
+
     ayatList.appendChild(fragment);
 
     // Add event listeners
@@ -607,25 +659,47 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
+    function copyTafsir(tafsirContainer) {
+      // Mengambil semua span dalam container
+      const tafsirSpans = tafsirContainer.querySelectorAll('span.block');
+      
+      // Mengumpulkan teks dari setiap span dan menggabungkannya dengan baris baru
+      const tafsirText = Array.from(tafsirSpans)
+        .map(span => span.textContent.trim())
+        .filter(text => text.length > 0)  // Menghapus baris kosong
+        .join('\n');
+      
+      navigator.clipboard
+        .writeText(tafsirText)
+        .then(() => {
+          alert("Tafsir berhasil disalin!");
+        })
+        .catch((err) => {
+          console.error("Gagal menyalin tafsir: ", err);
+        });
+    }
+    
     const copyTafsirButtons = ayatList.querySelectorAll(".copy-tafsir-btn");
     copyTafsirButtons.forEach((button) => {
       button.addEventListener("click", () => {
-        const tafsirText = button.previousElementSibling.textContent;
-        copyTafsir(tafsirText);
+        const tafsirContainer = button.closest('.tafsir-container').querySelector('p');
+        copyTafsir(tafsirContainer);
       });
     });
 
-    // Add event listeners for bookmark buttons
     const bookmarkButtons = ayatList.querySelectorAll(".bookmark-btn");
     bookmarkButtons.forEach((button) => {
       button.addEventListener("click", () => {
         const ayatElement = button.closest("[data-ayat]");
         const ayatNumber = parseInt(ayatElement.getAttribute("data-ayat"));
-        toggleBookmark(currentSurah.nomor, ayatNumber);
+        const isBookmarked = toggleBookmark(currentSurah, ayatNumber);
+
+        // Perbarui tampilan ikon
+        button.innerHTML = isBookmarked ? '<i class="fas fa-bookmark"></i>' : '<i class="far fa-bookmark"></i>';
       });
     });
 
-    updateBookmarkButtons();
+    updateBookmarkButtons(currentSurah);
   }
 
   function downloadAyatImageForTikTok(ayatElement, ayatNumber) {
@@ -706,16 +780,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  function copyTafsir(tafsirText) {
-    navigator.clipboard
-      .writeText(tafsirText)
-      .then(() => {
-        alert("Tafsir berhasil disalin!");
-      })
-      .catch((err) => {
-        console.error("Gagal menyalin tafsir: ", err);
-      });
-  }
+  
 
   function updateAudioSources() {
     const surahAudio = document.getElementById("surahAudio");
@@ -779,4 +844,9 @@ document.addEventListener("DOMContentLoaded", () => {
       button.innerHTML = `Show Tafsir <i class="fas fa-chevron-down ml-1"></i>`;
     }
   }
+
+  if (currentSurah) {
+    updateBookmarkButtons(currentSurah);
+  }
+
 });
