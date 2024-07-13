@@ -58,8 +58,8 @@
             </div>
             <div class="flex items-center space-x-4 ml-auto">
                 <button id="bookmarkListButton" class="p-2 w-10 h-10 rounded-full flex items-center justify-center bg-primary-600 text-white hover:bg-primary-700 transition-all">
-                    <i class="fas fa-bookmark"></i>
-                  </button>
+                  <i class="fas fa-bookmark"></i>
+                </button>
                 <button id="openModalButton" class="p-2 w-10 h-10 rounded-full flex items-center justify-center bg-primary-600 text-white hover:bg-primary-700 transition-all">
                   <i class="fas fa-cog"></i>
                 </button>
@@ -70,10 +70,16 @@
 
     <div id="myModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black bg-opacity-50">
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 w-full max-w-xl md:max-w-md">
-            <h2 class="text-xl font-bold mb-4 text-gray-700 dark:text-gray-300">Settings</h2>
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold text-gray-700 dark:text-gray-300">Settings</h2>
+                <button id="darkModeToggle" class="p-2  w-10 h-10 bg-primary-600 text-white rounded-full hover:bg-primary-700 dark:bg-primary-400 dark:text-gray-800 dark:hover:bg-primary-500 transition-all">
+                    <i id="darkModeIcon" class="fas fa-moon"></i>
+                    <span class="sr-only">Toggle Dark Mode</span>
+                </button>
+            </div>
 
-            <div id="prayerTimes" class="md:col-span-2 mt-4 font-bold">
-                <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300">Prayer Times</h3>
+            <div id="prayerTimes" class="bg-gray-100 dark:bg-gray-700 p-4 rounded-xl">
+                <h3 class="text-lg font-semibold mb-2 text-gray-800 dark:text-gray-200">Prayer Times</h3>
                 <!-- Prayer times will be inserted here by JavaScript -->
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -108,25 +114,25 @@
                         
                     </select>
                 </div>
-                <div class="flex flex-col md:col-span-2">
-                    <label for="darkModeToggle" class="mb-2 text-gray-700 dark:text-gray-300">Dark Mode:</label>
-                    <button id="darkModeToggle" class="p-2 w-full bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-all">
-                        <i class="fas fa-sun mr-2"></i> Toggle Dark Mode
-                    </button>
-                </div>
     
-                <a href="tasbih.html" class="p-4 bg-primary-600 dark:bg-primary-400 text-white rounded-lg flex items-center justify-center hover:bg-primary-700 dark:hover:bg-primary-500 transition-all">
-                    <i class="fas fa-pray mr-2"></i> Tasbih
-                </a>
-                <a href="doa.html" class="p-4 bg-primary-700 dark:bg-primary-400 text-white rounded-lg flex items-center justify-center hover:bg-primary-700 dark:hover:bg-primary-500 transition-all">
-                    <i class="fas fa-mosque mr-2"></i> Doa
-                </a>
-                <a href="emptiga.html" class="p-4 bg-primary-800 dark:bg-primary-400 text-white rounded-lg flex items-center justify-center hover:bg-primary-700 dark:hover:bg-primary-500 transition-all">
-                    <i class="fas fa-headphones mr-2"></i> Audio Player
-                </a>
-                <a href="audio.html" class="p-4 bg-primary-900 dark:bg-primary-400 text-white rounded-lg flex items-center justify-center hover:bg-primary-700 dark:hover:bg-primary-500 transition-all">
-                    <i class="fas fa-download mr-2"></i> Audio Download
-                </a>
+                <div class="flex justify-between items-center w-full">
+                    <a href="tasbih.html" class="flex-1 flex flex-col items-center mr-1 p-4 bg-primary-600 text-primary rounded-lg hover:bg-primary hover:text-white transition-colors">
+                      <i class="fas fa-pray text-2xl mb-2"></i>
+                      <span class="text-xs">Tasbih</span>
+                    </a>
+                    <a href="doa.html" class="flex-1 flex flex-col items-center p-4 mr-1 bg-primary-700 text-primary rounded-lg hover:bg-primary hover:text-white transition-colors">
+                      <i class="fas fa-mosque text-2xl mb-2"></i>
+                      <span class="text-xs">Doa</span>
+                    </a>
+                    <a href="emptiga.html" class="flex-1 flex flex-col items-center p-4 mr-1 bg-primary-800 text-primary rounded-lg hover:bg-primary hover:text-white transition-colors">
+                      <i class="fas fa-headphones text-2xl mb-2"></i>
+                      <span class="text-xs">Audio</span>
+                    </a>
+                    <a href="audio.html" class="flex-1 flex flex-col items-center p-4 mr-1 bg-primary-900 text-primary rounded-lg hover:bg-primary hover:text-white transition-colors">
+                      <i class="fas fa-download text-2xl mb-2"></i>
+                      <span class="text-xs">Download</span>
+                    </a>
+                  </div>
     
                 <button id="closeModalButton" class="md:col-span-2 p-2 bg-primary-700 dark:bg-primary-700 text-white dark:text-white rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-all mt-4">
                     Close
@@ -134,6 +140,8 @@
             </div>
         </div>
     </div>
+
+    
     <div class="flex min-h-screen pt-16 relative">
         <div id="sidebarOverlay" class="fixed inset-0 bg-black opacity-50 z-20 hidden md:hidden"></div>
 
