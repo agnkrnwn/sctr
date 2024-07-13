@@ -520,7 +520,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let audioSrc;
     if (currentAyatIndex === -1 && currentSurah.nomor !== 9) {
       // Play Bismillah audio
-      audioSrc = "./audio/001001.mp3"; // You need to provide the correct path
+      audioSrc = "./audio/bismillah.mp3"; // You need to provide the correct path
     } else {
       const currentAyat = ayat[currentAyatIndex];
       audioSrc = currentAyat.audio[selectedQari];
