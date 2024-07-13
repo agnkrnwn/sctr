@@ -428,10 +428,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     isAutoPlaying = true;
-    currentAyatIndex = 0;
-    document.getElementById("autoPlayToggle").innerHTML =
-      '<i class="fas fa-pause"></i>';
-    playNextAyat(ayat);
+  currentAyatIndex = currentSurah.nomor === 9 ? 0 : -1; // Start from 0 for At-Taubah, -1 for others
+  document.getElementById("autoPlayToggle").innerHTML = '<i class="fas fa-pause"></i>';
+  playNextAyat(ayat);
 
     // Add overlay pause button
     const overlay = document.createElement("div");
@@ -477,14 +476,21 @@ document.addEventListener("DOMContentLoaded", () => {
       stopAutoPlay();
       return;
     }
-
-    const currentAyat = ayat[currentAyatIndex];
-    // const audio = new Audio(currentAyat.audio["05"]);
-    const audio = new Audio(currentAyat.audio[selectedQari]);
+  
+    let audioSrc;
+    if (currentAyatIndex === -1 && currentSurah.nomor !== 9) {
+      // Play Bismillah audio
+      audioSrc = "path/to/bismillah/audio.mp3"; // You need to provide the correct path
+    } else {
+      const currentAyat = ayat[currentAyatIndex];
+      audioSrc = currentAyat.audio[selectedQari];
+    }
+  
+    const audio = new Audio(audioSrc);
     audio.setAttribute("data-ayat", currentAyatIndex);
-
+  
     highlightCurrentAyat(currentAyatIndex);
-
+  
     audio.play();
     audio.onended = () => {
       currentAyatIndex++;
@@ -495,7 +501,10 @@ document.addEventListener("DOMContentLoaded", () => {
   function highlightCurrentAyat(ayatIndex) {
     const ayatElements = document.querySelectorAll("[data-ayat]");
     ayatElements.forEach((element) => {
-      if (element.dataset.ayat === (ayatIndex + 1).toString()) {
+      if (
+        (ayatIndex === -1 && element.dataset.ayat === "bismillah" && currentSurah.nomor !== 9) ||
+        element.dataset.ayat === (ayatIndex + 1).toString()
+      ) {
         element.classList.add("current-ayat");
         element.scrollIntoView({ behavior: "smooth", block: "center" });
       } else {
@@ -525,70 +534,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function displayAyatWithTafsir(ayat, tafsir, container) {
     container.innerHTML = `
-          <h3 class="text-xl font-semibold mb-4 text-primary-600 dark:text-primary-400">Ayat-ayat:</h3>
-          <div id="ayatList" class="space-y-6"></div>
-        `;
-
+      <h3 class="text-xl font-semibold mb-4 text-primary-600 dark:text-primary-400">Ayat-ayat:</h3>
+      <div id="ayatList" class="space-y-6"></div>
+    `;
+  
     const ayatList = document.getElementById("ayatList");
     const fragment = document.createDocumentFragment();
-
+  
+    // Add Bismillah at the beginning (except for Surah At-Taubah)
+    if (currentSurah.nomor !== 9) {
+      const bismillahDiv = document.createElement("div");
+      bismillahDiv.className = "border-b border-gray-200 dark:border-gray-700 pb-4";
+      bismillahDiv.setAttribute("data-ayat", "bismillah");
+      bismillahDiv.innerHTML = `
+        <p class="text-right text-2xl my-5 font-arabic leading-relaxed" style="line-height: 2.5;">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
+        <p class="mb-1 text-lg">bismillāhir-raḥmānir-raḥīm</p>
+        <p class="text-gray-600 dark:text-gray-400">Dengan nama Allah Yang Maha Pengasih, Maha Penyayang.</p>
+      `;
+      fragment.appendChild(bismillahDiv);
+    }
+  
+  
     ayat.forEach((a, index) => {
       const div = document.createElement("div");
       div.className = "border-b border-gray-200 dark:border-gray-700 pb-4";
       div.setAttribute("data-ayat", a.nomorAyat);
       div.innerHTML = `
-            <div class="flex justify-between items-center mb-2">
-              <span class="text-lg font-semibold">${a.nomorAyat}.</span>
-              <div>
-                <button class="play-audio-btn text-primary-500 dark:text-primary-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200 mr-2" data-audio='${JSON.stringify(
-                  a.audio
-                )}'>
-                  <i class="fas fa-play"></i>
-                </button>
-                <a href="${
-                  a.audio["05"]
-                }" target="_blank" class="text-primary-500 dark:text-primary-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200 mr-2">
-                  <i class="fa-solid fa-file-audio"></i>
-                </a>
-                <button class="download-image-btn text-primary-500 dark:text-primary-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200 mr-2">
-                  <i class="fas fa-download"></i>
-                </button>
-                <button class="bookmark-btn text-primary-500 dark:text-primary-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200">
-                  <i class="far fa-bookmark"></i>
-                </button>
-              </div>
-            </div>
-            <p class="text-right text-2xl my-5 font-arabic leading-relaxed" style="line-height: 2.5;">${
-              a.teksArab
-            }</p>
-            <p class="mb-1 text-lg">${a.teksLatin}</p>
-            <p class="text-gray-600 dark:text-gray-400">${a.teksIndonesia}</p>
-            <button class="toggle-tafsir-btn mt-2 text-primary-500 dark:text-primary-400 hover:underline">
-              Show Tafsir <i class="fas fa-chevron-down ml-1"></i>
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-lg font-semibold">${a.nomorAyat}.</span>
+          <div>
+            <button class="play-audio-btn text-primary-500 dark:text-primary-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200 mr-2" data-audio='${JSON.stringify(a.audio)}'>
+              <i class="fas fa-play"></i>
             </button>
-            <div class="tafsir-container hidden mt-2">
-              <p class="text-gray-600 dark:text-gray-400">
-                ${
-                  tafsir[index]
-                    ? tafsir[index].teks
-                        .split("\n")
-                        .map(
-                          (line) => `
-                  <span class="block mb-2">${line}</span>
-                `
-                        )
-                        .join("")
-                    : "Tafsir tidak tersedia"
-                }
-              </p>
-              <button class="copy-tafsir-btn mt-2 bg-primary-500 text-white px-3 py-1 rounded hover:bg-primary-600 transition-colors duration-200">
-                <i class="fas fa-copy"> </i> Copy Tafsir
-              </button>
-            </div>
-          `;
+            <a href="${a.audio["05"]}" target="_blank" class="text-primary-500 dark:text-primary-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200 mr-2">
+              <i class="fa-solid fa-file-audio"></i>
+            </a>
+            <button class="download-image-btn text-primary-500 dark:text-primary-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200 mr-2">
+              <i class="fas fa-download"></i>
+            </button>
+            <button class="bookmark-btn text-primary-500 dark:text-primary-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200">
+              <i class="far fa-bookmark"></i>
+            </button>
+          </div>
+        </div>
+        <p class="text-right text-2xl my-5 font-arabic leading-relaxed" style="line-height: 2.5;">${a.teksArab}</p>
+        <p class="mb-1 text-lg">${a.teksLatin}</p>
+        <p class="text-gray-600 dark:text-gray-400">${a.teksIndonesia}</p>
+        <!-- ... rest of the ayat content ... -->
+      `;
       fragment.appendChild(div);
     });
-
+  
     ayatList.appendChild(fragment);
 
     // Add event listeners

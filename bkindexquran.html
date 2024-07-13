@@ -57,28 +57,30 @@
                 <h1 class="text-2xl font-bold text-primary-600 dark:text-primary-400">Al-Quran</h1>
             </div>
             <div class="flex items-center space-x-4 ml-auto">
-                <button id="openModalButton" class="p-2 w-10 h-10 rounded-full flex items-center justify-center bg-primary-600 text-white hover:bg-primary-700 transition-all">
-                  <i class="fas fa-th"></i>
-                </button>
                 <button id="bookmarkListButton" class="p-2 w-10 h-10 rounded-full flex items-center justify-center bg-primary-600 text-white hover:bg-primary-700 transition-all">
-                  <i class="fas fa-bookmark"></i>
+                    <i class="fas fa-bookmark"></i>
+                  </button>
+                <button id="openModalButton" class="p-2 w-10 h-10 rounded-full flex items-center justify-center bg-primary-600 text-white hover:bg-primary-700 transition-all">
+                  <i class="fas fa-cog"></i>
                 </button>
-                <button id="darkModeToggle" class="p-2 w-10 h-10 rounded-full flex items-center justify-center bg-primary-600 text-white hover:bg-primary-700 transition-all">
-                  <i class="fas fa-sun hidden dark:inline"></i>
-                </button>
+                
             </div>
         </div>
-        
-        
     </nav>
-    
+
     <div id="myModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black bg-opacity-50">
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 w-full max-w-xl md:max-w-md">
-            <h2 class="text-xl font-bold mb-4 text-gray-700 dark:text-gray-300">Control center</h2>
+            <h2 class="text-xl font-bold mb-4 text-gray-700 dark:text-gray-300">Settings</h2>
+
+            <div id="prayerTimes" class="md:col-span-2 mt-4 font-bold">
+                <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300">Prayer Times</h3>
+                <!-- Prayer times will be inserted here by JavaScript -->
+            </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="flex flex-col md:col-span-2 mt-4">
                     <label for="themeSelector" class="mb-2 text-gray-700 dark:text-gray-300">Select Theme:</label>
                     <select id="themeSelector" onchange="setTheme(this.value)" class="p-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg">
+                        <!-- ... (opsi tema yang sudah ada) ... -->
                         <option value="">Pilih Tema</option>
                         <option value="default">Default Theme</option>
                         <option value="green">Green Theme</option>
@@ -92,10 +94,27 @@
                         <option value="yellow">Yellow Theme</option>
                         <option value="cyan">Cyan Theme</option>
                         <option value="lime">Lime Theme</option>
-
                     </select>
                 </div>
-
+                <div class="flex flex-col md:col-span-2">
+                    <label for="qariSelect" class="mb-2 text-gray-700 dark:text-gray-300">Select Qari:</label>
+                    <select id="qariSelect" class="p-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg">
+                        <!-- ... (opsi qari yang sudah ada) ... -->
+                        <option value="01">Abdullah Al-Juhany</option>
+                        <option value="02">Abdul Muhsin Al-Qasim</option>
+                        <option value="03">Abdurrahman as-Sudais</option>
+                        <option value="04">Ibrahim Al-Dossari</option>
+                        <option value="05" selected>Misyari Rasyid Al-Afasi</option>
+                        
+                    </select>
+                </div>
+                <div class="flex flex-col md:col-span-2">
+                    <label for="darkModeToggle" class="mb-2 text-gray-700 dark:text-gray-300">Dark Mode:</label>
+                    <button id="darkModeToggle" class="p-2 w-full bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-all">
+                        <i class="fas fa-sun mr-2"></i> Toggle Dark Mode
+                    </button>
+                </div>
+    
                 <a href="tasbih.html" class="p-4 bg-primary-600 dark:bg-primary-400 text-white rounded-lg flex items-center justify-center hover:bg-primary-700 dark:hover:bg-primary-500 transition-all">
                     <i class="fas fa-pray mr-2"></i> Tasbih
                 </a>
@@ -108,24 +127,13 @@
                 <a href="audio.html" class="p-4 bg-primary-900 dark:bg-primary-400 text-white rounded-lg flex items-center justify-center hover:bg-primary-700 dark:hover:bg-primary-500 transition-all">
                     <i class="fas fa-download mr-2"></i> Audio Download
                 </a>
-                <div class="flex flex-col md:col-span-2">
-                    <label for="qariSelect" class="mb-2 text-gray-700 dark:text-gray-300">Select Qari:</label>
-                    <select id="qariSelect" class="p-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg">
-                        <option value="01">Abdullah Al-Juhany</option>
-                        <option value="02">Abdul Muhsin Al-Qasim</option>
-                        <option value="03">Abdurrahman as-Sudais</option>
-                        <option value="04">Ibrahim Al-Dossari</option>
-                        <option value="05" selected>Misyari Rasyid Al-Afasi</option>
-                    </select>
-                </div>
+    
                 <button id="closeModalButton" class="md:col-span-2 p-2 bg-primary-700 dark:bg-primary-700 text-white dark:text-white rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-all mt-4">
                     Close
                 </button>
             </div>
         </div>
     </div>
-    
-
     <div class="flex min-h-screen pt-16 relative">
         <div id="sidebarOverlay" class="fixed inset-0 bg-black opacity-50 z-20 hidden md:hidden"></div>
 
@@ -146,6 +154,7 @@
         </main>        
     </div>
     <script src="/js/theme-switcher.js"></script>
+    <script src="/js/prayer-times.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="/bkquran.js"></script>
     
