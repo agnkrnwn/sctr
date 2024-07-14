@@ -1,1 +1,76 @@
 const imageUrl = `https://everyayah.com/data/images_png/${chapter.replace(/^0+/, '')}_${aya.replace(/^0+/, '')}.png`;
+const audioUrl = `https://everyayah.com/data/${reciter}/${chapter}${aya}.mp3`;
+
+
+//isi dari qurandata.json
+{
+    "reciters": [
+        {
+            "value": "AbdulSamad_64kbps_QuranExplorer.Com",
+            "text": "Abdul Basit Abdul Samad (AbdulSamad_64kbps_QuranExplorer.Com)"
+          },
+          {
+            "value": "Abdul_Basit_Mujawwad_128kbps",
+            "text": "Abdul Basit Mujawwad (Abdul_Basit_Mujawwad_128kbps)"
+          },
+
+          // ... dll
+    ],
+    "chapters": [
+      {
+        "value": "1",
+        "text": "1: Al-Faatiha",
+        "ayaCount": 7
+      },
+      {
+        "value": "2",
+        "text": "2: Al-Baqara",
+        "ayaCount": 286
+      },
+      // ... dll
+    ]
+  }
+
+
+  begini saya punya qurandata.json isinya begini 
+
+//isi dari qurandata.json
+{
+    "reciters": [
+        {
+            "value": "AbdulSamad_64kbps_QuranExplorer.Com",
+            "text": "Abdul Basit Abdul Samad (AbdulSamad_64kbps_QuranExplorer.Com)"
+          },
+          {
+            "value": "Abdul_Basit_Mujawwad_128kbps",
+            "text": "Abdul Basit Mujawwad (Abdul_Basit_Mujawwad_128kbps)"
+          },
+
+          // ... dll
+    ],
+    "chapters": [
+      {
+        "value": "1",
+        "text": "1: Al-Faatiha",
+        "ayaCount": 7
+      },
+      {
+        "value": "2",
+        "text": "2: Al-Baqara",
+        "ayaCount": 286
+      },
+      // ... dll
+    ]
+  }
+
+ssaya itu mau nambahin biar ada link ke audio dan link ke gambar ayat 
+
+yang kaya gini 
+
+const imageUrl = `https://everyayah.com/data/images_png/${chapter.replace(/^0+/, '')}_${aya.replace(/^0+/, '')}.png`;
+const audioUrl = `https://everyayah.com/data/${reciter}/${chapter}${aya}.mp3`;
+
+
+sayamau tambahin ke json nya di setiap element
+
+apa kamu bisa? pake python 

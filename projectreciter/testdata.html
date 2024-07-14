@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al-Qur'an Digital</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .dark-mode .card {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+        }
+        .btn-group .btn {
+            border-radius: 0;
+        }
+        .btn-group .btn:first-child {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+        .btn-group .btn:last-child {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+        #ayahContainer {
+            max-height: 500px;
+            overflow-y: auto;
+            transition: background-color 0.3s;
+        }
+        .dark-mode #ayahContainer {
+            background-color: #2a2a2a !important;
+        }
+        .dropdown-menu {
+            border: none;
+            border-radius: 10px;
+        }
+        .dark-mode .dropdown-menu {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+        }
+        .dark-mode .dropdown-item {
+            color: #e0e0e0;
+        }
+        .dark-mode .dropdown-item:hover {
+            background-color: #2a2a2a;
+        }
+        .ayah {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            text-align: right;
+        }
+        .ayah.active {
+            background-color: rgba(0, 123, 255, 0.1);
+            border-radius: 0.25rem;
+        }
+        .dark-mode .ayah.active {
+            background-color: rgba(0, 123, 255, 0.2);
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1 class="text-primary">Al-Qur'an Digital</h1>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="darkModeToggle">
+                        <label class="form-check-label" for="darkModeToggle">Dark Mode</label>
+                    </div>
+                </div>
+                
+                <div class="row mb-4">
+                    <div class="col-md-4 mb-3">
+                        <div class="dropdown">
+                            <button class="btn btn-outline-primary dropdown-toggle w-100" type="button" id="surahDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-book-open me-2"></i>Pilih Surat
+                            </button>
+                            <ul class="dropdown-menu w-100 shadow" aria-labelledby="surahDropdown">
+                                <li class="px-3 py-2">
+                                    <input type="text" class="form-control" id="surahSearch" placeholder="Cari surat...">
+                                </li>
+                                <div id="surahList" class="overflow-auto" style="max-height: 300px;"></div>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <select id="reciterSelect" class="form-select">
+                            <option value="">Pilih Qari</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="autoPlaySurah">
+                            <label class="form-check-label" for="autoPlaySurah">
+                                Auto-play Surah Berikutnya
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center mb-4">
+                    <div class="btn-group" role="group" aria-label="Player controls">
+                        <button id="prevBtn" class="btn btn-outline-secondary"><i class="fas fa-step-backward"></i></button>
+                        <button id="playBtn" class="btn btn-outline-success"><i class="fas fa-play"></i></button>
+                        <button id="pauseBtn" class="btn btn-outline-warning"><i class="fas fa-pause"></i></button>
+                        <button id="stopBtn" class="btn btn-outline-danger"><i class="fas fa-stop"></i></button>
+                        <button id="nextBtn" class="btn btn-outline-secondary"><i class="fas fa-step-forward"></i></button>
+                    </div>
+                </div>
+
+                <div id="ayahContainer" class="bg-light p-3 rounded"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let quranData;
+        let currentReciter = '';
+        let currentSurah = '';
+        let currentAyah = 0;
+        let audioElements = [];
+        let isPlaying = false;
+        let autoPlaySurah = false;
+
+        fetch('qurandata_updated.json')
+            .then(response => response.json())
+            .then(data => {
+                quranData = data;
+                populateSurahList();
+                populateReciterSelect();
+            });
+
+            document.getElementById('darkModeToggle').addEventListener('change', function() {
+            document.body.classList.toggle('dark-mode');
+        });
+
+        function populateSurahList() {
+            const surahList = document.getElementById('surahList');
+            quranData.chapters.forEach(chapter => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.className = 'dropdown-item';
+                a.href = '#';
+                a.textContent = chapter.text;
+                a.dataset.value = chapter.value;
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    selectSurah(chapter.value, chapter.text);
+                });
+                li.appendChild(a);
+                surahList.appendChild(li);
+            });
+        }
+
+        function populateReciterSelect() {
+            const select = document.getElementById('reciterSelect');
+            quranData.reciters.forEach(reciter => {
+                const option = document.createElement('option');
+                option.value = reciter.value;
+                option.textContent = reciter.text;
+                select.appendChild(option);
+            });
+        }
+
+        document.getElementById('reciterSelect').addEventListener('change', function(e) {
+            currentReciter = e.target.value;
+            if (currentSurah) displaySurah(currentSurah);
+        });
+        document.getElementById('autoPlaySurah').addEventListener('change', function(e) {
+            autoPlaySurah = e.target.checked;
+        });
+        document.getElementById('surahSearch').addEventListener('input', searchSurah);
+
+        function searchSurah() {
+            const searchTerm = document.getElementById('surahSearch').value.toLowerCase();
+            const surahItems = document.querySelectorAll('#surahList .dropdown-item');
+            
+            surahItems.forEach(item => {
+                const surahName = item.textContent.toLowerCase();
+                if (surahName.includes(searchTerm)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        function selectSurah(value, text) {
+            currentSurah = value;
+            document.getElementById('surahDropdown').textContent = text;
+            displaySurah(value);
+        }
+
+        function displaySurah(surahIndex) {
+            if (!surahIndex) return;
+
+            currentAyah = 0;
+            const surah = quranData.chapters.find(ch => ch.value === surahIndex);
+            const container = document.getElementById('ayahContainer');
+            container.innerHTML = '';
+            audioElements = [];
+
+            surah.urls.forEach((ayah, index) => {
+                const ayahDiv = document.createElement('div');
+                ayahDiv.className = 'ayah';
+                ayahDiv.id = `ayah-${index + 1}`;
+                
+                const img = document.createElement('img');
+                img.src = ayah.image_url;
+                img.alt = `Surat ${surah.text}, Ayat ${ayah.aya}`;
+                img.className = 'img-fluid';
+                ayahDiv.appendChild(img);
+
+                if (currentReciter) {
+                    const audio = document.createElement('audio');
+                    audio.src = ayah.audio_urls[currentReciter];
+                    audioElements.push(audio);
+
+                    audio.addEventListener('ended', () => {
+                        if (isPlaying) playNext();
+                    });
+                }
+
+                container.appendChild(ayahDiv);
+            });
+        }
+
+        document.getElementById('prevBtn').addEventListener('click', playPrevious);
+        document.getElementById('playBtn').addEventListener('click', play);
+        document.getElementById('pauseBtn').addEventListener('click', pause);
+        document.getElementById('stopBtn').addEventListener('click', stop);
+        document.getElementById('nextBtn').addEventListener('click', playNext);
+
+        function play() {
+            if (!audioElements.length) return;
+            isPlaying = true;
+            if (currentAyah >= audioElements.length) currentAyah = 0;
+            playAyah(currentAyah);
+        }
+
+        function pause() {
+            isPlaying = false;
+            if (currentAyah < audioElements.length) {
+                audioElements[currentAyah].pause();
+            }
+        }
+
+        function stop() {
+            isPlaying = false;
+            audioElements.forEach(audio => {
+                audio.pause();
+                audio.currentTime = 0;
+            });
+            currentAyah = 0;
+            highlightAyah(-1);
+        }
+
+        function playPrevious() {
+            if (currentAyah > 0) {
+                currentAyah--;
+                playAyah(currentAyah);
+            } else if (autoPlaySurah) {
+                playPreviousSurah();
+            }
+        }
+
+        function playNext() {
+            if (currentAyah < audioElements.length - 1) {
+                currentAyah++;
+                playAyah(currentAyah);
+            } else if (autoPlaySurah) {
+                playNextSurah();
+            } else {
+                stop();
+            }
+        }
+
+        function playAyah(index) {
+            audioElements.forEach((audio, i) => {
+                if (i === index) {
+                    audio.play();
+                } else {
+                    audio.pause();
+                    audio.currentTime = 0;
+                }
+            });
+            highlightAyah(index);
+        }
+
+        function highlightAyah(index) {
+            document.querySelectorAll('.ayah').forEach((ayah, i) => {
+                if (i === index) {
+                    ayah.classList.add('active');
+                    ayah.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    ayah.classList.remove('active');
+                }
+            });
+        }
+
+        function playNextSurah() {
+            const currentSurahIndex = quranData.chapters.findIndex(ch => ch.value === currentSurah);
+            if (currentSurahIndex < quranData.chapters.length - 1) {
+                const nextSurah = quranData.chapters[currentSurahIndex + 1];
+                selectSurah(nextSurah.value, nextSurah.text);
+                play();
+            }
+        }
+
+        function playPreviousSurah() {
+            const currentSurahIndex = quranData.chapters.findIndex(ch => ch.value === currentSurah);
+            if (currentSurahIndex > 0) {
+                const prevSurah = quranData.chapters[currentSurahIndex - 1];
+                selectSurah(prevSurah.value, prevSurah.text);
+                play();
+            }
+        }
+    </script>
+</body>
+</html>
