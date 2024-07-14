@@ -10,7 +10,7 @@ document.getElementById('darkModeToggle').addEventListener('click', function() {
     document.documentElement.classList.toggle('dark');
 });
 
-fetch('qurandata_updated.json')
+fetch('qura.json')
     .then(response => response.json())
     .then(data => {
         quranData = data;
@@ -99,6 +99,7 @@ function searchSurah() {
 }
 
 function selectSurah(value, text) {
+    stopAllAudio(); // Hentikan semua audio yang sedang berjalan
     currentSurah = value;
     document.getElementById('surahDropdown').textContent = text;
     displaySurah(value);
@@ -154,7 +155,7 @@ function displaySurah(surahIndex) {
 
     surah.urls.forEach((ayah, index) => {
         const ayahDiv = document.createElement('div');
-        ayahDiv.className = 'ayah mb-4'; // Hilangkan kelas card
+        ayahDiv.className = 'ayah';
         ayahDiv.id = `ayah-${index + 1}`;
 
         const jumpToAyahInput = document.getElementById('jumpToAyah');
@@ -256,11 +257,7 @@ function pause() {
 }
 
 function stop() {
-    isPlaying = false;
-    audioElements.forEach(audio => {
-        audio.pause();
-        audio.currentTime = 0;
-    });
+    stopAllAudio();
     currentAyah = 0;
     highlightAyah(-1);
 }
@@ -303,6 +300,14 @@ function playPreviousSurah() {
         selectSurah(prevSurah.value, prevSurah.text);
         play();
     }
+}
+
+function stopAllAudio() {
+    audioElements.forEach(audio => {
+        audio.pause();
+        audio.currentTime = 0;
+    });
+    isPlaying = false;
 }
 
 // Perbaikan untuk dropdown surat

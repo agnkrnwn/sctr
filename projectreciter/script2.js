@@ -11,9 +11,12 @@ const nextBtn = document.getElementById('next');
 const startBtn = document.getElementById('start');
 const stopBtn = document.getElementById('stop');
 const darkModeToggle = document.getElementById('darkModeToggle');
+const toggleViewBtn = document.getElementById('toggleView');
+const allAyatContainer = document.getElementById('allAyatContainer');
 
 let chapterAyaCounts = {};
 let isAutoplay = false;
+let isSingleAyatView = true;
 
 function populateSelect(select, options) {
     options.forEach(option => {
@@ -41,7 +44,7 @@ function updateMedia() {
     }
 
     const audioUrl = `https://everyayah.com/data/${reciter}/${chapter}${aya}.mp3`;
-    const imageUrl = `https://everyayah.com/data/images_png/${chapter.replace(/^0+/, '')}_${aya.replace(/^0+/, '')}.png`;
+    const imageUrl = `https://everyayah.com/data/quranpngs/${chapter.replace(/^0+/, '')}_${aya.replace(/^0+/, '')}.png`;
 
     ayaAudio.src = audioUrl;
     ayaImage.src = imageUrl;
@@ -53,12 +56,46 @@ function updateMedia() {
             ayaAudio.play();
         }
     };
+
+    if (isSingleAyatView) {
+        document.getElementById('ayatgambar').classList.remove('hidden');
+        allAyatContainer.classList.add('hidden');
+    } else {
+        document.getElementById('ayatgambar').classList.add('hidden');
+        allAyatContainer.classList.remove('hidden');
+        loadAllAyat();
+    }
 }
 
 function updateAyaLimit() {
     const maxAya = chapterAyaCounts[chapterSelect.value];
     ayaInput.max = maxAya;
     ayaInput.value = Math.min(ayaInput.value, maxAya);
+}
+
+function prevAya() {
+    const currentAya = parseInt(ayaInput.value);
+    if (currentAya > 1) {
+        ayaInput.value = currentAya - 1;
+        updateMedia();
+    } else {
+        const currentChapter = parseInt(chapterSelect.value);
+        if (currentChapter > 1) {
+            chapterSelect.value = (currentChapter - 1).toString();
+            updateAyaLimit();
+            ayaInput.value = chapterAyaCounts[chapterSelect.value];
+            updateMedia();
+        }
+    }
+    if (!isSingleAyatView) {
+        highlightCurrentAya();
+    }
+    
+    // Efek visual saat tombol ditekan
+    prevBtn.classList.add('bg-primary-700', 'dark:bg-primary-800');
+    setTimeout(() => {
+        prevBtn.classList.remove('bg-primary-700', 'dark:bg-primary-800');
+    }, 200);
 }
 
 function nextAya() {
@@ -78,23 +115,17 @@ function nextAya() {
             stopAutoplay();
         }
     }
+    if (!isSingleAyatView) {
+        highlightCurrentAya();
+    }
+    
+    // Efek visual saat tombol ditekan
+    nextBtn.classList.add('bg-primary-700', 'dark:bg-primary-800');
+    setTimeout(() => {
+        nextBtn.classList.remove('bg-primary-700', 'dark:bg-primary-800');
+    }, 200);
 }
 
-function prevAya() {
-    const currentAya = parseInt(ayaInput.value);
-    if (currentAya > 1) {
-        ayaInput.value = currentAya - 1;
-        updateMedia();
-    } else {
-        const currentChapter = parseInt(chapterSelect.value);
-        if (currentChapter > 1) {
-            chapterSelect.value = (currentChapter - 1).toString();
-            updateAyaLimit();
-            ayaInput.value = chapterAyaCounts[chapterSelect.value];
-            updateMedia();
-        }
-    }
-}
 
 function toggleAutoplay() {
     isAutoplay = !isAutoplay;
@@ -117,11 +148,19 @@ function toggleAutoplay() {
 
 function startPlayback() {
     ayaAudio.play();
+    startBtn.classList.add('bg-primary-700', 'dark:bg-primary-800');
+    setTimeout(() => {
+        startBtn.classList.remove('bg-primary-700', 'dark:bg-primary-800');
+    }, 200);
 }
 
 function stopPlayback() {
     ayaAudio.pause();
     ayaAudio.currentTime = 0;
+    stopBtn.classList.add('bg-primary-700', 'dark:bg-primary-800');
+    setTimeout(() => {
+        stopBtn.classList.remove('bg-primary-700', 'dark:bg-primary-800');
+    }, 200);
 }
 
 function stopAutoplay() {
@@ -137,6 +176,91 @@ function toggleDarkMode() {
     localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
 }
 
+function toggleView() {
+    isSingleAyatView = !isSingleAyatView;
+    if (isSingleAyatView) {
+        allAyatContainer.classList.add('hidden');
+        document.getElementById('ayatgambar').classList.remove('hidden');
+    } else {
+        allAyatContainer.classList.remove('hidden');
+        document.getElementById('ayatgambar').classList.add('hidden');
+        loadAllAyat();
+    }
+    toggleViewBtn.classList.add('bg-primary-700', 'dark:bg-primary-800');
+    setTimeout(() => {
+        toggleViewBtn.classList.remove('bg-primary-700', 'dark:bg-primary-800');
+    }, 200);
+}
+
+function loadAllAyat() {
+    if (isSingleAyatView) return;
+
+    const chapter = chapterSelect.value.padStart(3, '0');
+    const maxAya = chapterAyaCounts[chapterSelect.value];
+    
+    allAyatContainer.innerHTML = ''; // Clear previous content
+    
+    for (let i = 1; i <= maxAya; i++) {
+        const aya = i.toString().padStart(3, '0');
+        const imageUrl = `https://everyayah.com/data/quranpngs/${chapter.replace(/^0+/, '')}_${aya.replace(/^0+/, '')}.png`;
+        
+        const ayaDiv = document.createElement('div');
+        ayaDiv.id = `aya-${i}`;
+        ayaDiv.classList.add('mb-4');
+        
+        const ayaImg = document.createElement('img');
+        ayaImg.src = imageUrl;
+        ayaImg.alt = `Aya ${i}`;
+        ayaImg.classList.add('w-full', 'h-auto', 'rounded-lg');
+        
+        ayaDiv.appendChild(ayaImg);
+        allAyatContainer.appendChild(ayaDiv);
+    }
+    
+    highlightCurrentAya();
+}
+
+function highlightCurrentAya() {
+    const currentAya = parseInt(ayaInput.value);
+    const allAyat = allAyatContainer.children;
+    
+    for (let i = 0; i < allAyat.length; i++) {
+        if (i + 1 === currentAya) {
+            allAyat[i].classList.add('bg-primary-100', 'bg-opacity-70', 'rounded-lg', 'p-2');
+            allAyat[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+            allAyat[i].classList.remove('bg-primary-100', 'bg-opacity-70', 'rounded-lg', 'p-2');
+        }
+    }
+}
+
+function setupChapterSearch() {
+    const chapterSearch = document.getElementById('chapterSearch');
+    const chapterSelect = document.getElementById('chapter');
+    const originalOptions = Array.from(chapterSelect.options);
+
+    chapterSearch.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const filteredOptions = originalOptions.filter(option => 
+            option.text.toLowerCase().includes(searchTerm)
+        );
+
+        chapterSelect.innerHTML = '';
+        filteredOptions.forEach(option => chapterSelect.add(option.cloneNode(true)));
+
+        if (filteredOptions.length > 0) {
+            chapterSelect.selectedIndex = 0;
+            updateAyaLimit();
+            updateMedia();
+        }
+    });
+}
+
+// Call this function after populating the chapter select
+// Add this line in the fetch().then() block:
+//setupChapterSearch();
+
+
 // Fetch JSON data and populate dropdowns
 fetch('quran_data.json')
     .then(response => response.json())
@@ -145,21 +269,33 @@ fetch('quran_data.json')
         populateSelect(chapterSelect, data.chapters);
         updateAyaLimit();
         updateMedia(); // Initial update
+       setupChapterSearch(); // Set up chapter search
     })
     .catch(error => console.error('Error loading data:', error));
 
+// Event listeners
 reciterSelect.addEventListener('change', updateMedia);
+
 chapterSelect.addEventListener('change', () => {
     updateAyaLimit();
+    ayaInput.value = '1'; // Reset to first ayah when changing chapter
     updateMedia();
 });
-ayaInput.addEventListener('change', updateMedia);
+
+
+ayaInput.addEventListener('change', () => {
+    updateMedia();
+    if (!isSingleAyatView) {
+        highlightCurrentAya();
+    }
+});
 autoplayBtn.addEventListener('click', toggleAutoplay);
 prevBtn.addEventListener('click', prevAya);
 nextBtn.addEventListener('click', nextAya);
 startBtn.addEventListener('click', startPlayback);
 stopBtn.addEventListener('click', stopPlayback);
 darkModeToggle.addEventListener('click', toggleDarkMode);
+toggleViewBtn.addEventListener('click', toggleView);
 
 // Check dark mode preference when page loads
 if (localStorage.getItem('darkMode') === 'true' || 

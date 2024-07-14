@@ -20,22 +20,58 @@
         }
     </script>
     <style>
-        /* ... style lainnya ... */
 
+     #ayahContainer {
+        background-color: #f7f7f0; /* Warna latar belakang yang lembut */
+        padding: 20px;
+    }
+
+    .ayah {
+        margin-bottom: 0; /* Menghilangkan jarak antar ayat */
+    }
+
+    .ayah img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto; /* Tengahkan gambar */
+        padding: 10px 0; /* Beri sedikit jarak atas dan bawah */
+    }
+
+    @media (min-width: 768px) {
         #ayahContainer {
-            background-color: #f7f8fa;
-            padding: 20px;
-            border-radius: 8px;
-        }
-
-        .ayah {
-            margin-bottom: 10px;
+            padding: 40px; /* Lebih banyak padding pada layar yang lebih besar */
         }
 
         .ayah img {
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-            transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+            max-width: 90%; /* Sedikit lebih kecil dari lebar penuh pada layar besar */
         }
+    }
+
+     /* Untuk layar kecil (smartphone) */
+     @media (max-width: 640px) {
+        #ayahContainer {
+            padding: 5px;
+        }
+
+        .ayah img {
+            width: 98%; /* Sedikit lebih kecil dari lebar penuh untuk menghindari scrollbar horizontal */
+        }
+    }
+
+    /* Untuk layar medium */
+    @media (min-width: 641px) and (max-width: 1024px) {
+        #ayahContainer {
+            max-width: 90%;
+        }
+    }
+
+    /* Untuk layar besar */
+    @media (min-width: 1025px) {
+        #ayahContainer {
+            max-width: 80%;
+        }
+    }
 
         .ayah img:hover {
             box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
@@ -120,7 +156,7 @@
                 </div>
             </div>
 
-            <div id="ayahContainer" class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg max-h-[500px] overflow-y-auto">
+            <div id="ayahContainer">
             </div>
         </div>
     </div>
