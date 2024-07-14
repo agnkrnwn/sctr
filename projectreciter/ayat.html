@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id" class="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al-Qur'an Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { "50": "#eff6ff", "100": "#dbeafe", "200": "#bfdbfe", "300": "#93c5fd", "400": "#60a5fa", "500": "#3b82f6", "600": "#2563eb", "700": "#1d4ed8", "800": "#1e40af", "900": "#1e3a8a", "950": "#172554" }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* ... style lainnya ... */
+
+        #ayahContainer {
+            background-color: #f7f8fa;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .ayah {
+            margin-bottom: 10px;
+        }
+
+        .ayah img {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+        }
+
+        .ayah img:hover {
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+    <div class="container mx-auto mt-5 px-2">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-3">
+            <div class="flex justify-between items-center mb-4">
+                <h1 class="text-3xl font-bold text-primary-600 dark:text-primary-400">Al-Qur'an Digital</h1>
+                <button id="darkModeToggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700">
+                    <svg class="w-6 h-6 text-gray-800 dark:text-white" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div class="relative">
+                    <button id="surahDropdown"
+                        class="w-full px-4 py-2 text-left dark:text-white bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        <i class="fas fa-book-open mr-2"></i>Pilih Surat
+                    </button>
+                    <div id="surahDropdownMenu"
+                        class="hidden absolute z-10 mt-2 w-full bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg">
+                        <input type="text" id="surahSearch"
+                            class="w-full px-4 py-2 border-b border-gray-300 dark:border-gray-600 focus:outline-none text-gray-900 dark:text-white bg-white dark:bg-gray-700"
+                            placeholder="Cari surat...">
+                        <ul id="surahList" class="max-h-60 overflow-auto text-gray-900 dark:text-white"></ul>
+                    </div>
+                </div>
+                <select id="reciterSelect"
+                    class="w-full px-4 py-2 dark:text-white bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                    <option value="">Pilih Qari</option>
+                </select>
+                <div class="flex justify-center">
+                    <div class="flex w-full">
+                        <input type="number" id="jumpToAyah"
+                            class="w-2/3 px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                            placeholder="Nomor Ayat" min="1">
+                        <button id="jumpBtn"
+                            class="w-1/3 bg-gray-500 text-white px-4 py-2 rounded-r-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50">Lompat</button>
+                    </div>
+                </div>
+                <!-- <div class="flex items-center">
+                    <input type="checkbox" id="autoPlaySurah" class="mr-2">
+                    <label for="autoPlaySurah" class="text-gray-700 dark:text-gray-300">
+                        Auto-play Surah Berikutnya
+                    </label>
+                </div> -->
+            </div>
+
+            <div class="mb-3 w-full">
+                <div class="flex rounded-md shadow-sm w-full" role="group">
+                    <button id="prevBtn"
+                        class="flex-1 px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-2 focus:ring-primary-700 focus:text-primary-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-primary-500 dark:focus:text-white">
+                        <i class="fas fa-step-backward"></i>
+                    </button>
+                    <button id="playBtn"
+                        class="flex-1 px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-2 focus:ring-primary-700 focus:text-primary-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-primary-500 dark:focus:text-white">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button id="pauseBtn"
+                        class="flex-1 px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-2 focus:ring-primary-700 focus:text-primary-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-primary-500 dark:focus:text-white">
+                        <i class="fas fa-pause"></i>
+                    </button>
+                    <button id="stopBtn"
+                        class="flex-1 px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-2 focus:ring-primary-700 focus:text-primary-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-primary-500 dark:focus:text-white">
+                        <i class="fas fa-stop"></i>
+                    </button>
+                    <button id="nextBtn"
+                        class="flex-1 px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-2 focus:ring-primary-700 focus:text-primary-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-primary-500 dark:focus:text-white">
+                        <i class="fas fa-step-forward"></i>
+                    </button>
+                    <input type="checkbox" id="autoPlaySurah" class="flex-1 px-4 py-2 ">
+                    
+                </div>
+            </div>
+
+            <div id="ayahContainer" class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg max-h-[500px] overflow-y-auto">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="ayat.js"></script>
+</body>
+
+</html>
