@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="id" class="bg-gradient-to-br from-primary-500 to-primary-700 min-h-screen">
+<html lang="id" class="bg-gradient-to-br from-primary-500 to-primary-700 min-h-screen dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kumpulan Doa Modern - Redesign</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/warna.css">
     <style>
-        body { font-family: 'Nunito', sans-serif; }
+        body { font-family: 'Poppins', sans-serif; }
     </style>
     <script>
         tailwind.config = {
@@ -25,6 +28,19 @@
             },
         }
     </script>
+    <style>
+        @font-face {
+        font-family: 'LPMQ Isep Misbah';
+
+        src: url('../../font/LPMQ-IsepMisbah.woff2') format('woff2');
+
+        font-weight: normal;
+
+        font-style: normal;
+
+        font-display: swap;
+        }
+    </style>
 </head>
 <body class="text-gray-800 dark:text-gray-200 transition-colors duration-200">
     <div class="flex flex-col lg:flex-row min-h-screen">
@@ -46,18 +62,18 @@
         <!-- Main Content -->
         <main class="flex-grow p-6 lg:p-10 bg-gray-100 dark:bg-gray-900">
             <div class="flex justify-between items-center mb-6">
-                <button id="sidebarToggle" class="lg:hidden p-2 text-primary-500 dark:text-primary-400">
-                    <i class="fas fa-bars"></i>
+                <button id="sidebarToggle" class="lg:hidden bg-primary-500 dark:bg-primary-700 text-white rounded-full p-3 h-12 w-12 flex items-center justify-center">
+                    <i class="fas fa-bars text-xl"></i>
                 </button>
-                <div class="flex-grow mx-4">
-                    <input type="text" id="searchInput" placeholder="Cari doa..." 
-                           class="w-full p-2 rounded-full border-2 border-primary-300 focus:border-primary-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                </div>
-                <button id="themeToggle" class="p-2 bg-primary-500 text-white rounded">
-                    <i class="fas fa-moon"></i>
+                <h2 class="text-3xl font-bold text-primary-700 dark:text-primary-300">Kumpulan Doa</h2>
+                <button id="themeToggle" class="bg-primary-500 dark:bg-primary-700 text-white rounded-full p-3 h-12 w-12 flex items-center justify-center">
+                    <i class="fas fa-moon text-xl"></i>
                 </button>
             </div>
-            <h2 class="text-4xl font-bold text-primary-700 dark:text-primary-300 mb-8">Kumpulan Doa</h2>
+            <div class="mb-6">
+                <input type="text" id="searchInput" placeholder="Cari doa..." 
+                       class="w-full p-3 rounded-full border-2 border-primary-300 focus:border-primary-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+            </div>
             <div id="doaList" class="space-y-4">
                 <!-- Doa items akan diisi dinamis -->
             </div>
@@ -74,6 +90,8 @@
         </aside>
     </div>
 
+    <script src="/js/theme-switcher.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="doa.js"></script>
 </body>
 </html>
