@@ -1,0 +1,896 @@
+{
+  "reciters": [
+    {
+      "value": "AbdulSamad_64kbps_QuranExplorer.Com",
+      "text": "Abdul Basit Abdul Samad (AbdulSamad_64kbps_QuranExplorer.Com)"
+    },
+    {
+      "value": "Abdul_Basit_Mujawwad_128kbps",
+      "text": "Abdul Basit Mujawwad (Abdul_Basit_Mujawwad_128kbps)"
+    },
+    {
+      "value": "Abdul_Basit_Murattal_192kbps",
+      "text": "Abdul Basit Murattal (Abdul_Basit_Murattal_192kbps)"
+    },
+    {
+      "value": "Abdul_Basit_Murattal_64kbps",
+      "text": "Abdul Basit Murattal (Abdul_Basit_Murattal_64kbps)"
+    },
+    {
+      "value": "Abdullaah_3awwaad_Al-Juhaynee_128kbps",
+      "text": "Abdullaah Awaad Al-Juhaynee (Abdullaah_3awwaad_Al-Juhaynee_128kbps)"
+    },
+    {
+      "value": "Abdullah_Basfar_192kbps",
+      "text": "Abdullah Basfar (Abdullah_Basfar_192kbps)"
+    },
+    {
+      "value": "Abdullah_Basfar_32kbps",
+      "text": "Abdullah Basfar (Abdullah_Basfar_32kbps)"
+    },
+    {
+      "value": "Abdullah_Basfar_64kbps",
+      "text": "Abdullah Basfar (Abdullah_Basfar_64kbps)"
+    },
+    {
+      "value": "Abdullah_Matroud_128kbps",
+      "text": "Abdullah Matroud (Abdullah_Matroud_128kbps)"
+    },
+    {
+      "value": "Abdurrahmaan_As-Sudais_192kbps",
+      "text": "Abdurrahmaan As-Sudais (Abdurrahmaan_As-Sudais_192kbps)"
+    },
+    {
+      "value": "Abdurrahmaan_As-Sudais_64kbps",
+      "text": "Abdurrahmaan As-Sudais (Abdurrahmaan_As-Sudais_64kbps)"
+    },
+    {
+      "value": "Abu_Bakr_Ash-Shaatree_128kbps",
+      "text": "Abu Bakr Ash-Shaatree (Abu_Bakr_Ash-Shaatree_128kbps)"
+    },
+    {
+      "value": "Abu_Bakr_Ash-Shaatree_64kbps",
+      "text": "Abu Bakr_Ash-Shaatree (Abu_Bakr_Ash-Shaatree_64kbps)"
+    },
+    {
+      "value": "Ahmed_Neana_128kbps",
+      "text": "Ahmed Neana (Ahmed_Neana_128kbps)"
+    },
+    {
+      "value": "Ahmed_ibn_Ali_al-Ajamy_128kbps_ketaballah.net",
+      "text": "Ahmed Ibn Ali Al-Ajamy (Ahmed_ibn_Ali_al-Ajamy_128kbps_ketaballah.net)"
+    },
+    {
+      "value": "Ahmed_ibn_Ali_al-Ajamy_64kbps_QuranExplorer.Com",
+      "text": "Ahmed Ibn Ali Al-Ajamy (Ahmed_ibn_Ali_al-Ajamy_64kbps_QuranExplorer.Com)"
+    },
+    {
+      "value": "Akram_AlAlaqimy_128kbps",
+      "text": "Akram AlAlaqimy (Akram_AlAlaqimy_128kbps)"
+    },
+    {
+      "value": "Alafasy_128kbps",
+      "text": "Alafasy (Alafasy_128kbps)"
+    },
+    {
+      "value": "Alafasy_64kbps",
+      "text": "Alafasy (Alafasy_64kbps)"
+    },
+    {
+      "value": "Ali_Hajjaj_AlSuesy_128kbps",
+      "text": "Ali Hajjaj AlSuesy (Ali_Hajjaj_AlSuesy_128kbps)"
+    },
+    {
+      "value": "Ali_Jaber_64kbps",
+      "text": "Ali Jaber (Ali_Jaber_64kbps)"
+    },
+    {
+      "value": "Ayman_Sowaid_64kbps",
+      "text": "Ayman Sowaid (Ayman_Sowaid_64kbps)"
+    },
+    {
+      "value": "English/Sahih_Intnl_Ibrahim_Walk_192kbps",
+      "text": "Sahih Ibrahim (English/Sahih_Intnl_Ibrahim_Walk_192kbps)"
+    },
+    {
+      "value": "Fares_Abbad_64kbps",
+      "text": "Fares Abbad (Fares_Abbad_64kbps)"
+    },
+    {
+      "value": "Ghamadi_40kbps",
+      "text": "Ghamadi (Ghamadi_40kbps)"
+    },
+    {
+      "value": "Hani_Rifai_192kbps",
+      "text": "Hani Rifai (Hani_Rifai_192kbps)"
+    },
+    {
+      "value": "Hani_Rifai_64kbps",
+      "text": "Hani Rifai (Hani_Rifai_64kbps)"
+    },
+    {
+      "value": "Hudhaify_128kbps",
+      "text": "Hudhaify (Hudhaify_128kbps)"
+    },
+    {
+      "value": "Hudhaify_32kbps",
+      "text": "Hudhaify (Hudhaify_32kbps)"
+    },
+    {
+      "value": "Hudhaify_64kbps",
+      "text": "Hudhaify (Hudhaify_64kbps)"
+    },
+    {
+      "value": "Husary_128kbps",
+      "text": "Al Husary (Husary_128kbps)"
+    },
+    {
+      "value": "Husary_128kbps_Mujawwad",
+      "text": "Al Husary - Mujawwad (Husary_128kbps_Mujawwad)"
+    },
+    {
+      "value": "Husary_64kbps",
+      "text": "Al Husary (Husary_64kbps)"
+    },
+    {
+      "value": "Husary_Muallim_128kbps",
+      "text": "Al Husary - Muallim (Husary_Muallim_128kbps)"
+    },
+    {
+      "value": "Husary_Mujawwad_64kbps",
+      "text": "Al Husary - Mujawwad (Husary_Mujawwad_64kbps)"
+    },
+    {
+      "value": "Ibrahim_Akhdar_32kbps",
+      "text": "Ibrahim Akhdar (Ibrahim_Akhdar_32kbps)"
+    },
+    {
+      "value": "Ibrahim_Akhdar_64kbps",
+      "text": "Ibrahim Akhdar (Ibrahim_Akhdar_64kbps)"
+    },
+    {
+      "value": "Karim_Mansoori_40kbps",
+      "text": "Karim Mansoori (Karim_Mansoori_40kbps)"
+    },
+    {
+      "value": "Khaalid_Abdullaah_al-Qahtaanee_192kbps",
+      "text": "Khaalid Abdullaah Al-Qahtaanee (Khaalid_Abdullaah_al-Qahtaanee_192kbps)"
+    },
+    {
+      "value": "MaherAlMuaiqly128kbps",
+      "text": "Maher AlMuaiqly (MaherAlMuaiqly128kbps)"
+    },
+    {
+      "value": "Maher_AlMuaiqly_64kbps",
+      "text": "Maher AlMuaiqly (Maher_AlMuaiqly_64kbps)"
+    },
+    {
+      "value": "Menshawi_16kbps",
+      "text": "Al Menshawi (Menshawi_16kbps)"
+    },
+    {
+      "value": "Menshawi_32kbps",
+      "text": "Al Menshawi (Menshawi_32kbps)"
+    },
+    {
+      "value": "Minshawy_Mujawwad_192kbps",
+      "text": "Al Minshawy - Mujawwad (Minshawy_Mujawwad_192kbps)"
+    },
+    {
+      "value": "Minshawy_Mujawwad_64kbps",
+      "text": "Al Minshawy - Mujawwad (Minshawy_Mujawwad_64kbps)"
+    },
+    {
+      "value": "Minshawy_Murattal_128kbps",
+      "text": "Al Minshawy - Murattal (Minshawy_Murattal_128kbps)"
+    },
+    {
+      "value": "Mohammad_al_Tablaway_128kbps",
+      "text": "Mohammad Al Tablaway (Mohammad_al_Tablaway_128kbps)"
+    },
+    {
+      "value": "Mohammad_al_Tablaway_64kbps",
+      "text": "Mohammad Al Tablaway (Mohammad_al_Tablaway_64kbps)"
+    },
+    {
+      "value": "Muhammad_AbdulKareem_128kbps",
+      "text": "Muhammad AbdulKareem (Muhammad_AbdulKareem_128kbps)"
+    },
+    {
+      "value": "Muhammad_Ayyoub_128kbps",
+      "text": "Muhammad Ayyoub (Muhammad_Ayyoub_128kbps)"
+    },
+    {
+      "value": "Muhammad_Ayyoub_32kbps",
+      "text": "Muhammad Ayyoub (Muhammad_Ayyoub_32kbps)"
+    },
+    {
+      "value": "Muhammad_Ayyoub_64kbps",
+      "text": "Muhammad Ayyoub (Muhammad_Ayyoub_64kbps)"
+    },
+    {
+      "value": "Muhammad_Jibreel_128kbps",
+      "text": "Muhammad Jibreel (Muhammad_Jibreel_128kbps)"
+    },
+    {
+      "value": "Muhammad_Jibreel_64kbps",
+      "text": "Muhammad Jibreel (Muhammad_Jibreel_64kbps)"
+    },
+    {
+      "value": "Muhsin_Al_Qasim_192kbps",
+      "text": "Muhsin Al Qasim (Muhsin_Al_Qasim_192kbps)"
+    },
+    {
+      "value": "MultiLanguage/Basfar_Walk_192kbps",
+      "text": "Basfar - MultiLanguage (MultiLanguage/Basfar_Walk_192kbps)"
+    },
+    {
+      "value": "Mustafa_Ismail_48kbps",
+      "text": "Mustafa Ismail (Mustafa_Ismail_48kbps)"
+    },
+    {
+      "value": "Nabil_Rifa3i_48kbps",
+      "text": "Nabil Rifa3i (Nabil_Rifa3i_48kbps)"
+    },
+    {
+      "value": "Nasser_Alqatami_128kbps",
+      "text": "Nasser Alqatami (Nasser_Alqatami_128kbps)"
+    },
+    {
+      "value": "Parhizgar_48kbps",
+      "text": "Parhizgar (Parhizgar_48kbps)"
+    },
+    {
+      "value": "Sahl_Yassin_128kbps",
+      "text": "Sahl Yassin (Sahl_Yassin_128kbps)"
+    },
+    {
+      "value": "Salaah_AbdulRahman_Bukhatir_128kbps",
+      "text": "Salaah AbdulRahman Bukhatir (Salaah_AbdulRahman_Bukhatir_128kbps)"
+    },
+    {
+      "value": "Salah_Al_Budair_128kbps",
+      "text": "Salah Al Budair (Salah_Al_Budair_128kbps)"
+    },
+    {
+      "value": "Saood_ash-Shuraym_128kbps",
+      "text": "Saood Ash-Shuraym (Shuraym_128kbps)"
+    },
+    {
+      "value": "Saood_ash-Shuraym_64kbps",
+      "text": "Saood Ash-Shuraym (Shuraym_64kbps)"
+    },
+    {
+      "value": "Yaser_Salamah_128kbps",
+      "text": "Yaser Salamah (Yaser_Salamah_128kbps)"
+    },
+    {
+      "value": "Yasser_Ad-Dussary_128kbps",
+      "text": "Yasser Ad-Dussary (Dussary_128kbps)"
+    },
+    {
+      "value": "ahmed_ibn_ali_al_ajamy_128kbps",
+      "text": "Ahmed Ibn Ali Al-Ajamy (ahmed_ibn_ali_al_ajamy_128kbps)"
+    },
+    {
+      "value": "aziz_alili_128kbps",
+      "text": "Aziz Alili (aziz_alili_128kbps)"
+    },
+    {
+      "value": "khalefa_al_tunaiji_64kbps",
+      "text": "Khalefa Al Tunaiji (khalefa_al_tunaiji_64kbps)"
+    },
+    {
+      "value": "mahmoud_ali_al_banna_32kbps",
+      "text": "Mahmoud Ali Al Banna (mahmoud_ali_al_banna_32kbps)"
+    },
+    {
+      "value": "translations/Fooladvand_Hedayatfar_40Kbps",
+      "text": "Hedayatfar - with translations by Fooladvand (translations/Fooladvand_Hedayatfar_40Kbps)"
+    },
+    {
+      "value": "translations/Makarem_Kabiri_16Kbps",
+      "text": "Makarem Kabiri - with translations (translations/Makarem_Kabiri_16Kbps)"
+    },
+    {
+      "value": "translations/azerbaijani/balayev",
+      "text": "Balayev - with azerbaijani translations (translations/azerbaijani/balayev)"
+    },
+    {
+      "value": "translations/besim_korkut_ajet_po_ajet",
+      "text": "Besim Korkut - with translations (translations/besim_korkut_ajet_po_ajet)"
+    },
+    {
+      "value": "translations/urdu_farhat_hashmi",
+      "text": "Farhat Hashmi - with Urdu translations (translations/urdu_farhat_hashmi)"
+    },
+    {
+      "value": "translations/urdu_shamshad_ali_khan_46kbps",
+      "text": "Shamshad Ali Khan - with Urdu translations (translations/urdu_shamshad_ali_khan_46kbps)"
+    },
+    {
+      "value": "warsh/warsh_Abdul_Basit_128kbps",
+      "text": "Abdul Basit - warsh (warsh/warsh_Abdul_Basit_128kbps)"
+    },
+    {
+      "value": "warsh/warsh_ibrahim_aldosary_128kbps",
+      "text": "Ibrahim Al Dosary - warsh (warsh/warsh_ibrahim_aldosary_128kbps)"
+    },
+    {
+      "value": "warsh/warsh_yassin_al_jazaery_64kbps",
+      "text": "Yassin Al Jazaery - warsh (warsh/warsh_yassin_al_jazaery_64kbps)"
+    }
+  ],
+  "chapters": [
+    {
+      "value": "1",
+      "text": "1: Al-Faatiha",
+      "ayaCount": 7
+    },
+    {
+      "value": "2",
+      "text": "2: Al-Baqara",
+      "ayaCount": 286
+    },
+    {
+      "value": "3",
+      "text": "3: Aal-i-Imraan",
+      "ayaCount": 200
+    },
+    {
+      "value": "4",
+      "text": "4: An-Nisaa",
+      "ayaCount": 176
+    },
+    {
+      "value": "5",
+      "text": "5: Al-Maaida",
+      "ayaCount": 120
+    },
+    {
+      "value": "6",
+      "text": "6: Al-An'aam",
+      "ayaCount": 165
+    },
+    {
+      "value": "7",
+      "text": "7: Al-A'raaf",
+      "ayaCount": 206
+    },
+    {
+      "value": "8",
+      "text": "8: Al-Anfaal",
+      "ayaCount": 75
+    },
+    {
+      "value": "9",
+      "text": "9: At-Tawba",
+      "ayaCount": 129
+    },
+    {
+      "value": "10",
+      "text": "10: Yunus",
+      "ayaCount": 109
+    },
+    {
+      "value": "11",
+      "text": "11: Hud",
+      "ayaCount": 123
+    },
+    {
+      "value": "12",
+      "text": "12: Yusuf",
+      "ayaCount": 111
+    },
+    {
+      "value": "13",
+      "text": "13: Ar-Ra'd",
+      "ayaCount": 43
+    },
+    {
+      "value": "14",
+      "text": "14: Ibrahim",
+      "ayaCount": 52
+    },
+    {
+      "value": "15",
+      "text": "15: Al-Hijr",
+      "ayaCount": 99
+    },
+    {
+      "value": "16",
+      "text": "16: An-Nahl",
+      "ayaCount": 128
+    },
+    {
+      "value": "17",
+      "text": "17: Al-Israa",
+      "ayaCount": 111
+    },
+    {
+      "value": "18",
+      "text": "18: Al-Kahf",
+      "ayaCount": 110
+    },
+    {
+      "value": "19",
+      "text": "19: Maryam",
+      "ayaCount": 98
+    },
+    {
+      "value": "20",
+      "text": "20: Taa-Haa",
+      "ayaCount": 135
+    },
+    {
+      "value": "21",
+      "text": "21: Al-Anbiyaa",
+      "ayaCount": 112
+    },
+    {
+      "value": "22",
+      "text": "22: Al-Hajj",
+      "ayaCount": 78
+    },
+    {
+      "value": "23",
+      "text": "23: Al-Muminoon",
+      "ayaCount": 118
+    },
+    {
+      "value": "24",
+      "text": "24: An-Noor",
+      "ayaCount": 64
+    },
+    {
+      "value": "25",
+      "text": "25: Al-Furqaan",
+      "ayaCount": 77
+    },
+    {
+      "value": "26",
+      "text": "26: Ash-Shu'araa",
+      "ayaCount": 227
+    },
+    {
+      "value": "27",
+      "text": "27: An-Naml",
+      "ayaCount": 93
+    },
+    {
+      "value": "28",
+      "text": "28: Al-Qasas",
+      "ayaCount": 88
+    },
+    {
+      "value": "29",
+      "text": "29: Al-Ankaboot",
+      "ayaCount": 69
+    },
+    {
+      "value": "30",
+      "text": "30: Ar-Room",
+      "ayaCount": 60
+    },
+    {
+      "value": "31",
+      "text": "31: Luqman",
+      "ayaCount": 34
+    },
+    {
+      "value": "32",
+      "text": "32: As-Sajda",
+      "ayaCount": 30
+    },
+    {
+      "value": "33",
+      "text": "33: Al-Ahzaab",
+      "ayaCount": 73
+    },
+    {
+      "value": "34",
+      "text": "34: Saba",
+      "ayaCount": 54
+    },
+    {
+      "value": "35",
+      "text": "35: Faatir",
+      "ayaCount": 45
+    },
+    {
+      "value": "36",
+      "text": "36: Yaseen",
+      "ayaCount": 83
+    },
+    {
+      "value": "37",
+      "text": "37: As-Saaffaat",
+      "ayaCount": 182
+    },
+    {
+      "value": "38",
+      "text": "38: Saad",
+      "ayaCount": 88
+    },
+    {
+      "value": "39",
+      "text": "39: Az-Zumar",
+      "ayaCount": 75
+    },
+    {
+      "value": "40",
+      "text": "40: Al-Ghaafir",
+      "ayaCount": 85
+    },
+    {
+      "value": "41",
+      "text": "41: Fussilat",
+      "ayaCount": 54
+    },
+    {
+      "value": "42",
+      "text": "42: Ash-Shura",
+      "ayaCount": 53
+    },
+    {
+      "value": "43",
+      "text": "43: Az-Zukhruf",
+      "ayaCount": 89
+    },
+    {
+      "value": "44",
+      "text": "44: Ad-Dukhaan",
+      "ayaCount": 59
+    },
+    {
+      "value": "45",
+      "text": "45: Al-Jaathiya",
+      "ayaCount": 37
+    },
+    {
+      "value": "46",
+      "text": "46: Al-Ahqaf",
+      "ayaCount": 35
+    },
+    {
+      "value": "47",
+      "text": "47: Muhammad",
+      "ayaCount": 38
+    },
+    {
+      "value": "48",
+      "text": "48: Al-Fath",
+      "ayaCount": 29
+    },
+    {
+      "value": "49",
+      "text": "49: Al-Hujuraat",
+      "ayaCount": 18
+    },
+    {
+      "value": "50",
+      "text": "50: Qaaf",
+      "ayaCount": 45
+    },
+    {
+      "value": "51",
+      "text": "51: Adh-Dhaariyat",
+      "ayaCount": 60
+    },
+    {
+      "value": "52",
+      "text": "52: At-Tur",
+      "ayaCount": 49
+    },
+    {
+      "value": "53",
+      "text": "53: An-Najm",
+      "ayaCount": 62
+    },
+    {
+      "value": "54",
+      "text": "54: Al-Qamar",
+      "ayaCount": 55
+    },
+    {
+      "value": "55",
+      "text": "55: Ar-Rahmaan",
+      "ayaCount": 78
+    },
+    {
+      "value": "56",
+      "text": "56: Al-Waaqia",
+      "ayaCount": 96
+    },
+    {
+      "value": "57",
+      "text": "57: Al-Hadid",
+      "ayaCount": 29
+    },
+    {
+      "value": "58",
+      "text": "58: Al-Mujaadila",
+      "ayaCount": 22
+    },
+    {
+      "value": "59",
+      "text": "59: Al-Hashr",
+      "ayaCount": 24
+    },
+    {
+      "value": "60",
+      "text": "60: Al-Mumtahana",
+      "ayaCount": 13
+    },
+    {
+      "value": "61",
+      "text": "61: As-Saff",
+      "ayaCount": 14
+    },
+    {
+      "value": "62",
+      "text": "62: Al-Jumu'a",
+      "ayaCount": 11
+    },
+    {
+      "value": "63",
+      "text": "63: Al-Munaafiqoon",
+      "ayaCount": 11
+    },
+    {
+      "value": "64",
+      "text": "64: At-Taghaabun",
+      "ayaCount": 18
+    },
+    {
+      "value": "65",
+      "text": "65: At-Talaaq",
+      "ayaCount": 12
+    },
+    {
+      "value": "66",
+      "text": "66: At-Tahrim",
+      "ayaCount": 12
+    },
+    {
+      "value": "67",
+      "text": "67: Al-Mulk",
+      "ayaCount": 30
+    },
+    {
+      "value": "68",
+      "text": "68: Al-Qalam",
+      "ayaCount": 52
+    },
+    {
+      "value": "69",
+      "text": "69: Al-Haaqqa",
+      "ayaCount": 52
+    },
+    {
+      "value": "70",
+      "text": "70: Al-Ma'aarij",
+      "ayaCount": 44
+    },
+    {
+      "value": "71",
+      "text": "71: Nooh",
+      "ayaCount": 28
+    },
+    {
+      "value": "72",
+      "text": "72: Al-Jinn",
+      "ayaCount": 28
+    },
+    {
+      "value": "73",
+      "text": "73: Al-Muzzammil",
+      "ayaCount": 20
+    },
+    {
+      "value": "74",
+      "text": "74: Al-Muddaththir",
+      "ayaCount": 56
+    },
+    {
+      "value": "75",
+      "text": "75: Al-Qiyaama",
+      "ayaCount": 40
+    },
+    {
+      "value": "76",
+      "text": "76: Al-Insaan",
+      "ayaCount": 31
+    },
+    {
+      "value": "77",
+      "text": "77: Al-Mursalaat",
+      "ayaCount": 50
+    },
+    {
+      "value": "78",
+      "text": "78: An-Naba",
+      "ayaCount": 40
+    },
+    {
+      "value": "79",
+      "text": "79: An-Naazi'aat",
+      "ayaCount": 46
+    },
+    {
+      "value": "80",
+      "text": "80: Abasa",
+      "ayaCount": 42
+    },
+    {
+      "value": "81",
+      "text": "81: At-Takwir",
+      "ayaCount": 29
+    },
+    {
+      "value": "82",
+      "text": "82: Al-Infitaar",
+      "ayaCount": 19
+    },
+    {
+      "value": "83",
+      "text": "83: Al-Mutaffifin",
+      "ayaCount": 36
+    },
+    {
+      "value": "84",
+      "text": "84: Al-Inshiqaaq",
+      "ayaCount": 25
+    },
+    {
+      "value": "85",
+      "text": "85: Al-Burooj",
+      "ayaCount": 22
+    },
+    {
+      "value": "86",
+      "text": "86: At-Taariq",
+      "ayaCount": 17
+    },
+    {
+      "value": "87",
+      "text": "87: Al-A'laa",
+      "ayaCount": 19
+    },
+    {
+      "value": "88",
+      "text": "88: Al-Ghaashiya",
+      "ayaCount": 26
+    },
+    {
+      "value": "89",
+      "text": "89: Al-Fajr",
+      "ayaCount": 30
+    },
+    {
+      "value": "90",
+      "text": "90: Al-Balad",
+      "ayaCount": 20
+    },
+    {
+      "value": "91",
+      "text": "91: Ash-Shams",
+      "ayaCount": 15
+    },
+    {
+      "value": "92",
+      "text": "92: Al-Lail",
+      "ayaCount": 21
+    },
+    {
+      "value": "93",
+      "text": "93: Ad-Dhuhaa",
+      "ayaCount": 11
+    },
+    {
+      "value": "94",
+      "text": "94: Ash-Sharh",
+      "ayaCount": 8
+    },
+    {
+      "value": "95",
+      "text": "95: At-Tin",
+      "ayaCount": 8
+    },
+    {
+      "value": "96",
+      "text": "96: Al-Alaq",
+      "ayaCount": 19
+    },
+    {
+      "value": "97",
+      "text": "97: Al-Qadr",
+      "ayaCount": 5
+    },
+    {
+      "value": "98",
+      "text": "98: Al-Bayyina",
+      "ayaCount": 8
+    },
+    {
+      "value": "99",
+      "text": "99: Az-Zalzala",
+      "ayaCount": 8
+    },
+    {
+      "value": "100",
+      "text": "100: Al-Aadiyaat",
+      "ayaCount": 11
+    },
+    {
+      "value": "101",
+      "text": "101: Al-Qaari'a",
+      "ayaCount": 11
+    },
+    {
+      "value": "102",
+      "text": "102: At-Takaathur",
+      "ayaCount": 8
+    },
+    {
+      "value": "103",
+      "text": "103: Al-Asr",
+      "ayaCount": 3
+    },
+    {
+      "value": "104",
+      "text": "104: Al-Humaza",
+      "ayaCount": 9
+    },
+    {
+      "value": "105",
+      "text": "105: Al-Fil",
+      "ayaCount": 5
+    },
+    {
+      "value": "106",
+      "text": "106: Quraish",
+      "ayaCount": 4
+    },
+    {
+      "value": "107",
+      "text": "107: Al-Maa'un",
+      "ayaCount": 7
+    },
+    {
+      "value": "108",
+      "text": "108: Al-Kawthar",
+      "ayaCount": 3
+    },
+    {
+      "value": "109",
+      "text": "109: Al-Kaafiroon",
+      "ayaCount": 6
+    },
+    {
+      "value": "110",
+      "text": "110: An-Nasr",
+      "ayaCount": 3
+    },
+    {
+      "value": "111",
+      "text": "111: Al-Masad",
+      "ayaCount": 5
+    },
+    {
+      "value": "112",
+      "text": "112: Al-Ikhlaas",
+      "ayaCount": 4
+    },
+    {
+      "value": "113",
+      "text": "113: Al-Falaq",
+      "ayaCount": 5
+    },
+    {
+      "value": "114",
+      "text": "114: An-Naas",
+      "ayaCount": 6
+    }
+  ]
+}
