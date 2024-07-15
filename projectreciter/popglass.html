@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Quran Audio Player</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            100: '#E6F6FF',
+                            200: '#BAE3FF',
+                            300: '#7CC4FA',
+                            400: '#47A3F3',
+                            500: '#2186EB',
+                            600: '#0967D2',
+                            700: '#0552B5',
+                            800: '#03449E',
+                            900: '#01337D',
+                        }
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .bg-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+        .btn-primary {
+            background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+        }
+        .progress-bar {
+            height: 6px;
+            border-radius: 3px;
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            transition: width 0.3s ease;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+    </style>
+</head>
+<body class="bg-gradient text-white min-h-screen flex items-center justify-center">
+    <div class="container mx-auto px-4 py-8">
+        <div class="card p-8">
+            <div id="player-container" class="flex flex-col items-center">
+                <div class="mb-6 w-full overflow-hidden rounded-xl shadow-lg">
+                    <img id="ayah-image" src="placeholder-image.jpg" alt="Ayah Image" class="w-full h-auto object-cover">
+                </div>
+                
+                <div class="w-full mb-6">
+                    <div id="current-surah" class="text-2xl font-bold mb-2 text-center">Not Playing</div>
+                    <div class="flex justify-center items-center text-sm">
+                        <span id="current-time" class="mr-2">0:00</span>
+                        <div class="w-64 bg-gray-200 rounded-full">
+                            <div id="progress-bar" class="progress-bar" style="width: 0%"></div>
+                        </div>
+                        <span id="duration" class="ml-2">0:00</span>
+                    </div>
+                </div>
+                
+                <div class="flex justify-center space-x-6 mb-6">
+                    <button id="prev" class="btn-primary">
+                        <i class="fas fa-step-backward"></i>
+                    </button>
+                    <button id="play-pause" class="btn-primary">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button id="next" class="btn-primary">
+                        <i class="fas fa-step-forward"></i>
+                    </button>
+                </div>
+                
+                <div class="flex justify-between items-center w-full">
+                    <div class="flex space-x-2">
+                        <button id="toggle-sidebar" class="btn-primary">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <button id="play-full-surah" class="btn-primary">
+                            <i class="fas fa-music"></i>
+                        </button>
+                        <button id="dark-mode-toggle" class="btn-primary">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="flex items-center space-x-3">
+                        <span class="text-sm font-medium">Autoplay</span>
+                        <label class="switch">
+                            <input type="checkbox" id="autoplay">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="sidebar" class="hidden mt-8">
+                <div class="mb-4">
+                    <select id="reciter" class="w-full bg-white bg-opacity-20 text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <!-- Reciters will be populated here -->
+                    </select>
+                </div>
+                <h2 class="text-xl font-bold mb-4">Surah List</h2>
+                <div class="h-96 overflow-y-auto">
+                    <ul id="surah-list" class="space-y-2 bg-white bg-opacity-20 rounded-md px-3 py-2">
+                        <!-- Surah list will be populated here -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="audio-player" class="hidden"></audio>
+
+    <script src="pop.js"></script>
+    <script>
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const html = document.documentElement;
+    
+        darkModeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.setItem('darkMode', html.classList.contains('dark'));
+        });
+    
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'true') {
+            html.classList.add('dark');
+        }
+    </script>
+</body>
+</html>

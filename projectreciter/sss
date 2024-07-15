@@ -75,6 +75,30 @@ sayamau tambahin ke json nya di setiap element
 
 apa kamu bisa? pake python 
 
+<script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            100: '#E6F6FF',
+                            200: '#BAE3FF',
+                            300: '#7CC4FA',
+                            400: '#47A3F3',
+                            500: '#2186EB',
+                            600: '#0967D2',
+                            700: '#0552B5',
+                            800: '#03449E',
+                            900: '#01337D',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+
 
 <div class="audio-player bg-gray-100 dark:bg-gray-800 rounded-xl shadow-lg p-6 max-w-md mx-auto">
     <div class="flex justify-between items-center mb-4">
