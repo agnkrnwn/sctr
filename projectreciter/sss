@@ -133,3 +133,110 @@ apa kamu bisa? pake python
         </button>
     </div>
 </div>
+
+
+
+
+
+<div id="myModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black bg-opacity-50">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 w-full max-w-xl md:max-w-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold text-gray-700 dark:text-gray-300">Settings</h2>
+                <button id="darkModeToggle" class="p-2  w-10 h-10 bg-primary-600 text-white rounded-full hover:bg-primary-700 dark:bg-primary-400 dark:text-gray-800 dark:hover:bg-primary-500 transition-all">
+                    <i id="darkModeIcon" class="fas fa-moon"></i>
+                    <span class="sr-only">Toggle Dark Mode</span>
+                </button>
+            </div>
+
+            <div id="prayerTimes" class="bg-gray-100 dark:bg-gray-700 p-4 font-semibold rounded-lg">
+                <!-- Prayer times will be inserted here by JavaScript -->
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex flex-col md:col-span-2 mt-4">
+                    <label for="themeSelector" class="mb-2 text-gray-700 dark:text-gray-300">Select Theme:</label>
+                    <select id="themeSelector" onchange="setTheme(this.value)" class="p-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg">
+                        <option value="">Pilih Tema</option>
+                        <option value="default">Default Theme</option>
+                        <option value="slate">Slate Theme</option>
+                        <option value="green">Green Theme</option>
+                        <option value="blue">Blue Theme</option>
+                        <option value="purple">Purple Theme</option>
+                        <option value="orange">Orange Theme</option>
+                        <option value="teal">Teal Theme</option>
+                        <option value="pink">Pink Theme</option>
+                        <option value="indigo">Indigo Theme</option>
+                        <option value="red">Red Theme</option>
+                        <option value="yellow">Yellow Theme</option>
+                        <option value="cyan">Cyan Theme</option>
+                        <option value="lime">Lime Theme</option>
+                        <option value="lavender">Lavender Theme</option>
+                        <option value="coral">Coral Theme</option>
+                        <option value="mint">Mint Theme</option>
+                        <option value="rose">Rose Theme</option>
+                        <option value="emerald">Emerald Theme</option>
+                    </select>
+                </div>
+                <div class="flex flex-col md:col-span-2">
+                    <label for="qariSelect" class="mb-2 text-gray-700 dark:text-gray-300">Select Qari:</label>
+                    <select id="qariSelect" class="p-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg">
+                        <!-- ... (opsi qari yang sudah ada) ... -->
+                        <option value="01">Abdullah Al-Juhany</option>
+                        <option value="02">Abdul Muhsin Al-Qasim</option>
+                        <option value="03">Abdurrahman as-Sudais</option>
+                        <option value="04">Ibrahim Al-Dossari</option>
+                        <option value="05" selected>Misyari Rasyid Al-Afasi</option>
+                        
+                    </select>
+                </div>
+    
+                <div class="flex justify-between items-center w-full">
+                    <a href="tasbih.html" class="flex-1 flex flex-col items-center mr-1 p-4 bg-primary-700 text-white rounded-lg hover:bg-primary hover:text-white transition-colors">
+                      <i class="fas fa-pray text-2xl mb-2"></i>
+                      <span class="text-xs"></span>
+                    </a>
+                    <a href="/projectreciter/index.html" class="flex-1 flex flex-col items-center p-4 mr-1 bg-primary-700 text-white rounded-lg hover:bg-primary hover:text-white transition-colors">
+                      <i class="fas fa-book-quran text-2xl mb-2"></i>
+                      <span class="text-xs"></span>
+                    </a>
+                    <a href="emptiga.html" class="flex-1 flex flex-col items-center p-4 mr-1 bg-primary-700 text-white rounded-lg hover:bg-primary hover:text-white transition-colors">
+                      <i class="fas fa-headphones text-2xl mb-2"></i>
+                      <span class="text-xs"></span>
+                    </a>
+                    <a href="audio.html" class="flex-1 flex flex-col items-center p-4 mr-1 bg-primary-700 text-white rounded-lg hover:bg-primary hover:text-white transition-colors">
+                      <i class="fas fa-download text-2xl mb-2"></i>
+                      <span class="text-xs"></span>
+                    </a>
+                    <a href="doxm.html" class="flex-1 flex flex-col items-center p-4 mr-1 bg-primary-700 text-white rounded-lg hover:bg-primary hover:text-white transition-colors">
+                      <i class="fas fa-book text-2xl mb-2"></i>
+                      <span class="text-xs"></span>
+                    </a>
+                  </div>
+                  <div class="flex justify-between items-center w-full">
+                    <a href="/projectreciter/chapter2.html" class="flex-1 flex flex-col items-center mr-1 p-4 bg-primary-700 text-white rounded-lg hover:bg-primary hover:text-white transition-colors">
+                      <i class="fas fa-1 text-2xl mb-2"></i>
+                      <span class="text-xs"></span>
+                    </a>
+                    <a href="/projectreciter/ayat.html" class="flex-1 flex flex-col items-center p-4 mr-1 bg-primary-700 text-white rounded-lg hover:bg-primary hover:text-white transition-colors">
+                      <i class="fas fa-2 text-2xl mb-2"></i>
+                      <span class="text-xs"></span>
+                    </a>
+                    <a href="/projectreciter/testdata.html" class="flex-1 flex flex-col items-center p-4 mr-1 bg-primary-700 text-white rounded-lg hover:bg-primary hover:text-white transition-colors">
+                      <i class="fas fa-3 text-2xl mb-2"></i>
+                      <span class="text-xs"></span>
+                    </a>
+                    <a href="/projectreciter/pop.html" class="flex-1 flex flex-col items-center p-4 mr-1 bg-primary-700 text-white rounded-lg hover:bg-primary hover:text-white transition-colors">
+                      <i class="fas fa-4 text-2xl mb-2"></i>
+                      <span class="text-xs"></span>
+                    </a>
+                    <a href="/quran/index.html" class="flex-1 flex flex-col items-center p-4 mr-1 bg-primary-700 text-white rounded-lg hover:bg-primary hover:text-white transition-colors">
+                      <i class="fas fa-star-and-crescent text-2xl mb-2"></i>
+                      <span class="text-xs"></span>
+                    </a>
+                  </div>
+    
+                <button id="closeModalButton" class="md:col-span-2 p-2 bg-primary-700 dark:bg-primary-700 text-white dark:text-white rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-all mt-4">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
