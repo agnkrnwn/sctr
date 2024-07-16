@@ -59,59 +59,53 @@ document
   .getElementById("skip-forward")
   .addEventListener("click", () => skipAudio(10));
 
-function loadTrack(index) {
-  currentTrackIndex = index;
-  const track = tracks[index];
-  const titleElement = document.getElementById("current-title");
+  function loadTrack(index) {
+    currentTrackIndex = index;
+    const track = tracks[index];
+    const titleElement = document.getElementById('current-title');
+    
+    titleElement.textContent = track.judul;
+    
+    audioPlayer.pause();
+    showLoading();
+    
+    let loadProgress = 0;
+    const loadInterval = setInterval(() => {
+        loadProgress += 2;
+        if (loadProgress > 90) {
+            loadProgress = 90;
+        }
+        updateLoadingProgress(loadProgress);
+    }, 50);
 
-  titleElement.textContent = track.judul;
+    audioPlayer.src = track.link;
+    
+    audioPlayer.addEventListener('loadedmetadata', function() {
+        clearInterval(loadInterval);
+        updateLoadingProgress(95);
+    }, { once: true });
 
-  audioPlayer.pause();
-  showLoading();
-
-  let loadProgress = 0;
-  const loadInterval = setInterval(() => {
-    loadProgress += 5;
-    updateLoadingProgress(loadProgress);
-    if (loadProgress >= 100) {
-      clearInterval(loadInterval);
-    }
-  }, 50);
-
-  audioPlayer.addEventListener(
-    "canplay",
-    function () {
-      clearInterval(loadInterval);
+    let loadTimeout = setTimeout(() => {
+      hideLoading();
+      alert('Loading took too long. Please check your connection and try again.');
+  }, 60000); // 60 detik timeout
+  
+  audioPlayer.addEventListener('canplay', function() {
+      clearTimeout(loadTimeout);
       updateLoadingProgress(100);
       setTimeout(() => {
-        hideLoading();
-        playAudio();
+          hideLoading();
+          playAudio();
       }, 200);
-    },
-    { once: true }
-  );
+  }, { once: true });
+    
+    audioPlayer.load(); // Memulai proses loading
 
-  audioPlayer.src = track.link;
-
-  const playPromise = audioPlayer.play();
-
-  if (playPromise !== undefined) {
-    playPromise
-      .then((_) => {
-        document.getElementById("play").classList.add("hidden");
-        document.getElementById("pause").classList.remove("hidden");
-      })
-      .catch((error) => {
-        console.log("Playback was prevented. Error: ", error);
-        document.getElementById("pause").classList.add("hidden");
-        document.getElementById("play").classList.remove("hidden");
-      });
-  }
-
-  saveLastPlayedTrack(index);
-  updateSeekBar();
-  highlightCurrentTrack();
+    saveLastPlayedTrack(index);
+    updateSeekBar();
+    highlightCurrentTrack();
 }
+
 
 function playAudio() {
   const playPromise = audioPlayer.play();
@@ -131,22 +125,22 @@ function playAudio() {
 }
 
 function showLoading() {
-  const loadingElement = document.getElementById("loading");
-  loadingElement.classList.remove("hidden");
+  const loadingElement = document.getElementById('loading');
+  loadingElement.classList.remove('hidden');
   updateLoadingProgress(0);
 }
 
 function hideLoading() {
-  const loadingElement = document.getElementById("loading");
-  loadingElement.classList.add("hidden");
+  const loadingElement = document.getElementById('loading');
+  loadingElement.classList.add('hidden');
 }
 
 function updateLoadingProgress(percent) {
-  const circle = document.querySelector("#loading circle:nth-child(2)");
-  const percentText = document.querySelector("#loading .absolute span");
+  const circle = document.querySelector('#loading circle:nth-child(2)');
+  const percentText = document.querySelector('#loading .absolute span');
   const offset = 264 - (264 * percent) / 100;
   circle.style.strokeDashoffset = offset;
-  percentText.textContent = `${percent}%`;
+  percentText.textContent = `${Math.round(percent)}%`;
 }
 
 function pauseAudio() {
