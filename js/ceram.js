@@ -17,7 +17,7 @@ function highlightCurrentTrack() {
 }
 
 function loadTracks() {
-  fetch("ceramah.json")
+  fetch("doa/ceramah.json")
     .then((response) => response.json())
     .then((data) => {
       tracks = data;
