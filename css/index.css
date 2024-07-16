@@ -1198,6 +1198,12 @@ html {
   }
 }
 
+@media (max-width: 640px) {
+  #appsModal .grid {
+      grid-template-columns: repeat(5, 1fr);
+  }
+}
+
 .hover\:bg-gray-300:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(209 213 219 / var(--tw-bg-opacity));
