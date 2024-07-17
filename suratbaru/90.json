@@ -1,0 +1,353 @@
+{
+  "data": {
+    "nomor": 90,
+    "nama": "البلد",
+    "namaLatin": "Al-Balad",
+    "jumlahAyat": 20,
+    "tempatTurun": "Mekah",
+    "arti": "Negeri",
+    "deskripsi": "Surat Al Balad terdiri atas 20 ayat, termasuk golongan surat-surat Makkiyyah, diturunkan sesudah surat Qaaf. Dinamai <i>Al Balad</i>, diambil dari perkataan <i>Al Balad</i> yang terdapat  pada ayat pertama surat ini. Yang dimaksud dengan kota di sini ialah kota Mekah.",
+    "audioFull": {
+      "01": "https://equran.nos.wjv-1.neo.id/audio-full/Abdullah-Al-Juhany/090.mp3",
+      "02": "https://equran.nos.wjv-1.neo.id/audio-full/Abdul-Muhsin-Al-Qasim/090.mp3",
+      "03": "https://equran.nos.wjv-1.neo.id/audio-full/Abdurrahman-as-Sudais/090.mp3",
+      "04": "https://equran.nos.wjv-1.neo.id/audio-full/Ibrahim-Al-Dossari/090.mp3",
+      "05": "https://equran.nos.wjv-1.neo.id/audio-full/Misyari-Rasyid-Al-Afasi/090.mp3"
+    },
+    "ayat": [
+      {
+        "nomorAyat": 1,
+        "teksArab": "لَآ اُقْسِمُ بِهٰذَا الْبَلَدِۙ",
+        "teksLatin": "lā uqsimu bihāżal-balad(i).",
+        "teksIndonesia": "Aku bersumpah dengan negeri ini (Mekah),",
+        "tafsir": "Ayat ini secara harfiah terjemahannya, \"Aku tidak bersumpah dengan negeri ini.\" Kata \"tidak\" (lA) dalam ayat itu berfungsi menguatkan, karena itu maksudnya, \"Aku benar-benar bersumpah dengan negeri ini.\" Atau ayat itu dibaca, \"Tidak! Aku bersumpah dengan negeri ini,\" yang juga bermakna menekankan. \n\nAllah bersumpah dengan kota Mekah, tempat di mana terdapat Ka'bah yang dituju oleh manusia dari segala penjuru semenjak didirikan oleh Nabi Ibrahim sampai sekarang untuk melaksanakan ibadah haji. Di samping itu, kota ini juga menjadi pusat perdagangan semenjak lama sekali. Karena didatangi setiap tahun dari segenap penjuru itu, maka kota itu dinamai juga Ummul-Qura (Induk Negeri-negeri). Kota itu makmur sekalipun sekelilingnya padang pasir.",
+        "gambarAyat": "https://everyayah.com/data/quranpngs/90_1.png",
+        "audio": {
+          "01": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdullah-Al-Juhany/090001.mp3",
+          "02": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdul-Muhsin-Al-Qasim/090001.mp3",
+          "03": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdurrahman-as-Sudais/090001.mp3",
+          "04": "https://equran.nos.wjv-1.neo.id/audio-partial/Ibrahim-Al-Dossari/090001.mp3",
+          "05": "https://equran.nos.wjv-1.neo.id/audio-partial/Misyari-Rasyid-Al-Afasi/090001.mp3"
+        },
+        "audioIndo": "https://archive.org/download/audionyamasagung/090001.mp3"
+      },
+      {
+        "nomorAyat": 2,
+        "teksArab": "وَاَنْتَ حِلٌّۢ بِهٰذَا الْبَلَدِۙ",
+        "teksLatin": "wa anta ḥillum bihāżal-balad(i).",
+        "teksIndonesia": "dan engkau (Muhammad), bertempat di negeri (Mekah) ini,",
+        "tafsir": "Kata hill dalam ayat itu berarti \"bertempat\". Maksudnya adalah bahwa kota ini adalah juga tempat lahir Nabi Muhammad yang merupakan nabi terbesar dan terakhir yang membawa agama Islam. Dengan demikian, Allah bersumpah dengan kota Mekah yang agung karena tempat kelahiran manusia agung, yaitu Muhammad saw. Ada pula yang menafsirkan hill dalam ayat itu \"halal\", yaitu halal bagi Nabi berperang dalam kota itu bila diperangi, apa yang tidak dihalalkan bagi orang lain.",
+        "gambarAyat": "https://everyayah.com/data/quranpngs/90_2.png",
+        "audio": {
+          "01": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdullah-Al-Juhany/090002.mp3",
+          "02": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdul-Muhsin-Al-Qasim/090002.mp3",
+          "03": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdurrahman-as-Sudais/090002.mp3",
+          "04": "https://equran.nos.wjv-1.neo.id/audio-partial/Ibrahim-Al-Dossari/090002.mp3",
+          "05": "https://equran.nos.wjv-1.neo.id/audio-partial/Misyari-Rasyid-Al-Afasi/090002.mp3"
+        },
+        "audioIndo": "https://archive.org/download/audionyamasagung/090002.mp3"
+      },
+      {
+        "nomorAyat": 3,
+        "teksArab": "وَوَالِدٍ وَّمَا وَلَدَۙ",
+        "teksLatin": "wa wālidiw wa mā walad(a).",
+        "teksIndonesia": "dan demi (pertalian) bapak dan anaknya.",
+        "tafsir": "Allah bersumpah dengan seorang ayah, yaitu Ibrahim, dan anaknya, yaitu Ismail yang nanti menurunkan Nabi Muhammad. Dengan demikian, Allah bersumpah dengan nenek moyang Nabi Muhammad setelah sebelumnya Allah bersumpah dengan beliau dan kota kelahiran beliau, yang menunjukkan pertalian kedua nabi tersebut. Ada pula yang menafsirkan \"ayah\" dengan Adam yang merupakan ayah umat manusia dan anak cucunya yang lahir sesudah itu siapa saja.",
+        "gambarAyat": "https://everyayah.com/data/quranpngs/90_3.png",
+        "audio": {
+          "01": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdullah-Al-Juhany/090003.mp3",
+          "02": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdul-Muhsin-Al-Qasim/090003.mp3",
+          "03": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdurrahman-as-Sudais/090003.mp3",
+          "04": "https://equran.nos.wjv-1.neo.id/audio-partial/Ibrahim-Al-Dossari/090003.mp3",
+          "05": "https://equran.nos.wjv-1.neo.id/audio-partial/Misyari-Rasyid-Al-Afasi/090003.mp3"
+        },
+        "audioIndo": "https://archive.org/download/audionyamasagung/090003.mp3"
+      },
+      {
+        "nomorAyat": 4,
+        "teksArab": "لَقَدْ خَلَقْنَا الْاِنْسَانَ فِيْ كَبَدٍۗ",
+        "teksLatin": "laqad khalaqnal-insāna fī kabad(in).",
+        "teksIndonesia": "Sungguh, Kami telah menciptakan manusia berada dalam susah payah.",
+        "tafsir": "Setelah bersumpah, Allah menyampaikan pesan penting yang hendak dikemukakan-Nya yang karena itu Ia perlu terlebih dahulu bersumpah. Pesan itu adalah bahwa manusia terlahir dalam kesulitan. Maksudnya, manusia tidak bisa lagi hidup tanpa susah payah sebagaimana dialami oleh nenek moyang mereka, Adam dan Hawa, di surga, karena semuanya tersedia. Tetapi mereka harus hidup dengan terlebih dahulu bersusah payah: berusaha, mencari rezeki, mengatasi berbagai rintangan, dan sebagainya. Berdasarkan perjuangan itulah, Allah menilai manusia tersebut. Semakin besar perjuangan yang dilakukan manusia dan semakin besar manfaat yang diberikan hasil perjuangannya itu bagi umat manusia, semakin tinggi nilai manusia itu dalam pandangan Allah. Begitu pulalah Nabi Muhammad di kota ini, beliau perlu berjuang agar kebenaran menjadi nyata dan kebatilan menjadi sirna. Demikian pula seluruh manusia. Oleh karena itu, manusia mati seharusnya meninggalkan jasa.",
+        "gambarAyat": "https://everyayah.com/data/quranpngs/90_4.png",
+        "audio": {
+          "01": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdullah-Al-Juhany/090004.mp3",
+          "02": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdul-Muhsin-Al-Qasim/090004.mp3",
+          "03": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdurrahman-as-Sudais/090004.mp3",
+          "04": "https://equran.nos.wjv-1.neo.id/audio-partial/Ibrahim-Al-Dossari/090004.mp3",
+          "05": "https://equran.nos.wjv-1.neo.id/audio-partial/Misyari-Rasyid-Al-Afasi/090004.mp3"
+        },
+        "audioIndo": "https://archive.org/download/audionyamasagung/090004.mp3"
+      },
+      {
+        "nomorAyat": 5,
+        "teksArab": "اَيَحْسَبُ اَنْ لَّنْ يَّقْدِرَ عَلَيْهِ اَحَدٌ ۘ",
+        "teksLatin": "ayaḥsabu allay yaqdira ‘alaihi aḥad(un).",
+        "teksIndonesia": "Apakah dia (manusia) itu mengira bahwa tidak ada sesuatu pun yang berkuasa atasnya?",
+        "tafsir": "Dalam ayat ini, Allah bertanya apakah manusia yang selalu berada dalam kesulitan, dan untuk bisa hidup harus mampu mengatasi kesulitan itu, dapat menyombongkan dirinya setelah berhasil dalam perjuangan itu. Menyombongkan diri itu misalnya menyangka dirinya begitu kuasanya sehingga berpandangan bahwa tidak akan ada seorang pun yang akan mampu menyaingi dan mengalahkannya, termasuk Allah sendiri. Ia tidak boleh berpandangan demikian karena bila ada seorang yang hebat, pasti akan ada lagi orang yang lebih hebat darinya. Di atas segala yang hebat itu, Allah adalah yang terhebat dari segala yang hebat, sebagaimana difirmankan-Nya:\n\nDan di atas setiap orang yang berpengetahuan ada yang lebih mengetahui. (Yusuf/12: 76)",
+        "gambarAyat": "https://everyayah.com/data/quranpngs/90_5.png",
+        "audio": {
+          "01": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdullah-Al-Juhany/090005.mp3",
+          "02": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdul-Muhsin-Al-Qasim/090005.mp3",
+          "03": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdurrahman-as-Sudais/090005.mp3",
+          "04": "https://equran.nos.wjv-1.neo.id/audio-partial/Ibrahim-Al-Dossari/090005.mp3",
+          "05": "https://equran.nos.wjv-1.neo.id/audio-partial/Misyari-Rasyid-Al-Afasi/090005.mp3"
+        },
+        "audioIndo": "https://archive.org/download/audionyamasagung/090005.mp3"
+      },
+      {
+        "nomorAyat": 6,
+        "teksArab": "يَقُوْلُ اَهْلَكْتُ مَالًا لُّبَدًاۗ",
+        "teksLatin": "yaqūlu ahlaktu mālal lubadā(n).",
+        "teksIndonesia": "Dia mengatakan, “Aku telah menghabiskan harta yang banyak.” ",
+        "tafsir": "Kesombongannya itu misalnya berkenaan pengeluarannya untuk membantu orang lain. Pengeluaran itu dalam pandangannya sudah begitu besar, sehingga dianggapnya sia-sia. Ia merasa pengeluaran itu sudah sangat banyak sehingga tidak akan ada seorang pun yang akan mampu menandinginya, karena itu ia menjadi sombong.",
+        "gambarAyat": "https://everyayah.com/data/quranpngs/90_6.png",
+        "audio": {
+          "01": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdullah-Al-Juhany/090006.mp3",
+          "02": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdul-Muhsin-Al-Qasim/090006.mp3",
+          "03": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdurrahman-as-Sudais/090006.mp3",
+          "04": "https://equran.nos.wjv-1.neo.id/audio-partial/Ibrahim-Al-Dossari/090006.mp3",
+          "05": "https://equran.nos.wjv-1.neo.id/audio-partial/Misyari-Rasyid-Al-Afasi/090006.mp3"
+        },
+        "audioIndo": "https://archive.org/download/audionyamasagung/090006.mp3"
+      },
+      {
+        "nomorAyat": 7,
+        "teksArab": "اَيَحْسَبُ اَنْ لَّمْ يَرَهٗٓ اَحَدٌۗ",
+        "teksLatin": "ayaḥsabu allam yarahū aḥad(un).",
+        "teksIndonesia": "Apakah dia mengira bahwa tidak ada sesuatu pun yang melihatnya?",
+        "tafsir": "Allah bertanya mengenai orang yang sombong dengan pengeluarannya itu, \"Apakah ia mengira bahwa tidak seorang pun yang melihat perbuatannya itu?\" Artinya, bila ia sombong dengan pengeluarannya itu, berarti ia mengorbankan kekayaannya hanya untuk mencari nama, maka pengorbanan itu tidak akan diterima-Nya. Jangan ia menyangka bahwa Allah tidak melihat perbuatannya itu dan tidak mengetahui motif di balik perbuatan baiknya itu, yang tidak diketahui oleh manusia.",
+        "gambarAyat": "https://everyayah.com/data/quranpngs/90_7.png",
+        "audio": {
+          "01": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdullah-Al-Juhany/090007.mp3",
+          "02": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdul-Muhsin-Al-Qasim/090007.mp3",
+          "03": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdurrahman-as-Sudais/090007.mp3",
+          "04": "https://equran.nos.wjv-1.neo.id/audio-partial/Ibrahim-Al-Dossari/090007.mp3",
+          "05": "https://equran.nos.wjv-1.neo.id/audio-partial/Misyari-Rasyid-Al-Afasi/090007.mp3"
+        },
+        "audioIndo": "https://archive.org/download/audionyamasagung/090007.mp3"
+      },
+      {
+        "nomorAyat": 8,
+        "teksArab": "اَلَمْ نَجْعَلْ لَّهٗ عَيْنَيْنِۙ",
+        "teksLatin": "alam naj‘al lahū ‘ainain(i).",
+        "teksIndonesia": "Bukankah Kami telah menjadikan untuknya sepasang mata,",
+        "tafsir": "Allah selanjutnya bertanya mengenai orang itu, \"Tidakkah Kami beri ia dua mata?\" Artinya, untuk dapat mencari kekayaan, ia perlu dua mata, lalu siapakah yang memberinya dua mata itu bila bukan Allah? Untuk mencari rezeki ia perlu berbicara, lalu siapakah yang telah memberinya lidah dan dua bibir untuk mampu bicara? Dalam membesarkannya, ia telah menyusu pada kedua susu ibunya, siapakah yang telah menyediakan air susu ibunya itu bila bukan Allah? Dengan demikian, keberhasilannya adalah karena bantuan dan kasih sayang Allah. Oleh karena itu, ia tidak perlu menyombongkan dirinya karena hartanya.\n\nDi samping itu, mata, lidah, dan nafsu adalah nikmat Allah kepadanya yang tiada taranya. Ia akan bertemu dengan dua jalan yang disediakan Allah, yaitu jalan yang benar dan jalan yang salah. Ia perlu menggunakan mata, lidah, dan nafsu itu untuk jalan yang diridai oleh Allah.",
+        "gambarAyat": "https://everyayah.com/data/quranpngs/90_8.png",
+        "audio": {
+          "01": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdullah-Al-Juhany/090008.mp3",
+          "02": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdul-Muhsin-Al-Qasim/090008.mp3",
+          "03": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdurrahman-as-Sudais/090008.mp3",
+          "04": "https://equran.nos.wjv-1.neo.id/audio-partial/Ibrahim-Al-Dossari/090008.mp3",
+          "05": "https://equran.nos.wjv-1.neo.id/audio-partial/Misyari-Rasyid-Al-Afasi/090008.mp3"
+        },
+        "audioIndo": "https://archive.org/download/audionyamasagung/090008.mp3"
+      },
+      {
+        "nomorAyat": 9,
+        "teksArab": "وَلِسَانًا وَّشَفَتَيْنِۙ",
+        "teksLatin": "wa lisānaw wa syafatain(i).",
+        "teksIndonesia": "dan lidah dan sepasang bibir?",
+        "tafsir": "Allah selanjutnya bertanya mengenai orang itu, \"Tidakkah Kami beri ia dua mata?\" Artinya, untuk dapat mencari kekayaan, ia perlu dua mata, lalu siapakah yang memberinya dua mata itu bila bukan Allah? Untuk mencari rezeki ia perlu berbicara, lalu siapakah yang telah memberinya lidah dan dua bibir untuk mampu bicara? Dalam membesarkannya, ia telah menyusu pada kedua susu ibunya, siapakah yang telah menyediakan air susu ibunya itu bila bukan Allah? Dengan demikian, keberhasilannya adalah karena bantuan dan kasih sayang Allah. Oleh karena itu, ia tidak perlu menyombongkan dirinya karena hartanya.\n\nDi samping itu, mata, lidah, dan nafsu adalah nikmat Allah kepadanya yang tiada taranya. Ia akan bertemu dengan dua jalan yang disediakan Allah, yaitu jalan yang benar dan jalan yang salah. Ia perlu menggunakan mata, lidah, dan nafsu itu untuk jalan yang diridai oleh Allah.",
+        "gambarAyat": "https://everyayah.com/data/quranpngs/90_9.png",
+        "audio": {
+          "01": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdullah-Al-Juhany/090009.mp3",
+          "02": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdul-Muhsin-Al-Qasim/090009.mp3",
+          "03": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdurrahman-as-Sudais/090009.mp3",
+          "04": "https://equran.nos.wjv-1.neo.id/audio-partial/Ibrahim-Al-Dossari/090009.mp3",
+          "05": "https://equran.nos.wjv-1.neo.id/audio-partial/Misyari-Rasyid-Al-Afasi/090009.mp3"
+        },
+        "audioIndo": "https://archive.org/download/audionyamasagung/090009.mp3"
+      },
+      {
+        "nomorAyat": 10,
+        "teksArab": "وَهَدَيْنٰهُ النَّجْدَيْنِۙ",
+        "teksLatin": "wa hadaināhun-najdain(i).",
+        "teksIndonesia": "Dan Kami telah menunjukkan kepadanya dua jalan (kebajikan dan kejahatan),",
+        "tafsir": "Allah selanjutnya bertanya mengenai orang itu, \"Tidakkah Kami beri ia dua mata?\" Artinya, untuk dapat mencari kekayaan, ia perlu dua mata, lalu siapakah yang memberinya dua mata itu bila bukan Allah? Untuk mencari rezeki ia perlu berbicara, lalu siapakah yang telah memberinya lidah dan dua bibir untuk mampu bicara? Dalam membesarkannya, ia telah menyusu pada kedua susu ibunya, siapakah yang telah menyediakan air susu ibunya itu bila bukan Allah? Dengan demikian, keberhasilannya adalah karena bantuan dan kasih sayang Allah. Oleh karena itu, ia tidak perlu menyombongkan dirinya karena hartanya.\n\nDi samping itu, mata, lidah, dan nafsu adalah nikmat Allah kepadanya yang tiada taranya. Ia akan bertemu dengan dua jalan yang disediakan Allah, yaitu jalan yang benar dan jalan yang salah. Ia perlu menggunakan mata, lidah, dan nafsu itu untuk jalan yang diridai oleh Allah.",
+        "gambarAyat": "https://everyayah.com/data/quranpngs/90_10.png",
+        "audio": {
+          "01": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdullah-Al-Juhany/090010.mp3",
+          "02": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdul-Muhsin-Al-Qasim/090010.mp3",
+          "03": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdurrahman-as-Sudais/090010.mp3",
+          "04": "https://equran.nos.wjv-1.neo.id/audio-partial/Ibrahim-Al-Dossari/090010.mp3",
+          "05": "https://equran.nos.wjv-1.neo.id/audio-partial/Misyari-Rasyid-Al-Afasi/090010.mp3"
+        },
+        "audioIndo": "https://archive.org/download/audionyamasagung/090010.mp3"
+      },
+      {
+        "nomorAyat": 11,
+        "teksArab": "فَلَا اقْتَحَمَ الْعَقَبَةَ ۖ",
+        "teksLatin": "falaqtaḥamal-‘aqabah(ta).",
+        "teksIndonesia": "tetapi dia tidak menempuh jalan yang mendaki dan sukar?",
+        "tafsir": "Dalam ayat ini, Allah bertanya, \"Apakah tidak sebaiknya ia merapikan jalan mendaki yang terjal?\" Artinya, manusia seharusnya bekerja keras dan berjuang semaksimal mungkin mengatasi segala rintangan supaya berhasil menyelesaikan pekerjaan-pekerjaan besar dan meninggalkan jasa-jasa besar.",
+        "gambarAyat": "https://everyayah.com/data/quranpngs/90_11.png",
+        "audio": {
+          "01": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdullah-Al-Juhany/090011.mp3",
+          "02": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdul-Muhsin-Al-Qasim/090011.mp3",
+          "03": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdurrahman-as-Sudais/090011.mp3",
+          "04": "https://equran.nos.wjv-1.neo.id/audio-partial/Ibrahim-Al-Dossari/090011.mp3",
+          "05": "https://equran.nos.wjv-1.neo.id/audio-partial/Misyari-Rasyid-Al-Afasi/090011.mp3"
+        },
+        "audioIndo": "https://archive.org/download/audionyamasagung/090011.mp3"
+      },
+      {
+        "nomorAyat": 12,
+        "teksArab": "وَمَآ اَدْرٰىكَ مَا الْعَقَبَةُ ۗ",
+        "teksLatin": "wa mā adrāka mal-‘aqabah(tu).",
+        "teksIndonesia": "Dan tahukah kamu apakah jalan yang mendaki dan sukar itu?",
+        "tafsir": "Allah bertanya kepada manusia untuk memotivasi mereka, \"Apakah jalan mendaki yang terjal itu?\" Artinya, pekerjaan-pekerjaan besar itu memang sulit dikerjakan tetapi harus diatasi.",
+        "gambarAyat": "https://everyayah.com/data/quranpngs/90_12.png",
+        "audio": {
+          "01": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdullah-Al-Juhany/090012.mp3",
+          "02": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdul-Muhsin-Al-Qasim/090012.mp3",
+          "03": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdurrahman-as-Sudais/090012.mp3",
+          "04": "https://equran.nos.wjv-1.neo.id/audio-partial/Ibrahim-Al-Dossari/090012.mp3",
+          "05": "https://equran.nos.wjv-1.neo.id/audio-partial/Misyari-Rasyid-Al-Afasi/090012.mp3"
+        },
+        "audioIndo": "https://archive.org/download/audionyamasagung/090012.mp3"
+      },
+      {
+        "nomorAyat": 13,
+        "teksArab": "فَكُّ رَقَبَةٍۙ",
+        "teksLatin": "fakku raqabah(tin).",
+        "teksIndonesia": "(yaitu) melepaskan perbudakan (hamba sahaya),",
+        "tafsir": "Allah menegaskan bahwa pekerjaan besar yang sulit dilaksanakan itu adalah memerdekakan budak. Hal itu karena perbudakan pada waktu itu sudah sangat dalam merasuk ke dalam kehidupan masyarakat sehari-hari, baik di dunia Arab maupun di luarnya. Segala aktivitas manusia, seperti perdagangan, pertanian, kemiliteran, bahkan kehidupan sehari-hari, dan sebagainya, tidak akan bisa berjalan dengan baik pada waktu itu tanpa adanya budak yang mengerjakan pekerjaan-pekerjaan berat. Namun Allah meminta umat Islam agar menghapus perbudakan. Pelaksanaannya memang tidak sekaligus, tetapi berangsur-angsur. Seorang tuan seharusnya dapat memerdekakan budaknya, inilah yang dirasakan mereka sangat berat. Pemerdekaan budak juga dilakukan melalui cara-cara lain, misalnya dengan sanksi pelanggaran-pelanggaran yang hukumannya adalah memerdekakan budak. Juga dengan cara memberi kesempatan kepada budak itu untuk menebus dirinya.",
+        "gambarAyat": "https://everyayah.com/data/quranpngs/90_13.png",
+        "audio": {
+          "01": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdullah-Al-Juhany/090013.mp3",
+          "02": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdul-Muhsin-Al-Qasim/090013.mp3",
+          "03": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdurrahman-as-Sudais/090013.mp3",
+          "04": "https://equran.nos.wjv-1.neo.id/audio-partial/Ibrahim-Al-Dossari/090013.mp3",
+          "05": "https://equran.nos.wjv-1.neo.id/audio-partial/Misyari-Rasyid-Al-Afasi/090013.mp3"
+        },
+        "audioIndo": "https://archive.org/download/audionyamasagung/090013.mp3"
+      },
+      {
+        "nomorAyat": 14,
+        "teksArab": "اَوْ اِطْعَامٌ فِيْ يَوْمٍ ذِيْ مَسْغَبَةٍۙ",
+        "teksLatin": "au iṭ‘āmun fī yaumin żī masgabah(tin).",
+        "teksIndonesia": "atau memberi makan pada hari terjadi kelaparan,",
+        "tafsir": "Pekerjaan besar dan berat lainnya yang sulit dikerjakan adalah memberi makan orang pada musim kelaparan, ekonomi morat-marit, dan sebagainya. Hal itu karena yang memberi juga membutuhkannya. Namun demikian, Allah menguji umat Islam, apakah mereka mau dan mampu mengerjakannya.",
+        "gambarAyat": "https://everyayah.com/data/quranpngs/90_14.png",
+        "audio": {
+          "01": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdullah-Al-Juhany/090014.mp3",
+          "02": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdul-Muhsin-Al-Qasim/090014.mp3",
+          "03": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdurrahman-as-Sudais/090014.mp3",
+          "04": "https://equran.nos.wjv-1.neo.id/audio-partial/Ibrahim-Al-Dossari/090014.mp3",
+          "05": "https://equran.nos.wjv-1.neo.id/audio-partial/Misyari-Rasyid-Al-Afasi/090014.mp3"
+        },
+        "audioIndo": "https://archive.org/download/audionyamasagung/090014.mp3"
+      },
+      {
+        "nomorAyat": 15,
+        "teksArab": "يَّتِيْمًا ذَا مَقْرَبَةٍۙ",
+        "teksLatin": "yatīman żā maqrabah(tin).",
+        "teksIndonesia": "(kepada) anak yatim yang ada hubungan kerabat,",
+        "tafsir": "Memberi makan orang yang lapar pada masa kelaparan pertama sekali ditujukan pada anak-anak yatim yang ada hubungan keluarga dengan pemberi. Siapa lagi yang akan mau memperhatikan mereka bila bukan keluarga sendiri karena orang tuanya sudah tiada? Perhatian pada keluarga memang harus didahulukan sebagaimana sabda Rasulullah saw berikut:\n\nSedekah kepada orang miskin adalah sedekah (satu amal), sedekah kepada orang yang punya hubungan keluarga ada dua amal, sedekah dan silaturrahim. (Riwayat Ahmad, at-Tirmidhi, dan an-Nasa'i).\n\nSelanjutnya yang perlu mendapat perhatian utama adalah orang-orang miskin yang terhempas ke tanah, yaitu orang-orang yang begitu miskinnya sehingga tidak punya tempat untuk berteduh. Mereka misalnya tunawisma, gelandangan, anak jalanan, dan sebagainya.",
+        "gambarAyat": "https://everyayah.com/data/quranpngs/90_15.png",
+        "audio": {
+          "01": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdullah-Al-Juhany/090015.mp3",
+          "02": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdul-Muhsin-Al-Qasim/090015.mp3",
+          "03": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdurrahman-as-Sudais/090015.mp3",
+          "04": "https://equran.nos.wjv-1.neo.id/audio-partial/Ibrahim-Al-Dossari/090015.mp3",
+          "05": "https://equran.nos.wjv-1.neo.id/audio-partial/Misyari-Rasyid-Al-Afasi/090015.mp3"
+        },
+        "audioIndo": "https://archive.org/download/audionyamasagung/090015.mp3"
+      },
+      {
+        "nomorAyat": 16,
+        "teksArab": "اَوْ مِسْكِيْنًا ذَا مَتْرَبَةٍۗ",
+        "teksLatin": "au miskīnan żā matrabah(tin).",
+        "teksIndonesia": "atau orang miskin yang sangat fakir.",
+        "tafsir": "Memberi makan orang yang lapar pada masa kelaparan pertama sekali ditujukan pada anak-anak yatim yang ada hubungan keluarga dengan pemberi. Siapa lagi yang akan mau memperhatikan mereka bila bukan keluarga sendiri karena orang tuanya sudah tiada? Perhatian pada keluarga memang harus didahulukan sebagaimana sabda Rasulullah saw berikut:\n\nSedekah kepada orang miskin adalah sedekah (satu amal), sedekah kepada orang yang punya hubungan keluarga ada dua amal, sedekah dan silaturrahim. (Riwayat Ahmad, at-Tirmidhi, dan an-Nasa'i).\n\nSelanjutnya yang perlu mendapat perhatian utama adalah orang-orang miskin yang terhempas ke tanah, yaitu orang-orang yang begitu miskinnya sehingga tidak punya tempat untuk berteduh. Mereka misalnya tunawisma, gelandangan, anak jalanan, dan sebagainya.",
+        "gambarAyat": "https://everyayah.com/data/quranpngs/90_16.png",
+        "audio": {
+          "01": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdullah-Al-Juhany/090016.mp3",
+          "02": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdul-Muhsin-Al-Qasim/090016.mp3",
+          "03": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdurrahman-as-Sudais/090016.mp3",
+          "04": "https://equran.nos.wjv-1.neo.id/audio-partial/Ibrahim-Al-Dossari/090016.mp3",
+          "05": "https://equran.nos.wjv-1.neo.id/audio-partial/Misyari-Rasyid-Al-Afasi/090016.mp3"
+        },
+        "audioIndo": "https://archive.org/download/audionyamasagung/090016.mp3"
+      },
+      {
+        "nomorAyat": 17,
+        "teksArab": "ثُمَّ كَانَ مِنَ الَّذِيْنَ اٰمَنُوْا وَتَوَاصَوْا بِالصَّبْرِ وَتَوَاصَوْا بِالْمَرْحَمَةِۗ",
+        "teksLatin": "Ṡumma kāna minal-lażīna āmanū wa tawāṣau biṣ-ṣabri wa tawāṣau bil-marḥamah(ti).",
+        "teksIndonesia": "Kemudian dia termasuk orang-orang yang beriman dan saling berpesan untuk bersabar dan saling berpesan untuk berkasih sayang.",
+        "tafsir": "Pekerjaan berat lainnya adalah beriman dan saling menasihati untuk sabar dan menyayangi antara sesama Muslim. Sabar adalah kemampuan menahan diri, tabah menghadapi kesulitan, dan usaha keras mengatasi kesulitan tersebut. Kaum Muslimin harus mampu membuktikan imannya dengan melaksanakan sikap sabar itu, dan mendorong kaum Muslimin lainnya untuk melaksanakannya.\n\nJuga yang berat melaksanakannya adalah menyayangi orang lain seperti menyayangi diri sendiri atau keluarga sendiri. Akan tetapi, umat Islam harus mampu membuktikan imannya dengan melaksanakan sikap saling menyayangi itu, sebagaimana juga diperintahkan Rasulullah:\n\nOrang yang penyayang disayang oleh Yang Maha Penyayang. Sayangilah orang yang ada di bumi, maka yang ada di langit akan menyayangi kalian. (Riwayat at-Tirmidhi, Abu Dawud, dan Ahmad dari Abdullah bin 'Amr).",
+        "gambarAyat": "https://everyayah.com/data/quranpngs/90_17.png",
+        "audio": {
+          "01": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdullah-Al-Juhany/090017.mp3",
+          "02": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdul-Muhsin-Al-Qasim/090017.mp3",
+          "03": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdurrahman-as-Sudais/090017.mp3",
+          "04": "https://equran.nos.wjv-1.neo.id/audio-partial/Ibrahim-Al-Dossari/090017.mp3",
+          "05": "https://equran.nos.wjv-1.neo.id/audio-partial/Misyari-Rasyid-Al-Afasi/090017.mp3"
+        },
+        "audioIndo": "https://archive.org/download/audionyamasagung/090017.mp3"
+      },
+      {
+        "nomorAyat": 18,
+        "teksArab": "اُولٰۤىِٕكَ اَصْحٰبُ الْمَيْمَنَةِۗ",
+        "teksLatin": "ulā'ika aṣḥābul-maimanah(ti).",
+        "teksIndonesia": "Mereka (orang-orang yang beriman dan saling berpesan itu) adalah golongan kanan.",
+        "tafsir": "Kaum Muslimin yang berhasil melaksanakan pekerjaan-pekerjaan sulit di atas digolongkan sebagai \"golongan kanan\". Balasan bagi \"golongan kanan\" tersebut adalah surga yang penuh nikmat, sebagaimana dinyatakan dalam Surah al-Waqi'ah/56: 27-40.",
+        "gambarAyat": "https://everyayah.com/data/quranpngs/90_18.png",
+        "audio": {
+          "01": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdullah-Al-Juhany/090018.mp3",
+          "02": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdul-Muhsin-Al-Qasim/090018.mp3",
+          "03": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdurrahman-as-Sudais/090018.mp3",
+          "04": "https://equran.nos.wjv-1.neo.id/audio-partial/Ibrahim-Al-Dossari/090018.mp3",
+          "05": "https://equran.nos.wjv-1.neo.id/audio-partial/Misyari-Rasyid-Al-Afasi/090018.mp3"
+        },
+        "audioIndo": "https://archive.org/download/audionyamasagung/090018.mp3"
+      },
+      {
+        "nomorAyat": 19,
+        "teksArab": "وَالَّذِيْنَ كَفَرُوْا بِاٰيٰتِنَا هُمْ اَصْحٰبُ الْمَشْـَٔمَةِۗ",
+        "teksLatin": "wal-lażīna kafarū bi'āyātinā hum aṣḥābul-masy'amah(ti).",
+        "teksIndonesia": "Dan orang-orang yang kafir kepada ayat-ayat Kami, mereka itu adalah golongan kiri.",
+        "tafsir": "Mereka yang ingkar tidak mau melaksanakan pekerjaan-pekerjaan besar dan sulit itu. Mereka disebut ashabul-masy'amah, yaitu golongan kiri. Tempat mereka adalah neraka yang tertutup rapat, sehingga neraka begitu luar biasa panasnya. Mereka itu tentu akan sangat menderita di dalamnya. Dengan demikian, ia menemukan kesulitan hidup yang tiada taranya di akhirat, tidak sebanding dengan kesulitan mengerjakan perbuat-perbuatan baik waktu di dunia.",
+        "gambarAyat": "https://everyayah.com/data/quranpngs/90_19.png",
+        "audio": {
+          "01": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdullah-Al-Juhany/090019.mp3",
+          "02": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdul-Muhsin-Al-Qasim/090019.mp3",
+          "03": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdurrahman-as-Sudais/090019.mp3",
+          "04": "https://equran.nos.wjv-1.neo.id/audio-partial/Ibrahim-Al-Dossari/090019.mp3",
+          "05": "https://equran.nos.wjv-1.neo.id/audio-partial/Misyari-Rasyid-Al-Afasi/090019.mp3"
+        },
+        "audioIndo": "https://archive.org/download/audionyamasagung/090019.mp3"
+      },
+      {
+        "nomorAyat": 20,
+        "teksArab": "عَلَيْهِمْ نَارٌ مُّؤْصَدَةٌ ࣖ",
+        "teksLatin": "‘alaihim nārum mu'ṣadah(tun).",
+        "teksIndonesia": "Mereka berada dalam neraka yang ditutup rapat.",
+        "tafsir": "Mereka yang ingkar tidak mau melaksanakan pekerjaan-pekerjaan besar dan sulit itu. Mereka disebut ashabul-masy'amah, yaitu golongan kiri. Tempat mereka adalah neraka yang tertutup rapat, sehingga neraka begitu luar biasa panasnya. Mereka itu tentu akan sangat menderita di dalamnya. Dengan demikian, ia menemukan kesulitan hidup yang tiada taranya di akhirat, tidak sebanding dengan kesulitan mengerjakan perbuat-perbuatan baik waktu di dunia.",
+        "gambarAyat": "https://everyayah.com/data/quranpngs/90_20.png",
+        "audio": {
+          "01": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdullah-Al-Juhany/090020.mp3",
+          "02": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdul-Muhsin-Al-Qasim/090020.mp3",
+          "03": "https://equran.nos.wjv-1.neo.id/audio-partial/Abdurrahman-as-Sudais/090020.mp3",
+          "04": "https://equran.nos.wjv-1.neo.id/audio-partial/Ibrahim-Al-Dossari/090020.mp3",
+          "05": "https://equran.nos.wjv-1.neo.id/audio-partial/Misyari-Rasyid-Al-Afasi/090020.mp3"
+        },
+        "audioIndo": "https://archive.org/download/audionyamasagung/090020.mp3"
+      }
+    ],
+    "suratSelanjutnya": {
+      "nomor": 91,
+      "nama": "الشمس",
+      "namaLatin": "Asy-Syams",
+      "jumlahAyat": 15
+    },
+    "suratSebelumnya": {
+      "nomor": 89,
+      "nama": "الفجر",
+      "namaLatin": "Al-Fajr",
+      "jumlahAyat": 30
+    },
+    "headerBismillahAudio": "https://archive.org/download/audionyamasagung/090000.mp3"
+  }
+}

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ar" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al-Quran App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4A5568',
+                        secondary: '#2D3748',
+                    }
+                }
+            }
+        }
+    </script>
+  <style>
+    @font-face {
+        font-family: 'QuranFont';
+        src: url('./font/LPMQ-IsepMisbah.woff2') format('woff2');
+    }
+    .arabic {
+        font-family: 'QuranFont', Arial, sans-serif;
+        direction: rtl;
+        line-height: 9; /* Mengatur jarak antar baris */
+    }
+    .ayat-number {
+        font-family: 'QuranFont', serif;
+        font-size: 1.25rem;
+    }
+</style>
+
+    
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-200">
+    <!-- Navbar -->
+    <nav class="bg-white dark:bg-gray-800 shadow-lg fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+            <div class="relative flex items-center justify-between h-16">
+                <div class="absolute inset-y-0 left-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                    <button id="sidebarToggle" class="p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+                <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                    <button id="darkModeToggle" class="p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="fixed inset-y-0 left-0 w-64 bg-white dark:bg-gray-800 shadow-lg transform -translate-x-full transition-transform duration-300 ease-in-out z-40 mt-16">
+        <div class="p-4">
+            <input type="text" id="searchInput" placeholder="Cari surat..." class="w-full p-2 border rounded dark:bg-gray-700 dark:text-white">
+        </div>
+        <ul id="surahList" class="space-y-2 overflow-y-auto h-full pb-20"></ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="pt-16 pb-20">
+        <div id="app" class="max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 m-4">
+            <h1 id="surahTitle" class="text-3xl font-bold text-center mb-2 dark:text-white"></h1>
+            <h2 id="surahSubtitle" class="text-xl text-center mb-6 text-gray-600 dark:text-gray-400"></h2>
+            <div id="bismillah" class="text-2xl arabic text-center mb-8 dark:text-white"></div>
+            <div id="ayatContainer" class="space-y-4">
+                Loading Data.....
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="fixed bottom-4 right-4 bg-blue-500 text-white p-2 rounded-full shadow-lg hidden">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        let currentSurah = 1;
+        let surahData = [];
+
+        async function loadAllSurahData() {
+            for (let i = 1; i <= 114; i++) {
+                try {
+                    const response = await fetch(`./suratbaru/${i}.json`);
+                    const data = await response.json();
+                    surahData.push(data.data);
+                } catch (error) {
+                    console.error(`Error loading surah ${i}:`, error);
+                }
+            }
+            createSurahList();
+            loadSurah(1); // Load Al-Fatihah by default
+        }
+
+        function loadSurah(surahNumber) {
+            const surah = surahData[surahNumber - 1];
+            if (surah) {
+                renderSurah(surah);
+                currentSurah = surahNumber;
+                toggleSidebar();
+            }
+        }
+
+        function renderSurah(surah) {
+            document.getElementById('surahTitle').textContent = surah.nama;
+            document.getElementById('surahSubtitle').textContent = surah.namaLatin;
+            document.getElementById('bismillah').textContent = 'بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ';
+
+            const ayatContainer = document.getElementById('ayatContainer');
+            ayatContainer.innerHTML = '';
+            surah.ayat.forEach(ayat => {
+                const ayatDiv = document.createElement('div');
+                ayatDiv.className = 'mb-4 flex justify-end items-center';
+                ayatDiv.innerHTML = `
+                    <span class="ayat-number text-sm font-semi-bold text-gray-500 dark:text-gray-400 mx-1">﴿${ayat.nomorAyat}﴾</span>
+                    <span class="text-3xl arabic font-semi-bold leading-loose dark:text-white">${ayat.teksArab}</span>
+                `;
+                ayatContainer.appendChild(ayatDiv);
+            });
+        }
+
+
+
+
+
+        function createSurahList() {
+            const surahList = document.getElementById('surahList');
+            surahData.forEach((surah, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <button class="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center" onclick="loadSurah(${index + 1})">
+                        <i class="fas fa-book-open mr-2 text-gray-500 dark:text-gray-400"></i>
+                        <span class="dark:text-white">${surah.namaLatin}</span>
+                        <span class="arabic text-sm ml-auto dark:text-gray-400">${surah.nama}</span>
+                    </button>
+                `;
+                surahList.appendChild(li);
+            });
+        }
+
+        function searchSurah() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const surahItems = document.querySelectorAll('#surahList li');
+            surahItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('-translate-x-full');
+        }
+
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAllSurahData();
+            
+            document.getElementById('searchInput').addEventListener('input', searchSurah);
+            document.getElementById('sidebarToggle').addEventListener('click', toggleSidebar);
+            document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
+            document.getElementById('scrollToTop').addEventListener('click', scrollToTop);
+
+            window.addEventListener('scroll', function() {
+                const scrollToTopButton = document.getElementById('scrollToTop');
+                if (window.pageYOffset > 100) {
+                    scrollToTopButton.classList.remove('hidden');
+                } else {
+                    scrollToTopButton.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
