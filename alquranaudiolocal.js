@@ -13,7 +13,7 @@ function updateQariSelection() {
 function getIndonesianAudioUrl(surahNumber, ayatNumber) {
     const paddedSurah = surahNumber.toString().padStart(3, '0');
     const paddedAyat = ayatNumber.toString().padStart(3, '0');
-    return `./asset/alldatasurah/${paddedSurah}${paddedAyat}.mp3`;
+    return `./asset/alldatasurah/${paddedSurah}${paddedAyat}.mp3`;  ///////////////////
 }
 
 
@@ -85,19 +85,20 @@ function getSurahName(surahNumber) {
 }
 
 function showBookmarkList() {
-  // Hapus modal yang mungkin sudah ada
+  // Remove existing modal if any
   const existingModal = document.querySelector('.bookmark-modal');
   if (existingModal) {
     document.body.removeChild(existingModal);
   }
 
   const modal = document.createElement("div");
-  modal.className =
-    "bookmark-modal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50";
+  modal.className = "bookmark-modal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50";
   modal.innerHTML = `
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 w-full max-w-md max-h-[80vh] overflow-y-auto">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 w-full max-w-md flex flex-col" style="height: 80vh; max-height: 600px;">
       <h2 class="text-xl font-bold mb-4 text-gray-700 dark:text-gray-300">Bookmarks</h2>
-      <ul id="bookmarkList" class="space-y-2"></ul>
+      <div id="bookmarkListWrapper" class="flex-grow overflow-y-auto" style="max-height: calc(100% - 100px);">
+        <ul id="bookmarkList" class="space-y-2"></ul>
+      </div>
       <button id="closeBookmarkList" class="mt-4 px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600 transition-colors duration-200">Close</button>
     </div>
   `;
@@ -122,7 +123,7 @@ function showBookmarkList() {
           <span class="text-sm text-gray-600 dark:text-gray-400">Ayat ${bookmark.ayat}</span>
         </div>
         <div class="flex space-x-2 ml-2">
-          <button class="go-to-bookmark p-2 text-white " data-surah="${bookmark.surah}" data-ayat="${bookmark.ayat}" title="Lihat">
+          <button class="go-to-bookmark p-2 text-white bg-primary-500 hover:bg-primary-600 rounded transition-colors duration-200" data-surah="${bookmark.surah}" data-ayat="${bookmark.ayat}" title="Lihat">
             <i class="fas fa-eye"></i>
           </button>
           <button class="remove-bookmark p-2 text-white bg-red-500 hover:bg-red-600 rounded transition-colors duration-200" data-surah="${bookmark.surah}" data-ayat="${bookmark.ayat}" title="Hapus">
@@ -157,20 +158,20 @@ function showBookmarkList() {
       const surah = parseInt(button.getAttribute("data-surah"));
       const ayat = parseInt(button.getAttribute("data-ayat"));
 
-      // Cari surah yang sesuai
+      // Find the corresponding surah
       const surahData = allSurahs.find(s => s.nomor === surah);
       if (surahData) {
         const result = toggleBookmark(surahData, ayat);
         alert(result.message);
-        // Hapus modal setelah menghapus bookmark
+        // Remove modal after deleting bookmark
         const modal = document.querySelector('.bookmark-modal');
         if (modal) {
           document.body.removeChild(modal);
         }
-        // Tampilkan kembali daftar bookmark yang diperbarui
+        // Show updated bookmark list
         setTimeout(showBookmarkList, 100);
       } else {
-        console.error(`Surah ${surah} tidak ditemukan`);
+        console.error(`Surah ${surah} not found`);
       }
     }
   });
