@@ -13,7 +13,7 @@ function updateQariSelection() {
 function getIndonesianAudioUrl(surahNumber, ayatNumber) {
     const paddedSurah = surahNumber.toString().padStart(3, '0');
     const paddedAyat = ayatNumber.toString().padStart(3, '0');
-    return `https://res.cloudinary.com/izzabags/video/upload/v1721249987/audio/${paddedSurah}${paddedAyat}.mp3`;
+    return `./asset/alldatasurah/${paddedSurah}${paddedAyat}.mp3`;
 }
 
 
