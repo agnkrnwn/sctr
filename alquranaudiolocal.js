@@ -887,70 +887,57 @@ function speakTafsir(text, button) {
     tempDiv.style.backgroundColor = "#26282A";
     tempDiv.style.color = "white";
     tempDiv.style.fontFamily = "Poppins, sans-serif";
-    tempDiv.style.display = "flex";
-    tempDiv.style.flexDirection = "column";
-    tempDiv.style.justifyContent = "center";
-    tempDiv.style.alignItems = "center";
-    tempDiv.style.padding = "50px";
-    tempDiv.style.boxSizing = "border-box";
-
+    tempDiv.style.position = "relative";
+    tempDiv.style.overflow = "hidden";
+  
     const contentWrapper = document.createElement("div");
-    contentWrapper.style.width = "100%";
-    contentWrapper.style.maxWidth = "800px";
-    contentWrapper.style.margin = "0 auto";
-
+    contentWrapper.style.position = "absolute";
+    contentWrapper.style.top = "50%";
+    contentWrapper.style.left = "50%";
+    contentWrapper.style.transform = "translate(-50%, -50%)";
+    contentWrapper.style.width = "900px";
+    contentWrapper.style.textAlign = "center";
+  
     const arabicText = document.createElement("p");
-    arabicText.textContent =
-      ayatElement.querySelector(".font-arabic").textContent;
-    arabicText.style.fontSize = "clamp(25px, 7vw, 50px)";
+    arabicText.textContent = ayatElement.querySelector(".font-arabic").textContent;
+    arabicText.style.fontSize = "60px";
     arabicText.style.fontFamily = '"Traditional Arabic", Arial';
     arabicText.style.textAlign = "right";
     arabicText.style.direction = "rtl";
-    arabicText.style.marginBottom = "30px";
-
+    arabicText.style.marginBottom = "40px";
+  
     const latinText = document.createElement("p");
-    latinText.textContent =
-      ayatElement.querySelector("p:nth-of-type(2)").textContent;
-    latinText.style.fontSize = "clamp(18px, 3.5vw, 36px)";
+    latinText.textContent = ayatElement.querySelector("p:nth-of-type(2)").textContent;
+    latinText.style.fontSize = "36px";
     latinText.style.textAlign = "left";
-    latinText.style.marginBottom = "20px";
-
+    latinText.style.marginBottom = "30px";
+  
     const indonesianText = document.createElement("p");
-    indonesianText.textContent =
-      ayatElement.querySelector("p:nth-of-type(3)").textContent;
-    indonesianText.style.fontSize = "clamp(16px, 3vw, 30px)";
+    indonesianText.textContent = ayatElement.querySelector("p:nth-of-type(3)").textContent;
+    indonesianText.style.fontSize = "30px";
     indonesianText.style.textAlign = "left";
-    indonesianText.style.marginBottom = "30px";
-
+    indonesianText.style.marginBottom = "40px";
+  
     const title = document.createElement("p");
     title.textContent = `${currentSurah.namaLatin} - ${currentSurah.nama} :  ${ayatNumber}`;
+    title.style.fontSize = "36px";
     title.style.textAlign = "center";
-    title.style.fontSize = "clamp(15px, 5vw, 30px)";
-
-    // Tambahkan informasi qari
-    // const qariName = document.getElementById("qariSelect").options[document.getElementById("qariSelect").selectedIndex].text;
-    // const qariInfo = document.createElement('p');
-    // qariInfo.textContent = `Qari: ${qariName}`;
-    // qariInfo.style.fontSize = 'clamp(14px, 2.5vw, 24px)';
-    // qariInfo.style.textAlign = 'center';
-    // qariInfo.style.marginTop = '20px';
-
+  
     contentWrapper.appendChild(arabicText);
     contentWrapper.appendChild(latinText);
     contentWrapper.appendChild(indonesianText);
     contentWrapper.appendChild(title);
-    // contentWrapper.appendChild(qariInfo);
     tempDiv.appendChild(contentWrapper);
-
+  
     document.body.appendChild(tempDiv);
-
+  
     html2canvas(tempDiv, {
       width: 1080,
       height: 1920,
       scale: 1,
     }).then((canvas) => {
       document.body.removeChild(tempDiv);
-
+  
       const link = document.createElement("a");
       link.download = `${currentSurah.namaLatin}-Ayat-${ayatNumber}.png`;
       link.href = canvas.toDataURL();
